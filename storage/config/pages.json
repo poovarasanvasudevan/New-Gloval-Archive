@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Home",
+    "title": "Home",
+    "url": "/home",
+    "order": 1
+  },
+  {
+    "name": "Search",
+    "title": "Search",
+    "url": "/search",
+    "order": 2
+  },
+  {
+    "name": "Reports",
+    "title": "Reports",
+    "url": "/reports",
+    "order": 3
+  },
+  {
+    "name": "Definition",
+    "title": "Definition",
+    "url": "/definition",
+    "order": 3
+  },
+  {
+    "name": "cico",
+    "title": "Check in/Out",
+    "url": "/home",
+    "order": 4
+  },
+  {
+    "name": "ConditionalReport",
+    "title": "Conditional Report",
+    "url": "/creport",
+    "order": 5
+  },
+  {
+    "name": "Maintenence",
+    "title": "Maintenence",
+    "url": "/maintenence",
+    "order": 6
+  },
+  {
+    "name": "RoleUsers",
+    "title": "Role and Users",
+    "url": "/userrole",
+    "order": 6
+  },
+  {
+    "name": "Task",
+    "title": "Task",
+    "url": "/task",
+    "order": 7
+  }
+]
