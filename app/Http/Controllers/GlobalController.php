@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Artefact;
 use App\ArtefactType;
+use App\Cico;
 use App\Location;
 use App\PickData;
 use App\Role;
 use App\User;
+use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Grids;
 use HTML;
@@ -48,7 +51,7 @@ class GlobalController extends Controller
 
         $user = User::whereAbhyasiid(strtolower($userName))->wherePassword(md5($password));
         if ($user && $user->count() == 1) {
-            \Auth::login($user->first());
+            Auth::login($user->first());
             return response()->redirectTo("/home");
         } else {
             return response()->redirectTo("/")->withErrors(['Invalid Username or Password']);
@@ -58,16 +61,16 @@ class GlobalController extends Controller
 
     public function logout()
     {
-        \Auth::logout();
+        Auth::logout();
         return response()->redirectTo("/")->withErrors(['Logout Succesfully']);
     }
 
     public function home()
     {
 
-        if (\Auth::user()) {
+        if (Auth::user()) {
 
-            $artefactTypes = User::find(\Auth::user()->id)->artefact_type()->get();
+            $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
 
             return view("home")
                 ->with('artefacttypes', $artefactTypes);
@@ -78,7 +81,7 @@ class GlobalController extends Controller
 
     public function resetPassword()
     {
-        if (\Auth::user()) {
+        if (Auth::user()) {
 
             return response()->view('resetpassword');
         } else {
@@ -110,7 +113,7 @@ class GlobalController extends Controller
             array_push($errordata, "New Password cannot be same as current Password");
         }
 
-        $user = User::whereAbhyasiid(\Auth::user()->abhyasiid)->wherePassword(md5($currentPassword));
+        $user = User::whereAbhyasiid(Auth::user()->abhyasiid)->wherePassword(md5($currentPassword));
         if ($user && $user->count() == 1) {
 
             $update = true;
@@ -122,20 +125,20 @@ class GlobalController extends Controller
         if ($error) {
             return response()->redirectTo("/reset-password")->withErrors($errordata);
         } else {
-            User::whereAbhyasiid(\Auth::user()->abhyasiid)
+            User::whereAbhyasiid(Auth::user()->abhyasiid)
                 ->wherePassword(md5($currentPassword))
                 ->update(['password' => md5($newPassword)]);
 
-            \Auth::logout();
+            Auth::logout();
             return response()->redirectTo("/")->withErrors(["Succesfully Updated"]);
         }
     }
 
     public function definition()
     {
-        if (\Auth::user()) {
+        if (Auth::user()) {
 
-            $artefactTypes = User::find(\Auth::user()->id)->artefact_type()->get();
+            $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
             $location = Location::active()->get();
             return view('definition')
                 ->with('locations', $location)
@@ -159,11 +162,12 @@ class GlobalController extends Controller
         else
             $artefactFind->where('parent_id', $parentId);
 
+        $artefactFind->where('active', true);
         $artefactFinds = $artefactFind->get();
         $result = array();
         foreach ($artefactFinds as $af) {
 
-            if (Artefact::whereParentId($af->id)->count() > 0) {
+            if (Artefact::whereParentId($af->id)->where('active', true)->count() > 0) {
                 array_push($result, array(
                     "title" => $af->artefact_name,
                     "key" => $af->id,
@@ -186,7 +190,7 @@ class GlobalController extends Controller
 
     public function roleUsers()
     {
-        if (\Auth::user()) {
+        if (Auth::user()) {
             $grid = new Grid(
                 (new GridConfig)
                     ->setDataProvider(
@@ -263,7 +267,7 @@ class GlobalController extends Controller
 
     public function userEdit($id)
     {
-        if (\Auth::user()) {
+        if (Auth::user()) {
 
             $user = User::find($id);
             $location = Location::all();
@@ -284,7 +288,7 @@ class GlobalController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        if (\Auth::user()) {
+        if (Auth::user()) {
 
             $user = User::find($id);
 
@@ -391,5 +395,150 @@ class GlobalController extends Controller
                 'status' => 100
             ));
         }
+    }
+
+    function addArtefact($type, $id, $val)
+    {
+        $parentId = null;
+        if ($id != 0) {
+            $parentId = $id;
+        }
+
+        $newArtefcat = new Artefact();
+        $newArtefcat->artefact_type = $type;
+        $newArtefcat->parent_id = $parentId;
+        $newArtefcat->artefact_name = $val;
+        $newArtefcat->old_artefact_id = '00000';
+        $newArtefcat->user_id = Auth::user()->id;
+        $newArtefcat->location = Auth::user()->location;
+
+        if ($newArtefcat->save()) {
+            return response()->json(array(
+                'status' => 200
+            ));
+        } else {
+            return response()->json(array(
+                'status' => 100
+            ));
+        }
+    }
+
+    function deleteArtefact($id)
+    {
+        $delArtefact = Artefact::find($id);
+        $delArtefact->active = false;
+        if ($delArtefact->save()) {
+            return response()->json(array(
+                'status' => 200
+            ));
+        } else {
+            return response()->json(array(
+                'status' => 100
+            ));
+        }
+    }
+
+    function renameArtefact($id, $newName)
+    {
+        $delArtefact = Artefact::find($id);
+        $delArtefact->artefact_name = $newName;
+        if ($delArtefact->save()) {
+            return response()->json(array(
+                'status' => 200
+            ));
+        } else {
+            return response()->json(array(
+                'status' => 100
+            ));
+        }
+    }
+
+    function moveArtefact($id, $newParent)
+    {
+        $moveArtefact = Artefact::find($id);
+        $moveArtefact->parent_id = $newParent;
+        if ($moveArtefact->save()) {
+            return response()->json(array(
+                'status' => 200
+            ));
+        } else {
+            return response()->json(array(
+                'status' => 100
+            ));
+        }
+    }
+
+    function allartefact()
+    {
+        return response()->json(DB::table('artefacts')->pluck('artefact_name'));
+    }
+
+    function cico()
+    {
+        if (Auth::user()) {
+            return view('cico');
+        } else {
+            return response()->redirectTo("/");
+        }
+    }
+
+    function getCheckout()
+    {
+        $result = DB::table('artefacts')
+            ->leftJoin('cico', 'artefacts.id', '=', 'cico.artefact_id')
+            ->select('artefacts.artefact_name', 'artefacts.id')
+            ->whereRaw('artefacts.id NOT IN (SELECT artefact_id
+                           FROM cico where check_out_status=true)')
+            ->get();
+
+        return response()->json($result);
+    }
+
+    function checkout()
+    {
+        $id = request()->input('artefactid');
+        $desc = request()->input('checkoutreason');
+
+        $cico = new Cico();
+        $cico->artefact_id = $id;
+        $cico->user_id = Auth::user()->id;
+        $cico->check_out_description = $desc;
+
+        if ($cico->save()) {
+            flash('Checkout Successfull', 'success');
+            return response()->redirectTo('/cico');
+        } else {
+            flash('Failed to checkout', 'error');
+            return response()->redirectTo('/cico');
+        }
+    }
+
+    function checkin()
+    {
+        $id = request()->input('artefactid');
+        $desc = request()->input('checkinreason');
+        $cid = request()->input('checkinId');
+
+        $cico = Cico::find($cid);
+        $cico->check_in_description = $desc;
+        $cico->check_out_status = false;
+        if ($cico->save()) {
+            flash('Checkin Successfull', 'success');
+            return response()->redirectTo('/cico');
+        } else {
+            flash('Failed to checkin', 'error');
+            return response()->redirectTo('/cico');
+        }
+    }
+
+    function checkInAutocomplete() {
+        $result = DB::table('artefacts')
+            ->leftJoin('cico', 'artefacts.id', '=', 'cico.artefact_id')
+            ->select('artefacts.artefact_name', 'artefacts.id')
+            ->whereRaw('artefacts.id IN (SELECT artefact_id
+                           FROM cico where check_out_status=true)')
+            ->get();
+
+        return response()->json($result);
     }
 }

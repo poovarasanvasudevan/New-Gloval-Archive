@@ -101,6 +101,7 @@ class CreateAllTables extends Migration
             $table->integer('artefact_type')->unsigned();
             $table->json("artefact_values")->nullable();
             $table->integer("user_id")->unsigned();
+            $table->boolean("active")->default(true);
             $table->timestamps();
 
 
@@ -130,8 +131,10 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->integer("artefact_id")->unsigned();
             $table->integer("user_id")->unsigned();
-            $table->string("reason");
-            $table->string("remarks");
+            $table->boolean('check_out_status')->default('true');
+            $table->string("check_out_description")->nullable();
+            $table->string("check_in_description")->nullable();
+            $table->string("remarks")->default('No Remarks Found');
             $table->timestamps();
 
             $table->foreign("user_id")->references('id')->on('users')->onDelete('cascade');

@@ -283,7 +283,7 @@ class ArchiveMigrate extends Command
 
             if($arte->count() ==1) {
                 $arte1 = $arte->first();
-                $arte1->artefact_values = json_encode($tmp1);
+                $arte1->artefact_values = $tmp1;
                 $arte1->save();
             }
             $bar->advance();

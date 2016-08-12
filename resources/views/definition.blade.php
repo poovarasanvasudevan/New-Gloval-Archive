@@ -5,7 +5,7 @@
         @include("layout.navbar")
 
         <div class="col-md-12 card card-block" style="padding: 10px !important;margin-top: 50px !important;">
-            <div class="col-md-3"><h3>Artefact Definition</h3></div>
+            <div class="col-md-3"><input type="button" value="New Artefact" class="btn btn-success center-block" id="newArtefact"></div>
             <div class="col-md-6">
                 <div class="">
                     <div class="col-md-6">
@@ -48,7 +48,9 @@
                              style="height: 86% !important;overflow: auto;padding-right: 0px !important;">
                             <div class="panel-body">
                                 <div class="card card-block" id="card-block">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-3">
+                                        <h3 id="artefacttitle"></h3>
+                                    </div>
                                     <div class="col-md-6"><center id="status"></center></div>
                                     <div class="col-md-3">
                                         <input type="submit" value="Save" class="btn btn-primary">
@@ -73,5 +75,6 @@
 @endsection
 
 @section('js')
+
     <script src="/assets/js/definition.js"></script>
 @endsection

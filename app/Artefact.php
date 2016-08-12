@@ -38,7 +38,8 @@ class Artefact extends Model
         "artefact_name",
         "artefact_type",
         "artefact_values",
-        "user_id"
+        "user_id",
+        "active"
     ];
 
     protected $casts = [
@@ -73,5 +74,9 @@ class Artefact extends Model
         } else {
             return false;
         }
+    }
+
+    public function cico(){
+        return $this->hasMany('App\Cico');
     }
 }

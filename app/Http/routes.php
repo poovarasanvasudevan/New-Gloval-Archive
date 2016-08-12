@@ -30,7 +30,15 @@ Route::get("/userEdit/{id}", 'GlobalController@userEdit');
 Route::get("/loadTree/{artefacttype}/{id}", 'GlobalController@loadTree');
 Route::get("/getArtefact/{type}/{id}", 'GlobalController@getArtefact');
 Route::get("/attrs", 'GlobalController@attrs');
+Route::get("/addArtefact/{type}/{id}/{val}", 'GlobalController@addArtefact');
+Route::get("/deleteArtefact/{id}", 'GlobalController@deleteArtefact');
+Route::get("/renameArtefact/{id}/{newName}", 'GlobalController@renameArtefact');
+Route::get("/moveArtefact/{id}/{newParent}", 'GlobalController@moveArtefact');
+Route::get("/allartefact", 'GlobalController@allartefact');
+Route::get("/cico", 'GlobalController@cico');
 
 
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
 Route::post("/resetmypassword", 'GlobalController@resetMyPassword');
+Route::post("/checkout", 'GlobalController@checkout');
+Route::get("/getCheckout", 'GlobalController@getCheckout');
