@@ -36,9 +36,11 @@ Route::get("/renameArtefact/{id}/{newName}", 'GlobalController@renameArtefact');
 Route::get("/moveArtefact/{id}/{newParent}", 'GlobalController@moveArtefact');
 Route::get("/allartefact", 'GlobalController@allartefact');
 Route::get("/cico", 'GlobalController@cico');
+Route::get("/cin", 'GlobalController@cin');
 
 
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
 Route::post("/resetmypassword", 'GlobalController@resetMyPassword');
 Route::post("/checkout", 'GlobalController@checkout');
 Route::get("/getCheckout", 'GlobalController@getCheckout');
+Route::get("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');

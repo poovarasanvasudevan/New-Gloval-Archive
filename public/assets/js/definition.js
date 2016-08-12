@@ -23,6 +23,9 @@ $(function () {
         e.preventDefault(); // avoid to execute the actual submit of the form.
     });
 
+
+
+
     $('#newArtefact').click(function () {
         swal({
             title: "Artefact!",

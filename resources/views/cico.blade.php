@@ -6,10 +6,16 @@
 
         <div class="col-md-6 card card-block col-md-offset-3" style="margin-top: 70px !important;">
 
-            @include('flash::message')
+            @if (session()->has('flash_notification.message'))
+                <div class="alert alert-{{ session('flash_notification.level') }}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                    {!! session('flash_notification.message') !!}
+                </div>
+            @endif
             <ul class="nav nav-pills center-block">
-                <li class="active"><a data-toggle="tab" href="#checkout">Check Out</a></li>
-                <li><a data-toggle="tab" href="#checkin">Check In</a></li>
+                <li class="active"><a  href="/cico">Check Out</a></li>
+                <li><a href="/cin">Check In</a></li>
             </ul>
 
             <hr/>
@@ -25,14 +31,14 @@
                                 <div class="form-group has-success">
                                     <label class="control-label" for="inputSuccess">Search Artefact</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-lg checkoutbox" id="inputSuccess">
+                                        <input type="text" class="form-control input-lg checkoutbox" id="inputcheckout">
                                         <span class="input-group-btn">
                                       <input type="submit" class="btn btn-primary btn-lg" value="ADD">
                                     </span>
                                     </div>
                                 </div>
                             </form>
-                            <div id="checkoutList" >
+                            <div id="checkoutList">
 
                             </div>
 
@@ -40,27 +46,6 @@
                     </div>
 
 
-                </div>
-                <div id="checkin" class="tab-pane fade" style="height: 55% !important;">
-                    <h2>
-                        <center>Checkin</center>
-                    </h2>
-                    <div class="col-md-8 col-md-offset-2">
-                        <form name="checkinForm">
-                            <div class="form-group has-success">
-                                <label class="control-label" for="inputSuccess">Search Artefact</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control input-lg checkinbox" id="inputSuccess">
-                                    <span class="input-group-btn">
-                                      <input type="submit" class="btn btn-primary btn-lg" value="ADD">
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
-                        <div id="checkinList" >
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

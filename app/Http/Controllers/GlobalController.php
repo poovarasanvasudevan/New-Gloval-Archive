@@ -481,6 +481,14 @@ class GlobalController extends Controller
             return response()->redirectTo("/");
         }
     }
+    function cin()
+    {
+        if (Auth::user()) {
+            return view('checkin');
+        } else {
+            return response()->redirectTo("/");
+        }
+    }
 
     function getCheckout()
     {
@@ -517,11 +525,11 @@ class GlobalController extends Controller
     {
         $id = request()->input('artefactid');
         $desc = request()->input('checkinreason');
-        $cid = request()->input('checkinId');
 
-        $cico = Cico::find($cid);
+        $cico = Cico::whereCheckOutStatus(true)->whereArtefactId($id)->first();
         $cico->check_in_description = $desc;
         $cico->check_out_status = false;
+        $cico->user_id = Auth::user()->id;
         if ($cico->save()) {
             flash('Checkin Successfull', 'success');
             return response()->redirectTo('/cico');
