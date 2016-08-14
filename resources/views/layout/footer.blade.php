@@ -7,6 +7,9 @@
 <script src="/assets/js/datepicker.js"></script>
 <script src="/assets/js/sweetalert.min.js"></script>
 <script src="/assets/js/xontextmenu.js"></script>
+<script src="/assets/js/jquery.flexdatalist.min.js"></script>
+<script src="/assets/js/jquery.tiny-layer.js"></script>
+<script src="/assets/js/jsgrid.min.js"></script>
 <script src="/assets/js/tree/jquery.contextMenu-1.6.5.js"></script>
 <script src="/assets/js/tree/jquery.fancytree.contextMenu.js"></script>
 <script src="/assets/js/global.js"></script>

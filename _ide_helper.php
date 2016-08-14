@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.42 on 2016-08-11.
+ * Generated for Laravel 5.2.43 on 2016-08-13.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -7281,7 +7281,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return \Symfony\Component\HttpFoundation\File\UploadedFile|array|null 
+         * @return \Illuminate\Http\UploadedFile|array|null 
          * @static 
          */
         public static function file($key = null, $default = null){
@@ -13165,7 +13165,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return \Symfony\Component\HttpFoundation\File\UploadedFile|array|null 
+         * @return \Illuminate\Http\UploadedFile|array|null 
          * @static 
          */
         public static function file($key = null, $default = null){
@@ -14473,6 +14473,122 @@ namespace {
 
 
     class Helper extends \App\Helpers\MyHelper{
+        
+    }
+
+
+    class Setting extends \Thetispro\Setting\Facades\Setting{
+        
+        /**
+         * Set the path to the file to use
+         *
+         * @param string $path The path to the file
+         * @return \Thetispro\Setting\Setting 
+         * @static 
+         */
+        public static function path($path){
+            return \Thetispro\Setting\Setting::path($path);
+        }
+        
+        /**
+         * Set the filename to use
+         *
+         * @param string $filename The filename
+         * @return \Thetispro\Setting\Setting 
+         * @static 
+         */
+        public static function filename($filename){
+            return \Thetispro\Setting\Setting::filename($filename);
+        }
+        
+        /**
+         * Get a value and return it
+         *
+         * @param string $key String using dot notation
+         * @param Mixed $default
+         * @return Mixed The value(s) found
+         * @static 
+         */
+        public static function get($key = null, $default = null){
+            return \Thetispro\Setting\Setting::get($key, $default);
+        }
+        
+        /**
+         * Store the passed value in to the json file
+         *
+         * @param $key
+         * @param mixed $value The value(s) to be stored
+         * @return void 
+         * @static 
+         */
+        public static function set($key, $value){
+            \Thetispro\Setting\Setting::set($key, $value);
+        }
+        
+        /**
+         * Forget the value(s) currently stored
+         *
+         * @param mixed $deleteKey The value(s) to be removed (dot notation)
+         * @return void 
+         * @static 
+         */
+        public static function forget($deleteKey){
+            \Thetispro\Setting\Setting::forget($deleteKey);
+        }
+        
+        /**
+         * Check to see if the value exists
+         *
+         * @param string $searchKey The key to search for
+         * @return boolean True: found - False not found
+         * @static 
+         */
+        public static function has($searchKey){
+            return \Thetispro\Setting\Setting::has($searchKey);
+        }
+        
+        /**
+         * Load the file in to $this->settings so values can be used immediately
+         *
+         * @param string $path The path to be used
+         * @param string $filename The filename to be used
+         * @return \Thetispro\Setting\Setting 
+         * @static 
+         */
+        public static function load($path = null, $filename = null){
+            return \Thetispro\Setting\Setting::load($path, $filename);
+        }
+        
+        /**
+         * Save the file
+         *
+         * @param string $path The path to be used
+         * @param string $filename The filename to be used
+         * @return void 
+         * @static 
+         */
+        public static function save($path = null, $filename = null){
+            \Thetispro\Setting\Setting::save($path, $filename);
+        }
+        
+        /**
+         * Clears the JSON Config file
+         *
+         * @static 
+         */
+        public static function clear(){
+            return \Thetispro\Setting\Setting::clear();
+        }
+        
+        /**
+         * This will mass assign data to the Setting
+         *
+         * @param array $data
+         * @static 
+         */
+        public static function setArray($data){
+            return \Thetispro\Setting\Setting::setArray($data);
+        }
         
     }
 

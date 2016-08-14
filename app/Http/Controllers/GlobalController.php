@@ -6,6 +6,7 @@ use App\Artefact;
 use App\ArtefactType;
 use App\Cico;
 use App\Location;
+use App\Page;
 use App\PickData;
 use App\Role;
 use App\User;
@@ -15,6 +16,7 @@ use Illuminate\Http\Request;
 use Grids;
 use HTML;
 use Illuminate\Support\Facades\Config;
+use Mail;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\Components\ColumnHeadersRow;
 use Nayjest\Grids\Components\ColumnsHider;
@@ -40,6 +42,7 @@ use Nayjest\Grids\GridConfig;
 
 
 use App\Http\Requests;
+use Validator;
 
 class GlobalController extends Controller
 {
@@ -300,7 +303,7 @@ class GlobalController extends Controller
             $location = request()->input("location");
             $artefact_type = request()->input("artefact");
 
-            $validator = \Validator::make($request->all(), [
+            $validator = Validator::make($request->all(), [
                 'fname' => 'required|max:25',
                 'lname' => 'required',
                 'abhayasiId' => 'required',
@@ -309,10 +312,18 @@ class GlobalController extends Controller
                 'email' => 'required',
             ]);
 
+            if ($role == 0 || $role == '0') {
+                $validator->errors()->add('field', 'Please select Valid Role');
+            }
             if (is_array($artefact_type)) {
                 if (sizeof($artefact_type) == 0) {
                     $validator->errors()->add('field', 'Please select minimum one artefacts to access');
                 }
+
+            }
+
+            if ($artefact_type == null) {
+                $validator->errors()->add('field', 'Please select minimum one artefacts to access');
             }
             if ($validator->fails()) {
                 return response()
@@ -481,6 +492,7 @@ class GlobalController extends Controller
             return response()->redirectTo("/");
         }
     }
+
     function cin()
     {
         if (Auth::user()) {
@@ -539,7 +551,8 @@ class GlobalController extends Controller
         }
     }
 
-    function checkInAutocomplete() {
+    function checkInAutocomplete()
+    {
         $result = DB::table('artefacts')
             ->leftJoin('cico', 'artefacts.id', '=', 'cico.artefact_id')
             ->select('artefacts.artefact_name', 'artefacts.id')
@@ -548,5 +561,191 @@ class GlobalController extends Controller
             ->get();
 
         return response()->json($result);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    function userCreate(Request $request)
+    {
+        if (Auth::user()) {
+
+            $user = new User();
+
+            $fname = request()->input("fname");
+            $lname = request()->input("lname");
+            $email = request()->input("email");
+            $abhyasiid = request()->input("abhayasiId");
+            $role = request()->input("role");
+            $location = request()->input("location");
+            $artefact_type = request()->input("artefact");
+
+            $validator = Validator::make($request->all(), [
+                'fname' => 'required|max:25',
+                'lname' => 'required',
+                'abhayasiId' => 'required',
+                'role' => 'required',
+                'location' => 'required',
+                'email' => 'required',
+                'artefact' => 'required'
+            ]);
+
+            if ($role == 0 || $role == '0') {
+                $validator->errors()->add('field', 'Please select Valid Role');
+            }
+            if (is_array($artefact_type)) {
+                if (sizeof($artefact_type) == 0) {
+                    $validator->errors()->add('field', 'Please select minimum one artefacts to access');
+                }
+            }
+
+            if ($artefact_type == null) {
+                $validator->errors()->add('field', 'Please select minimum one artefacts to access');
+            }
+            if ($validator->fails()) {
+                return response()
+                    ->redirectTo('/newUser')
+                    ->withErrors($validator);
+            } else {
+
+                $password = str_random(8);
+
+                $user->fname = $fname;
+                $user->lname = $lname;
+                $user->email = $email;
+                $user->abhyasiid = $abhyasiid;
+                $user->role = $role;
+                $user->password = md5($password);
+                $user->location = $location;
+                $user->artefact_type()->sync($artefact_type);
+                if ($user->save()) {
+
+                    Mail::send('email.newuser', array(
+                        'username' => $abhyasiid,
+                        'password' => $password,
+                        'url' => base_path('/')
+                    ), function ($message) use ($user) {
+                        $message
+                            ->to($user->email, $user->fname . " " . $user->lname)
+                            ->subject('Welcome to Global Archive!');
+                    });
+
+                    flash('User created succesfully', 'success');
+                    return response()
+                        ->redirectTo('/userrole/');
+                } else {
+                    flash('failed to create user', 'error');
+                    return response()
+                        ->redirectTo('/userrole/');
+                }
+            }
+
+        } else {
+            return response()->redirectTo("/");
+        }
+    }
+
+
+    function newUser()
+    {
+        if (Auth::user()) {
+            \Debugbar::addMessage(Page::getUserPage());
+            return response()->view('newUser');
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function addRole()
+    {
+        if (Auth::user()) {
+
+            $name = request()->input('rolename');
+            $pages = request()->input('pages');
+            $fullPage = array();
+
+            if ($pages == null) {
+                $pages = Page::where('is_default', true);
+                foreach ($pages as $page) {
+                    array_push($fullPage, $page->id);
+                }
+            } elseif (is_array($pages)) {
+                $p = Page::where('is_default', true)->get();
+                foreach ($pages as $page) {
+                    array_push($fullPage, $page);
+                }
+
+                foreach ($p as $p1) {
+                    array_push($fullPage, $p1->id);
+                }
+
+                array_unique($fullPage);
+            }
+
+            $role = new Role();
+            $role->short_name = strtoupper(preg_replace('/\s+/', '', $name));
+            $role->long_name = $name;
+            $role->save();
+            \Debugbar::addMessage($role);
+            \Debugbar::addMessage($fullPage);
+            $role->pages()->sync($fullPage);
+            flash("Role added succesfully", "success");
+            return response()->redirectTo('/editRole/0');
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function editRole($id)
+    {
+        if (Auth::user()) {
+
+            $role = Role::get();
+            $pages = Page::get();
+
+            \Debugbar::addMessage($role);
+            return view('editRole')
+                ->with('roleSelected', $id)
+                ->with('pages', $pages)
+                ->with('roles', $role);
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function allroles()
+    {
+        return response()->json(Role::get());
+    }
+
+    function updateRole()
+    {
+        if (Auth::user()) {
+
+            $role = Role::find(request()->input('id'));
+            $role->short_name = request()->input('short_name');
+            $role->long_name = request()->input('long_name');
+            $role->active = request()->input('active');
+            if ($role->save()) {
+                return response()->json($role);
+            }
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function maintenence()
+    {
+        if (Auth::user()) {
+            $location = Location::get();
+            $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
+            return view('maintenance')
+                ->with('artefacttypes', $artefactTypes)
+                ->with('locations', $location);
+
+        } else {
+            return response()->redirectTo('/');
+        }
     }
 }

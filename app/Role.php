@@ -25,11 +25,12 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     //
-    protected $table = "roles";
 
     protected $fillable = [
         "short_name",
-        "long_name"
+        "long_name",
+        "is_developer",
+        "active"
     ];
 
     public function pages()

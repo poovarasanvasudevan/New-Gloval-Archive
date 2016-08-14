@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="/assets/css/ui.fancytree.min.css">
     <link rel="stylesheet" href="/assets/css/sweetalert.css">
     <link rel="stylesheet" href="/assets/css/jquery.contextMenu.css">
+    <link rel="stylesheet" href="/assets/css/jquery.flexdatalist.min.css">
+    <link rel="stylesheet" href="/assets/css/jquery.tiny-layer.css">
+    <link rel="stylesheet" href="/assets/css/jsgrid.min.css">
+    <link rel="stylesheet" href="/assets/css/jsgrid-theme.css">
     <link rel="stylesheet" href="/assets/css/app.css">
    </head>
 

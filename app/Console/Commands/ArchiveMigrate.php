@@ -67,9 +67,9 @@ class ArchiveMigrate extends Command
         $users = \DB::connection("mysql2")->table("user")->get();
         foreach ($users as $user) {
             $user1 = new User();
-            $user1->abhyasiid = strtolower($user->abhyasiid);
-            $user1->fname = $user->firstname;
-            $user1->lname = $user->lastname;
+            $user1->abhyasiid = strtolower($user->AbhyasiID);
+            $user1->fname = $user->FirstName;
+            $user1->lname = $user->LastName;
             $user1->password = md5("password");
             $user1->save();
         }
@@ -104,6 +104,8 @@ class ArchiveMigrate extends Command
             $p->short_name = $page->name;
             $p->long_name = $page->title;
             $p->url = $page->url;
+            $p->is_default = $page->default;
+            $p->is_admin_page = $page->isadmin;
             $p->order = $page->order;
 
             $p->save();
@@ -117,8 +119,21 @@ class ArchiveMigrate extends Command
         $role->save();
         $this->info("done");
 
-        $this->warn("Assigning Page Permission to Admin : ");
-        Role::find(1)->pages()->sync(Page::all());
+        $this->warn("Creating Developer Role : ");
+        $role = new Role();
+        $role->short_name = 'developer';
+        $role->long_name = "Developer";
+        $role->is_developer = true;
+        $role->save();
+        $this->info("done");
+
+        $this->warn("Assigning Developer Page Permission  : ");
+        Role::find(2)->pages()->sync(Page::all());
+        $this->info("done");
+
+
+        $this->warn("Assigning Developer Page Permission  : ");
+        Role::find(2)->pages()->sync(Page::withoutGlobalScopes()->get());
         $this->info("done");
 
 
@@ -141,10 +156,10 @@ class ArchiveMigrate extends Command
 
         foreach ($artefacts as $artefact) {
             $a = new Artefact();
-            $a->artefact_type = $this->getArtefactCode($artefact->artefacttypecode);
+            $a->artefact_type = $this->getArtefactCode($artefact->ArtefactTypeCode);
             $a->location = 1;
-            $a->old_artefact_id = $artefact->artefactcode;
-            $a->artefact_name = $artefact->artefactname;
+            $a->old_artefact_id = $artefact->ArtefactCode;
+            $a->artefact_name = $artefact->ArtefactName;
             $a->parent_id = null;
             $a->user_id = 3;
             $a->save();
@@ -167,15 +182,15 @@ class ArchiveMigrate extends Command
         foreach ($artefactsChild as $artefact) {
 
             //$this->info($artefact->artefactcode);
-            if ($this->getArtefactCode($artefact->artefacttypecode) != 3) {
-                if ($artefact->artefactpid != '') {
+            if ($this->getArtefactCode($artefact->ArtefactTypeCode) != 3) {
+                if ($artefact->ArtefactPID != '') {
 
                     $a = new Artefact();
-                    $a->artefact_type = $this->getArtefactCode($artefact->artefacttypecode);
+                    $a->artefact_type = $this->getArtefactCode($artefact->ArtefactTypeCode);
                     $a->location = 1;
-                    $a->old_artefact_id = $artefact->artefactcode;
-                    $a->parent_id = Artefact::whereArtefactName($artefact->artefactpid)->first()->id;
-                    $a->artefact_name = $artefact->artefactname;
+                    $a->old_artefact_id = $artefact->ArtefactCode;
+                    $a->parent_id = Artefact::whereArtefactName($artefact->ArtefactPID)->first()->id;
+                    $a->artefact_name = $artefact->ArtefactName;
                     $a->user_id = 3;
                     $a->save();
                 }
@@ -193,26 +208,26 @@ class ArchiveMigrate extends Command
         $attributes = \DB::connection('mysql2')->table('attributes')->get();
         $bar = $this->output->createProgressBar(count($attributes));
         foreach ($attributes as $attribute) {
-            $artefacttypecode = $this->getArtefactCode($attribute->artefacttypecode);
+            $artefacttypecode = $this->getArtefactCode($attribute->ArtefactTypeCode);
             $pickFlag = false;
             $aListCode = "";
-            $htmlType = $attribute->datatype;
-            if ($attribute->pickflag == 'y' || $attribute->pickflag == 'Y') {
+            $htmlType = $attribute->DataType;
+            if ($attribute->PickFlag == 'y' || $attribute->PickFlag == 'Y') {
                 $pickFlag = true;
-                $aListCode = $attribute->alistcode;
+                $aListCode = $attribute->AListCode;
                 $htmlType = 'select';
             }
-            if($htmlType =='Varchar' || $htmlType =='vatchat' || $htmlType=='varchar') {
+            if ($htmlType == 'Varchar' || $htmlType == 'vatchat' || $htmlType == 'varchar') {
                 $htmlType = 'text';
             }
-            if($htmlType =='int') {
+            if ($htmlType == 'int') {
                 $htmlType = 'number';
             }
 
             $attributeObj = new ArtefactTypeAttribute();
             $attributeObj->artefact_type_id = $artefacttypecode;
             $attributeObj->html_type = $htmlType;
-            $attributeObj->attribute_title = $attribute->attributes;
+            $attributeObj->attribute_title = $attribute->Attributes;
             $attributeObj->pick_flag = $pickFlag;
 
             $attributeObj->save();
@@ -225,7 +240,7 @@ class ArchiveMigrate extends Command
                 foreach ($lists as $list) {
                     $pick = new PickData();
                     $pick->attribute_id = $attributeId;
-                    $pick->pick_data_value = $list->alistvalue;
+                    $pick->pick_data_value = $list->AlistValue;
                     $pick->save();
                 }
 
@@ -238,27 +253,32 @@ class ArchiveMigrate extends Command
 
 
         $this->warn("migrating Video Data : ");
-        $this->migrateData('videoattributes',7);
+        $this->migrateData('videoattributes', 7);
         $this->info("done");
 
 
         $this->warn("migrating Photo Data : ");
-        $this->migrateData('photoboxattributes',6);
+        $this->migrateData('photoboxattributes', 6);
         $this->info("done");
 
         $this->warn("migrating Book Data : ");
-        $this->migrateData('bboxattributes',2);
+        $this->migrateData('bboxattributes', 2);
         $this->info("done");
 
 
         $this->warn("migrating Audio Data : ");
-        $this->migrateData('audioattributes',1);
+        $this->migrateData('audioattributes', 1);
+        $this->info("done");
+
+        $this->warn("migrating Letters Data : ");
+        $this->migrateData('lboxattributes', 3);
         $this->info("done");
 
 
     }
 
-    function migrateData($tableName,$attId) {
+    function migrateData($tableName, $attId)
+    {
         $videoDatas = \DB::connection('mysql2')->table($tableName)->get();
         $bar = $this->output->createProgressBar(count($videoDatas));
         foreach ($videoDatas as $k => $v) {
@@ -266,7 +286,7 @@ class ArchiveMigrate extends Command
             foreach (json_decode(json_encode($v)) as $key => $val) {
 
                 $my_attrs = ArtefactTypeAttribute::whereArtefactTypeId($attId)
-                    ->whereRaw("LOWER(attribute_title) = ?", [str_ireplace('"', '', $key)]);
+                    ->whereRaw("LOWER(attribute_title) = ?", [str_ireplace('"', '', strtolower($key))]);
 
                 if ($my_attrs->count() == 1) {
 
@@ -279,9 +299,16 @@ class ArchiveMigrate extends Command
                 }
             }
 
-            $arte = Artefact::whereOldArtefactId($v->artefactcode);
+            $oldCode = "";
+            if ($tableName == 'videoattributes') {
+                $oldCode = $v->artefactCode;
+            } else {
+                $oldCode = $v->artefactcode;
+            }
 
-            if($arte->count() ==1) {
+            $arte = Artefact::whereOldArtefactId($oldCode);
+
+            if ($arte->count() == 1) {
                 $arte1 = $arte->first();
                 $arte1->artefact_values = $tmp1;
                 $arte1->save();
@@ -307,7 +334,8 @@ class ArchiveMigrate extends Command
             "LBox" => 3,
             "Video" => 7,
             "VTrack" => 7,
-            "PhotoBox" => 6
+            "PhotoBox" => 6,
+            "Letter" => 3
         );
         return $artefactArray[$artefact];
 

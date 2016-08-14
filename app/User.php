@@ -61,4 +61,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\ArtefactType');
     }
+
+    public function getPages($query){
+        return $query->where('votes', '>', 100);
+    }
 }

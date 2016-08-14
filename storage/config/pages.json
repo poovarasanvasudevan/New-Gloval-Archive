@@ -3,54 +3,80 @@
     "name": "Home",
     "title": "Home",
     "url": "/home",
-    "order": 1
+    "order": 1,
+    "default": true,
+    "isadmin": false
   },
   {
     "name": "Search",
     "title": "Search",
     "url": "/search",
-    "order": 2
+    "order": 2,
+    "default": true,
+    "isadmin": false
   },
   {
     "name": "Reports",
     "title": "Reports",
     "url": "/reports",
-    "order": 3
+    "order": 3,
+    "default": false,
+    "isadmin": false
   },
   {
     "name": "Definition",
     "title": "Definition",
     "url": "/definition",
-    "order": 3
+    "order": 3,
+    "default": false,
+    "isadmin": false
   },
   {
     "name": "cico",
     "title": "Check in/Out",
     "url": "/cico",
-    "order": 4
+    "order": 4,
+    "default": false,
+    "isadmin": false
   },
   {
     "name": "ConditionalReport",
     "title": "Conditional Report",
     "url": "/creport",
-    "order": 5
+    "order": 5,
+    "default": false,
+    "isadmin": false
   },
   {
     "name": "Maintenence",
     "title": "Maintenence",
     "url": "/maintenence",
-    "order": 6
+    "order": 6,
+    "default": false,
+    "isadmin": false
   },
   {
     "name": "RoleUsers",
     "title": "Role and Users",
     "url": "/userrole",
-    "order": 6
+    "order": 6,
+    "default": false,
+    "isadmin": false
   },
   {
     "name": "Task",
     "title": "Task",
     "url": "/task",
-    "order": 7
+    "order": 7,
+    "default": false,
+    "isadmin": false
+  },
+  {
+    "name": "admin",
+    "title": "Admin",
+    "url": "/admin",
+    "order": 7,
+    "default": false,
+    "isadmin": true
   }
 ]

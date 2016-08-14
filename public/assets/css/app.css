@@ -1801,3 +1801,16 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
     padding: 0px 5px;
 }
 /*# sourceMappingURL=bootstrap-datepicker3.standalone.css.map */
+.my-dialog-bg {
+    background: #FFF;
+    padding: 20px;
+}
+
+.white-popup-block {
+    background: #FFF;
+    padding: 20px 30px;
+    text-align: left;
+    max-width: 650px;
+    margin: 40px auto;
+    position: relative;
+}

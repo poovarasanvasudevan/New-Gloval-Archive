@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
 
                 @if(Auth::user())
-                    @foreach(\App\Role::find(Auth::user()->role)->pages()->get() as $page)
+                    @foreach(\App\Page::getUserPage() as $page)
                         <li><a href="{{$page->url}}">{{$page->long_name}}</a></li>
                     @endforeach
                 @endif

@@ -2,6 +2,11 @@
 @section('content')
     <div class="full-bg">
         @include("layout.navbar")
+        <style>
+            .easy-autocomplete-container {
+                margin-top: 55px !important;
+            }
+        </style>
 
         <div class="col-md-6 card card-block col-md-offset-3" style="margin-top: 70px !important;">
 
@@ -26,7 +31,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
 
-                            <form name="checkibForm" id="checkoutForm">
+                            <form name="checkinForm" id="checkinForm">
                                 <div class="form-group has-success">
                                     <label class="control-label" for="inputcheckin">Search Artefact</label>
                                     <div class="input-group">
@@ -40,7 +45,6 @@
                             <div id="checkinList">
 
                             </div>
-
                         </div>
                     </div>
 

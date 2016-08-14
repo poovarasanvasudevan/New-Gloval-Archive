@@ -34,6 +34,7 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->string('short_name');
             $table->string('long_name');
+            $table->boolean('is_developer')->default(FALSE);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
@@ -44,6 +45,8 @@ class CreateAllTables extends Migration
             $table->string('short_name');
             $table->string('long_name');
             $table->string('url');
+            $table->boolean('is_default')->default(false);
+            $table->boolean('is_admin_page')->default(false);
             $table->integer('order')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
@@ -72,6 +75,7 @@ class CreateAllTables extends Migration
             $table->string('lname');
             $table->string('email')->unique()->nullable();
             $table->string('password');
+            $table->boolean('is_developer')->default(false);
             $table->integer('role')->unsigned()->nullable();
             $table->integer("location")->unsigned()->default(1);
             $table->rememberToken();
@@ -90,6 +94,57 @@ class CreateAllTables extends Migration
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
         });
+
+        Schema::create('scheduled_maintenences',function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('artefact_type_id')->unsigned();
+            $table->string('maintenence_type');
+            $table->boolean('active')->default(TRUE);
+            $table->timestamps();
+            $table->foreign('artefact_type_id')->references('id')->on('artefact_types');
+        });
+
+        Schema::create('scheduled_maintenence_dates',function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('scheduled_maintenence_id')->unsigned();
+            $table->date('maintenence_date');
+            $table->boolean('is_completed')->default(false);
+            $table->json('conditional_report_result_data')->nullable();
+            $table->boolean('active')->default(TRUE);
+            $table->timestamps();
+            $table->foreign('scheduled_maintenence_id')->references('id')->on('scheduled_maintenences');
+        });
+
+
+        Schema::create('conditional_reports_segments',function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('artefact_type_id')->unsigned();
+            $table->string('segment_name');
+            $table->string('segment_title');
+            $table->boolean('active')->default(TRUE);
+            $table->timestamps();
+
+            $table->foreign('artefact_type_id')->references('id')->on('artefact_types');
+        });
+
+        Schema::create('conditional_reports',function(Blueprint $table){
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('conditional_reports_segments_id')->unsigned();
+            $table->string("conditional_report_name");
+            $table->string("conditional_report_title");
+            $table->string("conditional_report_html_type");
+            $table->boolean("conditional_report_pick_flag")->default(false);
+            $table->json("conditional_report_pick_data")->nullable();
+            $table->boolean('active')->default(TRUE);
+            $table->timestamps();
+
+            $table->foreign('conditional_reports_segments_id')->references('id')->on('conditional_reports_segments');
+        });
+
 
         Schema::create('artefacts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
@@ -181,6 +236,10 @@ class CreateAllTables extends Migration
         Schema::drop("artefacts");
         Schema::drop("pick_data");
         Schema::drop("artefact_type_attributes");
+        Schema::drop("scheduled_maintenence_dates");
+        Schema::drop("scheduled_maintenences");
+        Schema::drop("conditional_reports");
+        Schema::drop("conditional_reports_segments");
 
         Schema::drop("artefact_types");
         Schema::drop("page_role");

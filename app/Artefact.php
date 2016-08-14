@@ -79,4 +79,8 @@ class Artefact extends Model
     public function cico(){
         return $this->hasMany('App\Cico');
     }
+
+    public function scheduledMaintenence(){
+        return $this->hasMany('App\ScheduledMaintenence');
+    }
 }

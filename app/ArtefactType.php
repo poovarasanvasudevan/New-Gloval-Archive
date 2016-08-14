@@ -45,4 +45,8 @@ class ArtefactType extends Model
     public function attributes(){
         return $this->hasMany('App\ArtefactTypeAttribute');
     }
+
+    public function conditionaReportSegment(){
+        return $this->hasMany('App\ConditionalReportsSegment');
+    }
 }

@@ -155,6 +155,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\HelperServiceProvicer::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
+        Thetispro\Setting\SettingServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -216,6 +218,7 @@ return [
         'Grids' => Nayjest\Grids\Grids::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Helper' => App\Helpers\MyHelper::class,
+        'Setting' => Thetispro\Setting\Facades\Setting::class,
 
     ],
 

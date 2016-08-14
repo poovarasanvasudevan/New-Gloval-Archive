@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="PostgreSQL - gar@localhost" uuid="0c154b57-47b0-435c-bb74-63dade7d1b5e">
+    <data-source name="PostgreSQL - archive@localhost" uuid="beb51bb3-cd5a-49db-925e-42e2740700ea">
       <secret-storage>master_key</secret-storage>
       <user-name>postgres</user-name>
-      <introspection-scope>gar:public,pg_catalog,postgres</introspection-scope>
-      <resolve-scope>gar:public,postgres</resolve-scope>
+      <schema-pattern>archive.pg_catalog archive.public</schema-pattern>
+      <default-schemas>archive.public</default-schemas>
     </data-source>
-    <data-source name="PostgreSQL - archive@localhost" uuid="3f44e146-5815-47ac-8a0c-cb766d5c45eb">
-      <secret-storage>master_key</secret-storage>
-      <user-name>postgres</user-name>
-      <introspection-scope>archive:public,pg_catalog,postgres</introspection-scope>
-      <resolve-scope>archive:public,postgres</resolve-scope>
-    </data-source>
-    <data-source name="MySQL - gar@localhost" uuid="ccc70001-8ae7-424a-b0bd-4088b1ab9eac">
+    <data-source name="MySQL - president@localhost" uuid="9216413b-bda2-42f5-b468-39b54ab2cc21">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-scope>gar:</introspection-scope>
-      <resolve-scope>gar:</resolve-scope>
+      <schema-pattern>president.*</schema-pattern>
+      <default-schemas>president.*</default-schemas>
     </data-source>
   </component>
 </project>

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Scope\DeveloperScope;
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -33,11 +35,37 @@ class Page extends Model
         "short_name",
         "long_name",
         "url",
-        "order"
+        "order",
+        'is_admin_page',
+        'is_default'
     ];
+
+    /**
+     *
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new DeveloperScope());
+    }
 
     public function roles()
     {
         return $this->belongsToMany('App\Role');
     }
+
+    public static function getUserPage()
+    {
+
+        return \DB::table('pages')
+            ->select('pages.*')
+            ->leftJoin('page_role', 'page_role.page_id', '=', 'pages.id')
+            ->leftJoin('roles', 'page_role.role_id', '=', 'roles.id')
+            ->leftJoin('users', 'roles.id', '=', 'users.role')
+            ->whereRaw('users.id = ?', [Auth::user()->id])
+            ->orderBy("pages.id")
+            ->get();
+
+    }
+
 }

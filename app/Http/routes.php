@@ -37,10 +37,18 @@ Route::get("/moveArtefact/{id}/{newParent}", 'GlobalController@moveArtefact');
 Route::get("/allartefact", 'GlobalController@allartefact');
 Route::get("/cico", 'GlobalController@cico');
 Route::get("/cin", 'GlobalController@cin');
+Route::get("/newUser", 'GlobalController@newUser');
+Route::get("/editRole/{id}", 'GlobalController@editRole');
+Route::get("/allroles", 'GlobalController@allroles');
+Route::get("/maintenence", 'GlobalController@maintenence');
 
 
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
 Route::post("/resetmypassword", 'GlobalController@resetMyPassword');
 Route::post("/checkout", 'GlobalController@checkout');
+Route::post("/checkin", 'GlobalController@checkin');
+Route::post("/userCreate", 'GlobalController@userCreate');
+Route::post("/addRole", 'GlobalController@addRole');
+Route::post("/updateRole", 'GlobalController@updateRole');
 Route::get("/getCheckout", 'GlobalController@getCheckout');
-Route::get("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');
+Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');
