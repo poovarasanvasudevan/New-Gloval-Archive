@@ -27,6 +27,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $order
  * @method static \Illuminate\Database\Query\Builder|\App\Pages whereOrder($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @property boolean $is_default
+ * @property boolean $is_admin_page
+ * @method static \Illuminate\Database\Query\Builder|\App\Page whereIsDefault($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Page whereIsAdminPage($value)
  */
 class Page extends Model
 {

@@ -9,9 +9,13 @@ use App\Location;
 use App\Page;
 use App\PickData;
 use App\Role;
+use App\ScheduledMaintenence;
+use App\ScheduledMaintenenceDate;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 use DB;
+use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use Grids;
 use HTML;
@@ -747,5 +751,54 @@ class GlobalController extends Controller
         } else {
             return response()->redirectTo('/');
         }
+    }
+
+    function addSperodicMaintenance()
+    {
+        $date = Carbon::createFromFormat('d/m/Y', request()->input("scheduleDate"));
+        $scheduledMaintenence = new ScheduledMaintenence();
+        $scheduledMaintenence->artefact_id = request()->input('artefact_id');
+        $scheduledMaintenence->maintenence_type = 'Sperodic';
+        if ($scheduledMaintenence->save()) {
+            $scDate = new ScheduledMaintenenceDate();
+            $scDate->scheduled_maintenence_id = $scheduledMaintenence->id;
+            $scDate->maintenence_date = $date;
+            $scDate->save();
+
+            flash("Maintenence Scheduled Succesfully", "success");
+            return response()->redirectTo('/maintenence');
+        } else {
+            flash("Failed to Create Maintenence Scheduled", "error");
+            return response()->redirectTo('/maintenence');
+        }
+    }
+
+    function getSchedule($id)
+    {
+        return response()->json(ScheduledMaintenence::whereArtefactId($id)->get());
+    }
+
+    function addPerodicMaintenance()
+    {
+
+        $start_date = request()->input('start_date');
+        $start = Carbon::createFromFormat('d/m/Y', $start_date);
+        $end_date = request()->input("end_date");
+        $end = Carbon::createFromFormat('d/m/Y', $end_date);
+        $type = request()->input('type');
+        $occurance_number = request()->input('occurance_number');
+
+        $days = array();
+        if ($type == 'week') {
+            $weekdays = request()->input('weekdays');
+            $start->next($weekdays);
+            while($start->lte($end)) {
+                array_push($days,$start->addWeeks($occurance_number)->toDateString());
+            }
+        } else {
+
+        }
+
+        return response()->json($days);
     }
 }

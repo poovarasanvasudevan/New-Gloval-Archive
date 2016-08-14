@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ArtefactTypeAttribute[] $attributes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ConditionalReportsSegment[] $conditionaReportSegment
  */
 class ArtefactType extends Model
 {

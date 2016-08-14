@@ -2,16 +2,10 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="PostgreSQL - archive@localhost" uuid="beb51bb3-cd5a-49db-925e-42e2740700ea">
-      <secret-storage>master_key</secret-storage>
-      <user-name>postgres</user-name>
-      <schema-pattern>archive.pg_catalog archive.public</schema-pattern>
-      <default-schemas>archive.public</default-schemas>
+      <secret-storage>memory</secret-storage>
     </data-source>
     <data-source name="MySQL - president@localhost" uuid="9216413b-bda2-42f5-b468-39b54ab2cc21">
-      <secret-storage>master_key</secret-storage>
-      <user-name>root</user-name>
-      <schema-pattern>president.*</schema-pattern>
-      <default-schemas>president.*</default-schemas>
+      <secret-storage>memory</secret-storage>
     </data-source>
   </component>
 </project>

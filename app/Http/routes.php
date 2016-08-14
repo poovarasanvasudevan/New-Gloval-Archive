@@ -41,6 +41,7 @@ Route::get("/newUser", 'GlobalController@newUser');
 Route::get("/editRole/{id}", 'GlobalController@editRole');
 Route::get("/allroles", 'GlobalController@allroles');
 Route::get("/maintenence", 'GlobalController@maintenence');
+Route::get("/getSchedule/{id}", 'GlobalController@getSchedule');
 
 
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
@@ -50,5 +51,7 @@ Route::post("/checkin", 'GlobalController@checkin');
 Route::post("/userCreate", 'GlobalController@userCreate');
 Route::post("/addRole", 'GlobalController@addRole');
 Route::post("/updateRole", 'GlobalController@updateRole');
+Route::post("/addSperodicMaintenance", 'GlobalController@addSperodicMaintenance');
+Route::post("/addPerodicMaintenance", 'GlobalController@addPerodicMaintenance');
 Route::get("/getCheckout", 'GlobalController@getCheckout');
 Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');

@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Role whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Pages[] $pages
+ * @property boolean $is_developer
+ * @method static \Illuminate\Database\Query\Builder|\App\Role whereIsDeveloper($value)
  */
 class Role extends Model
 {

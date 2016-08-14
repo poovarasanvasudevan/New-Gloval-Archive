@@ -31,6 +31,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ArtefactType[] $artefact_type
+ * @property boolean $is_developer
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereIsDeveloper($value)
  */
 class User extends Authenticatable
 {

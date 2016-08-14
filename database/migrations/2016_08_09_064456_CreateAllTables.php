@@ -95,28 +95,6 @@ class CreateAllTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('scheduled_maintenences',function(Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('artefact_type_id')->unsigned();
-            $table->string('maintenence_type');
-            $table->boolean('active')->default(TRUE);
-            $table->timestamps();
-            $table->foreign('artefact_type_id')->references('id')->on('artefact_types');
-        });
-
-        Schema::create('scheduled_maintenence_dates',function(Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('scheduled_maintenence_id')->unsigned();
-            $table->date('maintenence_date');
-            $table->boolean('is_completed')->default(false);
-            $table->json('conditional_report_result_data')->nullable();
-            $table->boolean('active')->default(TRUE);
-            $table->timestamps();
-            $table->foreign('scheduled_maintenence_id')->references('id')->on('scheduled_maintenences');
-        });
-
 
         Schema::create('conditional_reports_segments',function(Blueprint $table) {
             $table->engine = 'InnoDB';
@@ -165,6 +143,30 @@ class CreateAllTables extends Migration
             $table->foreign("user_id")->references('id')->on('users')->onDelete('cascade');
             $table->foreign("artefact_type")->references('id')->on('artefact_types')->onDelete('cascade');
         });
+
+        Schema::create('scheduled_maintenences',function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('artefact_id')->unsigned();
+            $table->string('maintenence_type');
+            $table->boolean('active')->default(TRUE);
+            $table->timestamps();
+
+            $table->foreign('artefact_id')->references('id')->on('artefacts');
+        });
+
+        Schema::create('scheduled_maintenence_dates',function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('scheduled_maintenence_id')->unsigned();
+            $table->date('maintenence_date');
+            $table->boolean('is_completed')->default(false);
+            $table->json('conditional_report_result_data')->nullable();
+            $table->boolean('active')->default(TRUE);
+            $table->timestamps();
+            $table->foreign('scheduled_maintenence_id')->references('id')->on('scheduled_maintenences');
+        });
+
 
         Schema::create('artefact_type_user', function (Blueprint $table) {
             $table->engine = 'InnoDB';
@@ -233,11 +235,12 @@ class CreateAllTables extends Migration
 
         Schema::drop("cico");
         Schema::drop("artefact_type_user");
+        Schema::drop("scheduled_maintenence_dates");
+        Schema::drop("scheduled_maintenences");
         Schema::drop("artefacts");
         Schema::drop("pick_data");
         Schema::drop("artefact_type_attributes");
-        Schema::drop("scheduled_maintenence_dates");
-        Schema::drop("scheduled_maintenences");
+
         Schema::drop("conditional_reports");
         Schema::drop("conditional_reports_segments");
 
