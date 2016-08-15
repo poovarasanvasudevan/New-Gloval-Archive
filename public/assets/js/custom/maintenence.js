@@ -3,7 +3,7 @@
  */
 $(function () {
     $('.weekdays').hide();
-    $('.monthdays').hide();
+    $('.monthdays').hide();$('#content').html("");
     $('a#sperodicOpener').magnificPopup({
         type: 'inline',
         closeOnBgClick: false,
@@ -43,7 +43,8 @@ $(function () {
                 return false;
             }
         } else {
-            if ($('#month_day').val() > 0 || $('#month_day').val() < 31 || $('#month_day').val() == "") {
+            month = parseInt($('#month_day').val())
+            if (month < 0 || month > 31 || month == "" || month=='undefined') {
                 alert("Please enter date that wou want to make alert schedule");
                 return false;
             }
@@ -54,6 +55,7 @@ $(function () {
     $('#schedulePanel').hide();
     $('#artefactTypes').on('change', function () {
         $('#schedulePanel').hide();
+        $('#content').html("");
         artefactSelected = $(this).val();
         $('#artefact_name').val("");
         $('#parent').fancytree({
@@ -85,6 +87,7 @@ $(function () {
                 $('#artefact_name').html(node.title);
                 $('#artefact_id').val(node.key);
 
+                $('#content').html("");
                 $.ajax({
                     url: "/getSchedule/" + node.key,
                     method: 'GET',

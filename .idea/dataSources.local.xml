@@ -3,9 +3,11 @@
   <component name="dataSourceStorageLocal">
     <data-source name="PostgreSQL - archive@localhost" uuid="beb51bb3-cd5a-49db-925e-42e2740700ea">
       <secret-storage>memory</secret-storage>
+      <user-name>postgres</user-name>
     </data-source>
     <data-source name="MySQL - president@localhost" uuid="9216413b-bda2-42f5-b468-39b54ab2cc21">
       <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
     </data-source>
   </component>
 </project>

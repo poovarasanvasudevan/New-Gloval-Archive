@@ -42,6 +42,7 @@ Route::get("/editRole/{id}", 'GlobalController@editRole');
 Route::get("/allroles", 'GlobalController@allroles');
 Route::get("/maintenence", 'GlobalController@maintenence');
 Route::get("/getSchedule/{id}", 'GlobalController@getSchedule');
+Route::get("/task/{id}", 'GlobalController@task');
 
 
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');

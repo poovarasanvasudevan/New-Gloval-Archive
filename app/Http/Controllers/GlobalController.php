@@ -789,16 +789,73 @@ class GlobalController extends Controller
         $occurance_number = request()->input('occurance_number');
 
         $days = array();
+        $success = false;
         if ($type == 'week') {
             $weekdays = request()->input('weekdays');
             $start->next($weekdays);
-            while($start->lte($end)) {
-                array_push($days,$start->addWeeks($occurance_number)->toDateString());
-            }
-        } else {
+            $scheduledMaintenence = new ScheduledMaintenence();
+            $scheduledMaintenence->artefact_id = request()->input('artefact_id');
+            $scheduledMaintenence->maintenence_type = 'Perodic';
+            $scheduledMaintenence->save();
 
+            while ($start->lte($end)) {
+                $scDate = new ScheduledMaintenenceDate();
+                $scDate->scheduled_maintenence_id = $scheduledMaintenence->id;
+                $scDate->maintenence_date = $start->addWeeks($occurance_number);
+                $scDate->save();
+            }
+            $success = true;
+        } else {
+            $monthDay = request()->input("month_day");
+            $start_d = Carbon::createFromDate(null, null, $monthDay);
+            $scheduledMaintenence = new ScheduledMaintenence();
+            $scheduledMaintenence->artefact_id = request()->input('artefact_id');
+            $scheduledMaintenence->maintenence_type = 'Perodic';
+            $scheduledMaintenence->save();
+            while ($start_d->lt($end)) {
+                $scDate = new ScheduledMaintenenceDate();
+                $scDate->scheduled_maintenence_id = $scheduledMaintenence->id;
+                $scDate->maintenence_date = $start_d->addMonths($occurance_number);
+                $scDate->save();
+            }
+            $success = true;
         }
 
-        return response()->json($days);
+        if ($success) {
+            flash("Maintenence Scheduled Succesfully", "success");
+            return response()->redirectTo('/maintenence');
+        } else {
+            flash("Failed to Create Maintenence Scheduled", "error");
+            return response()->redirectTo('/maintenence');
+        }
+    }
+
+    function task($id)
+    {
+        if (Auth::user()) {
+            $result = "";
+
+            switch ($id) {
+                case 0:
+                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])->get();
+                    break;
+                case 1:
+                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])->get();
+                    break;
+                case 2:
+                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addMonth()->toDateString()])->get();
+                    break;
+                case 3:
+                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addYear()->toDateString()])->get();
+                    break;
+                default:
+                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])->get();
+
+            }
+            return view('task')->with('result', $result);
+
+        } else {
+            return response()->redirectTo("/");
+        }
     }
 }
