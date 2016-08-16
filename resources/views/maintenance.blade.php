@@ -74,7 +74,7 @@
                         <form id="newPerodicMaintenance" class="white-popup-block mfp-hide" method="post"
                               action="/addPerodicMaintenance">
                             <fieldset>
-                                <input type="hidden" name="artefact_id" value="" id="artefact_id">
+                                <input type="hidden" name="artefact_id" value="" id="artefact_id" class="artefact_id">
                                 <legend>New Sperodic Maintenence</legend>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -187,7 +187,7 @@
                                 <div class="form-group">
                                     <label for="fname" class="col-lg-2 control-label">Schedule Date</label>
                                     <div class="col-lg-10">
-                                        <input type="hidden" name="artefact_id" value="" id="artefact_id">
+                                        <input type="hidden" name="artefact_id" value="" id="artefact_id" class="artefact_id">
                                         <input type="text" required class="form-control scheduleDate"
                                                name="scheduleDate" id="scheduleDate"
                                                placeholder="Schedule Date"

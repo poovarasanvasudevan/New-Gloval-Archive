@@ -13,19 +13,24 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-         Commands\ArchiveMigrate::class,
-         Commands\TestConsole::class,
+        Commands\ArchiveMigrate::class,
+        Commands\TestConsole::class,
+        Commands\SendMaintenenceNotification::class,
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+
+        $schedule->command('archive:notification')
+            ->dailyAt('05:00');
     }
 }

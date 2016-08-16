@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Artefact;
 use App\ArtefactType;
 use App\Cico;
+use App\ConditionalReportsSegment;
 use App\Location;
 use App\Page;
 use App\PickData;
@@ -759,7 +760,8 @@ class GlobalController extends Controller
         $scheduledMaintenence = new ScheduledMaintenence();
         $scheduledMaintenence->artefact_id = request()->input('artefact_id');
         $scheduledMaintenence->maintenence_type = 'Sperodic';
-        if ($scheduledMaintenence->save()) {
+        $scheduledMaintenence->save();
+        if ($scheduledMaintenence->id) {
             $scDate = new ScheduledMaintenenceDate();
             $scDate->scheduled_maintenence_id = $scheduledMaintenence->id;
             $scDate->maintenence_date = $date;
@@ -830,27 +832,63 @@ class GlobalController extends Controller
         }
     }
 
-    function task($id)
+    function task($id = 0)
     {
         if (Auth::user()) {
             $result = "";
+            $data = $artefacts = \DB::table('artefacts')
+                ->select(array(
+                    'artefacts.artefact_name',
+                    'artefact_types.artefact_type_long',
+                    'scheduled_maintenence_dates.maintenence_date',
+                    'scheduled_maintenence_dates.id'
+                ))
+                ->leftJoin('artefact_types', 'artefacts.artefact_type', '=', 'artefact_types.id')
+                ->leftJoin('scheduled_maintenences', 'artefacts.id', '=', 'scheduled_maintenences.artefact_id')
+                ->leftJoin('scheduled_maintenence_dates', 'scheduled_maintenences.id', '=', 'scheduled_maintenence_dates.scheduled_maintenence_id');
+
 
             switch ($id) {
                 case 0:
-                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])->get();
+                    $result = $data
+                        ->whereRaw('scheduled_maintenence_dates.maintenence_date <= ?', [Carbon::now()->endOfWeek()->toDateString()])
+                        ->whereRaw("scheduled_maintenence_dates.is_completed = ?", [false])
+                        ->orderBy('scheduled_maintenence_dates.maintenence_date')
+                        ->get();
+
                     break;
                 case 1:
-                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])->get();
+                    $result = $data
+                        ->whereRaw('scheduled_maintenence_dates.maintenence_date <= ?', [Carbon::now()->endOfWeek()->toDateString()])
+                        ->whereRaw("scheduled_maintenence_dates.is_completed = ?", [false])
+                        ->orderBy('scheduled_maintenence_dates.maintenence_date')
+                        ->get();
+
                     break;
                 case 2:
-                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addMonth()->toDateString()])->get();
+                    $result = $data
+                        ->whereRaw('scheduled_maintenence_dates.maintenence_date <= ?', [Carbon::now()->endOfMonth()->toDateString()])
+                        ->whereRaw("scheduled_maintenence_dates.is_completed = ?", [false])
+                        ->orderBy('scheduled_maintenence_dates.maintenence_date')
+                        ->get();
+
                     break;
                 case 3:
-                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addYear()->toDateString()])->get();
+                    $result = $data
+                        ->whereRaw('scheduled_maintenence_dates.maintenence_date <= ?', [Carbon::now()->endOfYear()->toDateString()])
+                        ->whereRaw("scheduled_maintenence_dates.is_completed = ?", [false])
+                        ->orderBy('scheduled_maintenence_dates.maintenence_date')
+                        ->get();
+
                     break;
                 default:
-                    $result = ScheduledMaintenenceDate::whereRaw('maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])->get();
+                    $result = $data
+                        ->whereRaw('scheduled_maintenence_dates.maintenence_date <= ?', [Carbon::now()->addWeek()->toDateString()])
+                        ->whereRaw("scheduled_maintenence_dates.is_completed = ?", [false])
+                        ->orderBy('scheduled_maintenence_dates.maintenence_date')
+                        ->get();
 
+                    break;
             }
             return view('task')->with('result', $result);
 
@@ -858,4 +896,105 @@ class GlobalController extends Controller
             return response()->redirectTo("/");
         }
     }
+
+    function doTask($taskId = 0)
+    {
+        if (Auth::user()) {
+            if ($taskId != 0) {
+                /***
+                 *
+                 * SELECT conditional_reports.*
+                 * FROM conditional_reports
+                 * LEFT JOIN conditional_reports_segments segment ON conditional_reports.conditional_reports_segments_id = segment.id
+                 * LEFT JOIN artefact_types at on segment.artefact_type_id = at.id
+                 * LEFT JOIN artefacts a ON at.id = a.artefact_type
+                 * LEFT JOIN scheduled_maintenences sm ON a.id = sm.artefact_id
+                 * LEFT JOIN scheduled_maintenence_dates  ON sm.id = scheduled_maintenence_dates.scheduled_maintenence_id
+                 * WHERE scheduled_maintenence_dates.id=170;
+                 */
+//
+//                $results = DB::table('conditional_reports_segments')
+//                    ->select(array(
+//                        "conditional_reports_segments.id",
+//                        "conditional_reports_segments.segment_title",
+//                        "conditional_reports.conditional_report_title",
+//                        "conditional_reports.conditional_report_html_type",
+//                        "conditional_reports.conditional_report_pick_flag",
+//                        "conditional_reports.conditional_report_pick_data",
+//                    ))
+//                    ->leftJoin('conditional_reports_segments', "conditional_reports.conditional_reports_segments_id", " = ", "conditional_reports_segments.id")
+//                    ->leftJoin('artefact_types', "conditional_reports_segments.artefact_type_id", " = ", "artefact_types.id")
+//                    ->leftJoin('artefacts', "artefact_types.id", " = ", "artefacts.artefact_type")
+//                    ->leftJoin('scheduled_maintenences', "artefacts.id", " = ", "scheduled_maintenences.artefact_id")
+//                    ->leftJoin('scheduled_maintenence_dates', "scheduled_maintenences.id", " = ", "scheduled_maintenence_dates.scheduled_maintenence_id")
+//                    ->where("scheduled_maintenence_dates.id", $taskId)
+//                    ->get();
+
+
+                $full_report = array();
+
+                $res = ScheduledMaintenenceDate::find($taskId)
+                    ->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->conditionaReportSegment()->get();
+
+                $artefact = Artefact::find(ScheduledMaintenenceDate::find($taskId)
+                    ->scheduledMaintenence()->first()->artefact_id);
+
+                $type = ArtefactType::find($artefact->artefact_type);
+
+                \Debugbar::addMessage($artefact);
+                return view('dotask')
+                    ->with('artefact', $artefact)
+                    ->with('type', $type)
+                    ->with('taskId', $taskId)
+                    ->with('segments', $res);
+
+            } else {
+                return response()->redirectTo('/');
+            }
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function saveConditionalReport()
+    {
+        $taskId = "";
+        $requestData = array();
+        foreach (request()->all() as $key => $reqData) {
+            if ($key == 'taskId') {
+                $taskId = $reqData;
+            } else {
+                array_push($requestData, array(
+                    "cr_id" => $key,
+                    "cr_value" => $reqData
+                ));
+            }
+
+        }
+        $crd = ScheduledMaintenenceDate::find($taskId);
+        $crd->is_completed = true;
+        $crd->conditional_report_result_data = json_encode($requestData);
+        if ($crd->save()) {
+            return response()->redirectTo('/task');
+        } else {
+            return response()->redirectTo('/doTask/' . $taskId);
+        }
+
+       // dd(json_encode($requestData));
+    }
+
+    function crview($id = 0) {
+        if(Auth::user()){
+            if($id ==0){
+                return response()->redirectTo('/');
+            } else {
+                $result = ScheduledMaintenence::whereArtefactId($id)->get();
+                return view('report.crview')->with('schedule',$result);
+            }
+        }else {
+            return response()->redirectTo('/');
+        }
+    }
+
+
 }

@@ -48,7 +48,7 @@ class Artefact extends Model
 
     public function artefactType()
     {
-        return $this->belongsTo('App\ArtefactType');
+        return $this->belongsTo('App\ArtefactType','artefact_type');
     }
 
     public function userId()

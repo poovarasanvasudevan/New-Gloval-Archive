@@ -111,7 +111,7 @@ class CreateAllTables extends Migration
         Schema::create('conditional_reports',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('conditional_reports_segments_id')->unsigned();
+            $table->integer('conditional_reports_segment_id')->unsigned();
             $table->string("conditional_report_name");
             $table->string("conditional_report_title");
             $table->string("conditional_report_html_type");
@@ -120,7 +120,7 @@ class CreateAllTables extends Migration
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
 
-            $table->foreign('conditional_reports_segments_id')->references('id')->on('conditional_reports_segments');
+            $table->foreign('conditional_reports_segment_id')->references('id')->on('conditional_reports_segments');
         });
 
 

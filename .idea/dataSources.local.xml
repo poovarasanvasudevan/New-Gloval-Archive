@@ -2,12 +2,13 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="PostgreSQL - archive@localhost" uuid="beb51bb3-cd5a-49db-925e-42e2740700ea">
-      <secret-storage>memory</secret-storage>
       <user-name>postgres</user-name>
     </data-source>
-    <data-source name="MySQL - president@localhost" uuid="9216413b-bda2-42f5-b468-39b54ab2cc21">
-      <secret-storage>memory</secret-storage>
+    <data-source name="MySQL - president@localhost" uuid="10da5c55-0396-4300-bf21-4c2d2ae03c24">
+      <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
+      <introspection-scope>president:</introspection-scope>
+      <resolve-scope>president:</resolve-scope>
     </data-source>
   </component>
 </project>

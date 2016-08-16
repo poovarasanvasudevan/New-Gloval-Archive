@@ -28,7 +28,7 @@ class ConditionalReportsSegment extends Model
 {
     //
 
-    public function conditionaReport(){
+    public function conditionalReport(){
         return $this->hasMany('App\ConditionalReport');
     }
 }

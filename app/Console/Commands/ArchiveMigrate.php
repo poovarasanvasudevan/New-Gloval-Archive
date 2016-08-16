@@ -339,7 +339,7 @@ class ArchiveMigrate extends Command
                 $checklist = \DB::connection('mysql2')->table("checklist")->where("CheckListPK", $val)->first();
                 if ($checklist) {
                     $conditionalReport = new ConditionalReport();
-                    $conditionalReport->conditional_reports_segments_id = $segment->id;
+                    $conditionalReport->conditional_reports_segment_id = $segment->id;
                     $conditionalReport->conditional_report_name = str_random(8);
                     $conditionalReport->conditional_report_title = $checklist->CheckListItem;
                     $conditionalReport->conditional_report_html_type = $checklist->DataType;
@@ -371,7 +371,7 @@ class ArchiveMigrate extends Command
 
             foreach ($photo->items as $item) {
                 $conditionalReport = new ConditionalReport();
-                $conditionalReport->conditional_reports_segments_id = $segment->id;
+                $conditionalReport->conditional_reports_segment_id = $segment->id;
                 $conditionalReport->conditional_report_name = str_random(8);
                 $conditionalReport->conditional_report_title = $item->name;
                 $conditionalReport->conditional_report_html_type = $item->type;
@@ -399,7 +399,7 @@ class ArchiveMigrate extends Command
 
             foreach ($photo->items as $item) {
                 $conditionalReport = new ConditionalReport();
-                $conditionalReport->conditional_reports_segments_id = $segment->id;
+                $conditionalReport->conditional_reports_segment_id = $segment->id;
                 $conditionalReport->conditional_report_name = str_random(8);
                 $conditionalReport->conditional_report_title = $item->name;
                 $conditionalReport->conditional_report_html_type = $item->type;
@@ -431,7 +431,7 @@ class ArchiveMigrate extends Command
                 if ($my_attrs->count() == 1) {
 
                     $tmp = array();
-                    $attrId = $my_attrs->first()->id;
+                    $attrId = 'data_'.$my_attrs->first()->id;
                     $tmp['attr_id'] = $attrId;
                     $tmp['attr_value'] = $val;
 

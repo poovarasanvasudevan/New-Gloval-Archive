@@ -35,7 +35,7 @@
                     <div class="form-group has-success col-md-6">
                         <label class="control-label" for="inputcheckin">List Task</label>
                         <div class="input-group">
-                            <select class="form-control">
+                            <select class="form-control" id="type">
                                 <option value="0">--Select--</option>
                                 <option value="1">This Week</option>
                                 <option value="2">This Month</option>
@@ -46,16 +46,24 @@
                 </div>
                 <hr/>
 
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin: 0px !important;padding: 0px !important;">
                     @if($result)
                         @foreach($result as $r)
-                        <div class="col-md-3">
-                            <p>
-                                <label>
-                                    {{$r->maintenence_date}}
-                                </label>
-                            </p>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="card card-block">
+                                    <h3 class="card-title">{{$r->artefact_name}}</h3>
+                                    <p class="card-text">
+                                        {{$r->artefact_type_long}}
+                                        <span class="label label-info">{{$r->maintenence_date}}</span>
+                                    </p>
+
+                                    @if($r->maintenence_date == \Carbon\Carbon::now()->toDateString())
+                                        <a type="button" class="btn btn-success pull-right" href="/doTask/{{$r->id}}">Make Report Now</a>
+                                    @else
+                                        <a type="button" class="btn btn-success pull-right" disabled >Make Report Now</a>
+                                    @endif
+                                </div>
+                            </div>
                         @endforeach
                     @else
                         <center><label>No Schedule Found</label></center>
@@ -67,6 +75,12 @@
 @endsection
 
 @section('js')
-
+    <script>
+        $(function () {
+            $('#type').change(function () {
+                window.location = '/task/' + $(this).val();
+            })
+        })
+    </script>
 @endsection
 

@@ -85,7 +85,7 @@ $(function () {
                 var node = data.node;
                 $('#schedulePanel').show();
                 $('#artefact_name').html(node.title);
-                $('#artefact_id').val(node.key);
+                $('.artefact_id').val(node.key);
 
                 $('#content').html("");
                 $.ajax({
