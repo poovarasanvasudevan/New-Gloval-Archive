@@ -30,7 +30,9 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
 
-        $schedule->command('archive:notification')
-            ->dailyAt('05:00');
+        $schedule
+            ->command('archive:notification')
+            ->dailyAt('05:00')
+            ->sendOutputTo(storage_path('config/logs'));
     }
 }

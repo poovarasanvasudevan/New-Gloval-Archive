@@ -40,14 +40,6 @@
     "isadmin": false
   },
   {
-    "name": "ConditionalReport",
-    "title": "Conditional Report",
-    "url": "/creport",
-    "order": 5,
-    "default": false,
-    "isadmin": false
-  },
-  {
     "name": "Maintenence",
     "title": "Maintenence",
     "url": "/maintenence",
@@ -70,13 +62,5 @@
     "order": 7,
     "default": false,
     "isadmin": false
-  },
-  {
-    "name": "admin",
-    "title": "Admin",
-    "url": "/admin",
-    "order": 7,
-    "default": false,
-    "isadmin": true
   }
 ]

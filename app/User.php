@@ -64,7 +64,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\ArtefactType');
     }
 
-    public function getPages($query){
+    public function getPages($query)
+    {
         return $query->where('votes', '>', 100);
+    }
+
+    public function scheduleMaintenenceDate()
+    {
+        return $this->hasMany('App\ScheduledMaintenenceDate');
+    }
+    public function cico(){
+        return $this->hasMany('App\Cico');
     }
 }

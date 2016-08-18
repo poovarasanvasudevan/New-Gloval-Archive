@@ -16,7 +16,8 @@
         "laravelcollective/html": "^5",
         "laracasts/flash": "^2.0",
         "fedeisas/laravel-mail-css-inliner": "~1.5",
-        "thetispro/laravel5-setting": "dev-master"
+        "thetispro/laravel5-setting": "dev-master",
+        "barryvdh/laravel-dompdf": "0.6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

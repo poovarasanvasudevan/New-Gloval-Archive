@@ -31,4 +31,12 @@ class Cico extends Model
 {
     //
     protected $table = 'cico';
+
+    public function artefact(){
+        return $this->belongsTo('App\Artefact');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

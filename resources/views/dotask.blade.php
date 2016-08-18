@@ -5,6 +5,24 @@
         @include("layout.navbar")
         <div class="col-md-12" style="margin-top: 70px !important;">
             <div class="col-md-8 col-md-offset-2 card card-block padding15">
+                @if($errors->any())
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session()->has('flash_notification.message'))
+                    <div class="alert alert-{{ session('flash_notification.level') }}">
+                        <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">&times;</button>
+
+                        {!! session('flash_notification.message') !!}
+                    </div>
+                @endif
                 <div class="card card-block">
                     <div class="col-md-4 pull-left">
 

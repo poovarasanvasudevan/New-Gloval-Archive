@@ -106,10 +106,12 @@ $(function () {
                 $('#status').html("");
                 var node = data.node;
 
+
                 $('#artefacttitle').html(node.title);
                 if (node.isFolder()) {
                     return false;
                 }
+                $('#crlink').prop('href', '/crview/' + node.key);
                 $('#detailPanel').html('<center style="margin-top: 23% !important;"> <img src="/image/logo.png"> </center>');
                 $.ajax({
                     url: '/getArtefact/' + artefactSelected + '/' + node.key,

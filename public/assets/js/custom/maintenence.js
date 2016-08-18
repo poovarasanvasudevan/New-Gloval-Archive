@@ -3,7 +3,8 @@
  */
 $(function () {
     $('.weekdays').hide();
-    $('.monthdays').hide();$('#content').html("");
+    $('.monthdays').hide();
+    $('#content').html("");
     $('a#sperodicOpener').magnificPopup({
         type: 'inline',
         closeOnBgClick: false,
@@ -17,10 +18,10 @@ $(function () {
     });
 
     $('.scheduleDate').datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            format: 'dd/mm/yyyy'
-        })
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd/mm/yyyy'
+    })
         .on("changeDate", function (e) {
             // `e` here contains the extra attributes
             $('#maintenenceDesc').val("Maintenence has been scheduled on : " + e.format());
@@ -44,7 +45,7 @@ $(function () {
             }
         } else {
             month = parseInt($('#month_day').val())
-            if (month < 0 || month > 31 || month == "" || month=='undefined') {
+            if (month < 0 || month > 31 || month == "" || month == 'undefined') {
                 alert("Please enter date that wou want to make alert schedule");
                 return false;
             }
@@ -86,6 +87,7 @@ $(function () {
                 $('#schedulePanel').show();
                 $('#artefact_name').html(node.title);
                 $('.artefact_id').val(node.key);
+
 
                 $('#content').html("");
                 $.ajax({

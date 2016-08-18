@@ -11,14 +11,14 @@ class ScheduledMaintenenceDate extends Model
     protected $table = 'scheduled_maintenence_dates';
     protected $dates = ['maintenence_date'];
     protected $casts = [
-        'conditional_report_pick_data' => 'json'
+        'conditional_report_result_data' => 'json'
     ];
-    public function getMaintenenceDateAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d', $date)->format('d-m-Y');
-    }
 
     public function scheduledMaintenence(){
         return $this->belongsTo('App\ScheduledMaintenence','scheduled_maintenence_id');
+    }
+
+    public function users(){
+        return $this->belongsTo('App\User','user_id');
     }
 }

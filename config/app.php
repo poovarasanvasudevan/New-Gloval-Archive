@@ -157,6 +157,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
         Thetispro\Setting\SettingServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -219,6 +220,7 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         'Helper' => App\Helpers\MyHelper::class,
         'Setting' => Thetispro\Setting\Facades\Setting::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

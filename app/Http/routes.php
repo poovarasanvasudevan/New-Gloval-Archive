@@ -41,10 +41,15 @@ Route::get("/newUser", 'GlobalController@newUser');
 Route::get("/editRole/{id}", 'GlobalController@editRole');
 Route::get("/allroles", 'GlobalController@allroles');
 Route::get("/maintenence", 'GlobalController@maintenence');
+Route::get("/help", 'GlobalController@help');
+Route::get("/search", 'GlobalController@search');
+Route::get("/reports", 'GlobalController@reports');
 Route::get("/getSchedule/{id}", 'GlobalController@getSchedule');
 Route::get("/task/{id?}", 'GlobalController@task');
 Route::get("/doTask/{taskId?}", 'GlobalController@doTask');
 Route::get("/crview/{id?}", 'GlobalController@crview');
+Route::get("/crReportPrint/{id?}", 'GlobalController@crReportPrint');
+Route::get("/cicoReportPrint/{start?}/{end?}", 'GlobalController@cicoReportPrint');
 
 
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
@@ -57,5 +62,9 @@ Route::post("/addRole", 'GlobalController@addRole');
 Route::post("/updateRole", 'GlobalController@updateRole');
 Route::post("/addSperodicMaintenance", 'GlobalController@addSperodicMaintenance');
 Route::post("/addPerodicMaintenance", 'GlobalController@addPerodicMaintenance');
+Route::post("/getCicoWithDates", 'GlobalController@getCicoWithDates');
+Route::post("/getCRWithDates", 'GlobalController@getCRWithDates');
+
+
 Route::get("/getCheckout", 'GlobalController@getCheckout');
 Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');

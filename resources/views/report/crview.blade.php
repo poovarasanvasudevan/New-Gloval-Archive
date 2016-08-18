@@ -32,18 +32,30 @@
             </div>
             <div class="col-md-10 card card-block col-md-offset-1">
                 <fieldset>
-                    <legend></legend>
+                    <legend>{{$artefact->first()->artefact_name}}</legend>
                     <div>
                         @if($schedule)
                             @foreach($schedule as $sc)
-                                @foreach($sc->scheduledMaintenenceDate() as $scdate)
-                                    @if($scdate->is_completed == true)
-                                        <div class="card card-block">
-                                            {{$scdate->maintenence_date}}
+                                <div class="col-md-3">
+                                    <div class="card card-block">
+                                        <h4 class="card-title">{{$sc->artefact_name}}</h4>
+                                        <p class="card-text">
+                                            <label>Done At </label>&nbsp;&nbsp;<span
+                                                    class="label label-success">{{$sc->updated_at}}</span><br/>
+                                            <label>Maintenence Date </label>&nbsp;&nbsp;<span
+                                                    class="label label-success">{{$sc->maintenence_date}}</span><br/>
+                                            <label>Created Date </label>&nbsp;&nbsp;<span
+                                                    class="label label-success">{{$sc->created_at}}</span><br/>
+                                        <div class="pull-right" style="float: right;">
+                                            <a class="btn btn-danger"> Edit</a>
+                                            <a class="btn btn-success" target="_blank" href="/crReportPrint/{{$sc->id}}"> Print</a>
                                         </div>
-                                    @endif
-                                @endforeach
+                                        </p>
+                                    </div>
+                                </div>
                             @endforeach
+                        @else
+                            <center><h4>No Conditional Report Found</h4></center>
                         @endif
 
                     </div>

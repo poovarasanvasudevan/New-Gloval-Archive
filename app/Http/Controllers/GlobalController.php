@@ -393,8 +393,8 @@ class GlobalController extends Controller
                 $artefact_id = $data;
             } else {
                 $tmp = array();
-                $attrId = $k;
-                $tmp['attr_id'] = $k;
+                $attrId = "data_" . $k;
+                $tmp['attr_id'] = $attrId;
                 $tmp['attr_value'] = $data;
                 $fullreq[$attrId] = $tmp;
             }
@@ -973,25 +973,175 @@ class GlobalController extends Controller
         }
         $crd = ScheduledMaintenenceDate::find($taskId);
         $crd->is_completed = true;
-        $crd->conditional_report_result_data = json_encode($requestData);
+        $crd->conditional_report_result_data = $requestData;
+        $crd->user_id = Auth::user()->id;
         if ($crd->save()) {
+            flash("Report Saved Succesfully", "success");
             return response()->redirectTo('/task');
         } else {
+            flash("Failed to save Report", "error");
             return response()->redirectTo('/doTask/' . $taskId);
         }
 
-       // dd(json_encode($requestData));
+        // dd(json_encode($requestData));
     }
 
-    function crview($id = 0) {
-        if(Auth::user()){
-            if($id ==0){
+    function crview($id = 0)
+    {
+        if (Auth::user()) {
+            if ($id == 0) {
                 return response()->redirectTo('/');
             } else {
-                $result = ScheduledMaintenence::whereArtefactId($id)->get();
-                return view('report.crview')->with('schedule',$result);
+
+
+                /***
+                 *
+                 * SELECT scheduled_maintenence_dates.maintenence_date,
+                 * scheduled_maintenence_dates.updated_at,
+                 * scheduled_maintenence_dates.created_at,
+                 * artefacts.artefact_name
+                 * FROM scheduled_maintenence_dates
+                 * LEFT JOIN scheduled_maintenences ON scheduled_maintenence_dates.scheduled_maintenence_id = scheduled_maintenences.id
+                 * LEFT JOIN artefacts ON scheduled_maintenences.artefact_id = artefacts.id
+                 * WHERE scheduled_maintenence_dates.is_completed=true
+                 * AND artefacts.id=1091
+                 */
+                $result = DB::table('scheduled_maintenence_dates')
+                    ->select(array(
+                        'scheduled_maintenence_dates.maintenence_date',
+                        'scheduled_maintenence_dates.id',
+                        'scheduled_maintenence_dates.updated_at',
+                        'scheduled_maintenence_dates.created_at',
+                        'artefacts.artefact_name'
+                    ))
+                    ->leftJoin('scheduled_maintenences', 'scheduled_maintenence_dates.scheduled_maintenence_id', '=', 'scheduled_maintenences.id')
+                    ->leftJoin('artefacts', 'scheduled_maintenences.artefact_id', '=', 'artefacts.id')
+                    ->whereRaw('scheduled_maintenence_dates.is_completed = ? AND artefacts.id = ?', [true, $id])
+                    ->get();
+
+                $artefact_name = Artefact::find($id)->get();
+                //dd($result);
+                return view('report.crview')
+                    ->with('artefact', $artefact_name)
+                    ->with('schedule', $result);
             }
-        }else {
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function crReportPrint($id = 0)
+    {
+        if ($id != 0) {
+            $report = ScheduledMaintenenceDate::find($id);
+            $res = ScheduledMaintenenceDate::find($id)
+                ->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->conditionaReportSegment()->get();
+            //dd($report);
+            $user_name = User::find($report->user_id)->fname . " " . User::find($report->user_id)->lname;
+            if ($report) {
+                $pdf = \PDF::loadView('pdf.crreport', array(
+                    'report2' => $report,
+                    'segments' => $res,
+                    'user' => $user_name,
+                    'type' => $report->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->artefact_type_long,
+                    'artefact_name' => $report->scheduledMaintenence()->first()->artefactId()->first()->artefact_name
+                ));
+//                return view('pdf.crreport')
+//                    ->with('report2',$report)
+//                    ->with('user',$user_name)
+//                    ->with('artefact_name',$report->scheduledMaintenence()->first()->artefactId()->first()->artefact_name)
+//                    ->with('type',$report->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->artefact_type_long)
+//                    ->with('segments',$res);
+                return $pdf->stream();
+            } else {
+                return response()->redirectTo('/');
+            }
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function reports()
+    {
+        if (Auth::user()) {
+
+            return view('reports');
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function getCicoWithDates()
+    {
+        if (Auth::user()) {
+            $start_date = request()->input('start_date');
+            $end_date = request()->input('end_date');
+
+            $cico = Cico::with('artefact', 'user')
+                ->whereBetween('created_at', [Carbon::createFromFormat('d-m-Y', $start_date), Carbon::createFromFormat('d-m-Y', $end_date)])
+                ->orWhereBetween('updated_at', [Carbon::createFromFormat('d-m-Y', $start_date), Carbon::createFromFormat('d-m-Y', $end_date)])
+                ->get();
+            return response()->json($cico);
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function getCRWithDates()
+    {
+        if (Auth::user()) {
+            $start_date = request()->input('start_date');
+            $end_date = request()->input('end_date');
+
+            $cico = ScheduledMaintenenceDate::with('scheduledMaintenence', 'users', 'scheduledMaintenence.artefactId')
+                ->where('is_completed', true)
+                ->whereBetween('created_at', [Carbon::createFromFormat('d-m-Y', $start_date), Carbon::createFromFormat('d-m-Y', $end_date)])
+                ->orWhereBetween('updated_at', [Carbon::createFromFormat('d-m-Y', $start_date), Carbon::createFromFormat('d-m-Y', $end_date)])
+                ->get();
+            return response()->json($cico);
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function cicoReportPrint($start = 0, $end = 0)
+    {
+        if (Auth::user()) {
+            $start_date = $start;
+            $end_date = $end;
+
+            if ($start == 0 || $end == 0) {
+                return response()->redirectTo('/');
+            }
+            $cico = Cico::with('artefact', 'user')
+                ->whereBetween('created_at', [Carbon::createFromFormat('d-m-Y', $start_date), Carbon::createFromFormat('d-m-Y', $end_date)])
+                ->orWhereBetween('updated_at', [Carbon::createFromFormat('d-m-Y', $start_date), Carbon::createFromFormat('d-m-Y', $end_date)])
+                ->get();
+            $pdf = \PDF::loadView('pdf.cicoreport', array(
+                'datas' => $cico
+            ))->setPaper('a4', 'landscape');
+            return $pdf->stream();
+        } else {
+            return response()->redirectTo('/');
+        }
+    }
+
+    function help()
+    {
+        return response()->file(storage_path('config/manual/GAS_manual.pdf'));
+    }
+
+    function search()
+    {
+        if (Auth::user()) {
+            $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
+            $location = Location::active()->get();
+
+            return view('search')
+                ->with('artefacttypes', $artefactTypes)
+                ->with('locations', $location);
+        } else {
+            flash('Login first', 'error');
             return response()->redirectTo('/');
         }
     }

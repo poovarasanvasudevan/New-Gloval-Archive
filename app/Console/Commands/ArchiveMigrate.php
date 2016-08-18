@@ -121,22 +121,11 @@ class ArchiveMigrate extends Command
         $role->save();
         $this->info("done");
 
-        $this->warn("Creating Developer Role : ");
-        $role = new Role();
-        $role->short_name = 'developer';
-        $role->long_name = "Developer";
-        $role->is_developer = true;
-        $role->save();
-        $this->info("done");
 
         $this->warn("Assigning Developer Page Permission  : ");
         Role::find(1)->pages()->sync(Page::all());
         $this->info("done");
 
-
-        $this->warn("Assigning Developer Page Permission  : ");
-        Role::find(2)->pages()->sync(Page::withoutGlobalScopes()->get());
-        $this->info("done");
 
 
         $this->warn("Assigning Artefact Type Permission to Admin : ");
@@ -147,6 +136,7 @@ class ArchiveMigrate extends Command
         $this->warn("Making INKSAD408 to Admin : ");
         $user = User::whereAbhyasiid("inksad408")->first();
         $user->role = 1;
+        $user->is_developer = true;
         $user->save();
         $this->info("done");
 

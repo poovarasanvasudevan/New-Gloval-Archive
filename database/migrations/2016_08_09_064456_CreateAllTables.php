@@ -117,6 +117,7 @@ class CreateAllTables extends Migration
             $table->string("conditional_report_html_type");
             $table->boolean("conditional_report_pick_flag")->default(false);
             $table->json("conditional_report_pick_data")->nullable();
+            $table->string("default_value")->nullable();
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
 
@@ -162,9 +163,13 @@ class CreateAllTables extends Migration
             $table->date('maintenence_date');
             $table->boolean('is_completed')->default(false);
             $table->json('conditional_report_result_data')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
+
+
             $table->foreign('scheduled_maintenence_id')->references('id')->on('scheduled_maintenences');
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
 

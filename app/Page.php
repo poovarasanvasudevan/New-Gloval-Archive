@@ -50,7 +50,7 @@ class Page extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new DeveloperScope());
+        //static::addGlobalScope(new DeveloperScope());
     }
 
     public function roles()
