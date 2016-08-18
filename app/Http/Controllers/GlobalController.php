@@ -1160,12 +1160,12 @@ class GlobalController extends Controller
     function searchTable($page = 0)
     {
 
-        $myResult = Artefact::with("location","parent","user")
-        ->select(array(
-            "artefact_name",
-            "artefact_values",
-            "parent_id"
-        ))
+        $myResult = Artefact::with("location", "parent", "user")
+            ->select(array(
+                "artefact_name",
+                "artefact_values",
+                "parent_id"
+            ))
             ->where('artefact_type', request()->input('artefact_type'))
             ->where('active', true);
         $i = 0;
@@ -1188,6 +1188,7 @@ class GlobalController extends Controller
 
 
         $res = $myResult->take(env('LIMIT_RANGE', 30))->skip($page * env('LIMIT_RANGE', 30));
+        \Log::info($res->toSql());
         return response()->json($res->get());
     }
 }

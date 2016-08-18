@@ -42,7 +42,12 @@
                                     <select class="form-control" id="artefactTypes">
                                         <option value="0">select Location</option>
                                         @foreach($artefacttypes as $artefacttype)
-                                            <option value="{{$artefacttype->id}}">{{$artefacttype->artefact_type_long}}</option>
+                                            @if($attr_id == $artefacttype->id)
+                                                <option value="{{$artefacttype->id}}" selected>{{$artefacttype->artefact_type_long}}</option>
+                                            @else
+                                                <option value="{{$artefacttype->id}}">{{$artefacttype->artefact_type_long}}</option>
+                                            @endif
+
                                         @endforeach
                                     </select>
                                 </div>
@@ -92,7 +97,7 @@
             <div id="topBlock" class="col-md-10 card card-block" style="height: 87% !important;">
                 <div class="card card-block">
                     <div class="pull-right">
-                        <input type="button"  id="next" class="btn btn-primary" value="Next >>">
+                        <input type="button" id="next" class="btn btn-primary" value="Next >>">
                     </div>
                     <div class="pull-left">
                         <input type="button" id="prev" class="btn btn-primary" value="<< Prev">
