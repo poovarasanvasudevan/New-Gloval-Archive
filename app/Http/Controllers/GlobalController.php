@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artefact;
 use App\ArtefactType;
+use App\ArtefactTypeAttribute;
 use App\Cico;
 use App\ConditionalReportsSegment;
 use App\Location;
@@ -1131,20 +1132,62 @@ class GlobalController extends Controller
         return response()->file(storage_path('config/manual/GAS_manual.pdf'));
     }
 
-    function search()
+    function search($id = 0)
     {
         if (Auth::user()) {
             $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
             $location = Location::active()->get();
 
+            $codes = null;
+
+            if ($id != 0) {
+                $codes = ArtefactTypeAttribute::whereArtefactTypeId($id)
+                    ->whereActive(true)
+                    ->whereIsSearchable(true)
+                    ->get();
+            }
             return view('search')
                 ->with('artefacttypes', $artefactTypes)
-                ->with('locations', $location);
+                ->with('locations', $location)
+                ->with('attr_id', $id)
+                ->with('attributes', $codes);
         } else {
             flash('Login first', 'error');
             return response()->redirectTo('/');
         }
     }
 
+    function searchTable($page = 0)
+    {
 
+        $myResult = Artefact::with("location","parent","user")
+        ->select(array(
+            "artefact_name",
+            "artefact_values",
+            "parent_id"
+        ))
+            ->where('artefact_type', request()->input('artefact_type'))
+            ->where('active', true);
+        $i = 0;
+        foreach (request()->all() as $key => $data) {
+            if ($key != 'artefact_type') {
+                if ($data != "") {
+                    $i++;
+                    $key_column = "data_" . $key;
+                    if ($i == 1) {
+                        $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
+                        // $myResult->whereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
+                    } else {
+                        $myResult->orWhere("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
+                        //$myResult->orWhereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
+                    }
+                }
+            }
+        }
+        //ini_set('zend.enable_gc', '0');
+
+
+        $res = $myResult->take(env('LIMIT_RANGE', 30))->skip($page * env('LIMIT_RANGE', 30));
+        return response()->json($res->get());
+    }
 }

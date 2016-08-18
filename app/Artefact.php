@@ -51,14 +51,14 @@ class Artefact extends Model
         return $this->belongsTo('App\ArtefactType','artefact_type');
     }
 
-    public function userId()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function parentId()
+    public function parent()
     {
-        return $this->belongsTo('App\Artefact');
+        return $this->belongsTo('App\Artefact',"parent_id");
     }
 
     public function location()

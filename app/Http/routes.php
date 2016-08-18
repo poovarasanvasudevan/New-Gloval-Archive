@@ -42,7 +42,7 @@ Route::get("/editRole/{id}", 'GlobalController@editRole');
 Route::get("/allroles", 'GlobalController@allroles');
 Route::get("/maintenence", 'GlobalController@maintenence');
 Route::get("/help", 'GlobalController@help');
-Route::get("/search", 'GlobalController@search');
+Route::get("/search/{id?}", 'GlobalController@search');
 Route::get("/reports", 'GlobalController@reports');
 Route::get("/getSchedule/{id}", 'GlobalController@getSchedule');
 Route::get("/task/{id?}", 'GlobalController@task');
@@ -64,6 +64,7 @@ Route::post("/addSperodicMaintenance", 'GlobalController@addSperodicMaintenance'
 Route::post("/addPerodicMaintenance", 'GlobalController@addPerodicMaintenance');
 Route::post("/getCicoWithDates", 'GlobalController@getCicoWithDates');
 Route::post("/getCRWithDates", 'GlobalController@getCRWithDates');
+Route::any("/searchTable/{page?}", 'GlobalController@searchTable');
 
 
 Route::get("/getCheckout", 'GlobalController@getCheckout');
