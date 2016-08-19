@@ -37,6 +37,7 @@
 @section('js')
     <script>
         $(function () {
+            $('#artefactTypes').val(AType);
             $('#artefactTypes').change(function () {
                 window.location = '/admin/attributes/' + $(this).val()
             })
@@ -44,10 +45,6 @@
                 {
                     id: "textarea",
                     value: "textarea"
-                },
-                {
-                    id: "select",
-                    value: "select"
                 },
                 {
                     id: "select",
@@ -100,7 +97,7 @@
                     insertItem: function (item) {
                         return $.ajax({
                             type: "POST",
-                            url: "/admin/addArtefactTypes/" + Atype,
+                            url: "/admin/addArtefactTypes/" + AType,
                             data: item
                         });
                     }

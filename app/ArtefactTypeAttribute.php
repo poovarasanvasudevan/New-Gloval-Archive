@@ -38,9 +38,7 @@ class ArtefactTypeAttribute extends Model
     public function __construct()
     {
      //   parent::__construct($attributes);
-        static::addGlobalScope('active', function (Builder $builder) {
-            $builder->where('active', true);
-        });
+
     }
 
     public function pickData()
