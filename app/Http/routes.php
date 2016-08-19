@@ -69,3 +69,15 @@ Route::any("/searchTable/{page?}", 'GlobalController@searchTable');
 
 Route::get("/getCheckout", 'GlobalController@getCheckout');
 Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');
+
+
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function () {
+    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin/artefacttypes', 'AdminController@artefacttypes');
+    Route::get('/admin/getAllArtefactTypes', 'AdminController@getAllArtefactTypes');
+    Route::any('/admin/updateArtefactTypes', 'AdminController@updateArtefactTypes');
+    Route::any('/admin/deleteArtefactTypes', 'AdminController@deleteArtefactTypes');
+    Route::any('/admin/addArtefactTypes', 'AdminController@addArtefactTypes');
+    Route::any('/admin/updateAttributes', 'AdminController@updateAttributes');
+    Route::get('/admin/attributes/{id}', 'AdminController@attributes');
+});

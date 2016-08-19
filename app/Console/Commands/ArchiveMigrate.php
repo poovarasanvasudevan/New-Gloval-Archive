@@ -127,7 +127,6 @@ class ArchiveMigrate extends Command
         $this->info("done");
 
 
-
         $this->warn("Assigning Artefact Type Permission to Admin : ");
         User::find(3)->artefact_type()->sync(ArtefactType::all());
         $this->info("done");
@@ -166,15 +165,16 @@ class ArchiveMigrate extends Command
         $this->warn("Migrating Child Artefact : ");
         $artefactsChild = \DB::connection("mysql2")
             ->table("artefact")
-            ->whereNotNull('artefactpid')->get();
+            ->whereNotNull('artefactpid')
+            ->orderBy('ArtefactPK')->get();
 
 
         $bar = $this->output->createProgressBar(count($artefactsChild));
 
         foreach ($artefactsChild as $artefact) {
 
-            //$this->info($artefact->artefactcode);
-            if ($this->getArtefactCode($artefact->ArtefactTypeCode) != 3) {
+            //$this->info($artefact->ArtefactCode);
+            if (Artefact::whereArtefactName($artefact->ArtefactPID)->count() > 0) {
                 if ($artefact->ArtefactPID != '') {
 
                     $a = new Artefact();
@@ -265,7 +265,6 @@ class ArchiveMigrate extends Command
         $this->warn("migrating Letters Data : ");
         $this->migrateData('lboxattributes', 3);
         $this->info("done");
-
 
 
         $this->warn("Importing Letter Conditional Report");
@@ -421,7 +420,7 @@ class ArchiveMigrate extends Command
                 if ($my_attrs->count() == 1) {
 
                     $tmp = array();
-                    $attrId = 'data_'.$my_attrs->first()->id;
+                    $attrId = 'data_' . $my_attrs->first()->id;
                     $tmp['attr_id'] = $attrId;
                     $tmp['attr_value'] = $val;
 

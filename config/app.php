@@ -158,6 +158,7 @@ return [
         Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
         Thetispro\Setting\SettingServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -221,6 +222,7 @@ return [
         'Helper' => App\Helpers\MyHelper::class,
         'Setting' => Thetispro\Setting\Facades\Setting::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        "JavaScript"=>Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
 
     ],
 

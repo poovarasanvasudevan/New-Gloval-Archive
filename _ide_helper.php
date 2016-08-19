@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.43 on 2016-08-16.
+ * Generated for Laravel 5.2.43 on 2016-08-19.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -14717,6 +14717,32 @@ namespace {
          */
         public static function stream($filename = 'document.pdf'){
             return \Barryvdh\DomPDF\PDF::stream($filename);
+        }
+        
+    }
+
+
+    class JavaScript extends \Laracasts\Utilities\JavaScript\JavaScriptFacade{
+        
+        /**
+         * Bind the given array of variables to the view.
+         *
+         * @static 
+         */
+        public static function put(){
+            return \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::put();
+        }
+        
+        /**
+         * Translate the array of PHP vars to
+         * the expected JavaScript syntax.
+         *
+         * @param array $vars
+         * @return array 
+         * @static 
+         */
+        public static function buildJavaScriptSyntax($vars){
+            return \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::buildJavaScriptSyntax($vars);
         }
         
     }

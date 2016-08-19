@@ -43,6 +43,10 @@ class ArtefactType extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function artefact(){
+        return $this->hasMany('App\Artefact',"artefact_type");
+    }
+
     public function attributes(){
         return $this->hasMany('App\ArtefactTypeAttribute');
     }

@@ -1,0 +1,38 @@
+[
+
+  {
+    "name": "artefacttypes",
+    "title": "Artefact Types",
+    "url": "/admin/artefacttypes"
+  },
+  {
+    "name": "artefacts",
+    "title": "Artefacts",
+    "url": "/admin/artefacts"
+  },
+  {
+    "name": "attributes",
+    "title": "Attributes",
+    "url": "/admin/attributes/0"
+  },
+  {
+    "name": "users",
+    "title": "Users",
+    "url": "/admin/users"
+  },
+  {
+    "name": "attributeslist",
+    "title": "Attribute List",
+    "url": "/admin/attributelist"
+  },
+  {
+    "name": "logs",
+    "title": "Logs",
+    "url": "/admin/logs"
+  },
+  {
+    "name": "overview",
+    "title": "Overview",
+    "url": "/admin/overview"
+  }
+]

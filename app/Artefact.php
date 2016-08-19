@@ -46,7 +46,7 @@ class Artefact extends Model
         'artefact_values' => 'json'
     ];
 
-    public function artefactType()
+    public function artefacttype()
     {
         return $this->belongsTo('App\ArtefactType','artefact_type');
     }

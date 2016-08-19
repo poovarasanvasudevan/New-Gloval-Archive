@@ -72,4 +72,10 @@ class Page extends Model
 
     }
 
+    public static function getAdminPage()
+    {
+        $pages = json_decode(file_get_contents(storage_path('config/admin/sidebar.json')));
+        return $pages;
+    }
+
 }
