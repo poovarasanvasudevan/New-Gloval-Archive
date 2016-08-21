@@ -13,6 +13,7 @@ use App\Pages;
 use App\PickData;
 use App\Role;
 use App\User;
+use Excel;
 use Illuminate\Console\Command;
 
 class ArchiveMigrate extends Command
@@ -448,6 +449,85 @@ class ArchiveMigrate extends Command
 
         $this->info("done");
 
+
+        $this->info("Migrating Excel Attributes for photo given on 20-08-2016");
+        Excel::load(storage_path('config/data/Photos.xlsx'), function ($reader) {
+
+            //$this->info(json_encode($reader->first()->toArray()));
+
+            $boxes = array();
+
+            foreach ($reader->toArray() as $row) {
+                array_push($boxes, $row['box_number']);
+            }
+
+            array_unique($boxes);
+
+            foreach ($boxes as $box) {
+                $parent = new Artefact();
+                $parent->artefact_type = 6;
+                $parent->location = 1;
+                $parent->artefact_name = $box;
+                $parent->parent_id = null;
+                $parent->old_artefact_id=0000;
+                $parent->user_id = 3;
+
+                $parent->save();
+            }
+            // $artefact_name = $reader->artefact_code;
+            $dValues = array(
+                'archive_id_code' => 67,
+                'year_yyyy' => 68,
+                'month_mm' => 69,
+                'day_dd' => 70,
+                'hour' => 71,
+                'min' => 72,
+                'continent' => 73,
+                'country' => 74,
+                'state' => 75,
+                'city' => 76,
+                'placecenter' => 77,
+                'location' => 78,
+                'subject' => 79,
+                'tagged_persons' => 80,
+                'event' => 81,
+                'description' => 82,
+                'credit' => 83,
+                'photograper' => 84,
+                'comments' => 85,
+                'hat_selection' => 86,
+                'team_selection' => 87,
+                'final_selection' => 88,
+                'determined' => 89,
+                'box_number' => 90
+            );
+
+            foreach ($reader->toArray() as $row) {
+
+
+                $tmp1 = array();
+                foreach ($dValues as $k => $v) {
+                    $tmp = array();
+                    $attrId = 'data_' . $v;
+                    $tmp['attr_id'] = $attrId;
+                    $tmp['attr_value'] = $row[$k];
+
+                    $tmp1[$attrId] = $tmp;
+                }
+
+                $child = new Artefact();
+                $child->location = 1;
+                $child->artefact_type = 6;
+                $child->parent_id = Artefact::whereArtefactName($row['box_number'])->first()->id;
+                $child->user_id = 3;
+                $child->old_artefact_id=0000;
+                $child->artefact_name = $row['artefact_code'];
+                $child->artefact_values = $tmp1;
+                $child->save();
+            }
+
+        });
+        $this->info("Done");
 
     }
 
