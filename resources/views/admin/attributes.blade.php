@@ -124,7 +124,7 @@
                         sorting: false,
                         filtering: false
                     },
-                    {name: "sequence_number", title: "Title", type: "text"},
+                    {name: "sequence_number", title: "Sequence", type: "text"},
                     {name: "active", type: "checkbox", sorting: false, filtering: false},
                     {type: "control"}
                 ]

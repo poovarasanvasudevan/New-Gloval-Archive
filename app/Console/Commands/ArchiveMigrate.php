@@ -116,7 +116,6 @@ class ArchiveMigrate extends Command
             $p->sequence_number = $i;
             $p->is_default = $page->default;
             $p->is_admin_page = $page->isadmin;
-            $p->order = $page->order;
 
             $p->save();
         }

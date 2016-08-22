@@ -530,7 +530,17 @@ class GlobalController extends Controller
         $cico->user_id = Auth::user()->id;
         $cico->check_out_description = $desc;
 
+        $sett = \Setting::get('cico_mail');
+
         if ($cico->save()) {
+
+            Mail::send('email.cico', ['cico' => $cico], function ($message) use ($sett) {
+                foreach ($sett as $s) {
+                    $message->to($s);
+                }
+                $message->subject("Artefact Chedout");
+            });
+
             flash('Checkout Successfull', 'success');
             return response()->redirectTo('/cico');
         } else {

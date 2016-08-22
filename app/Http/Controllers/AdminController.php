@@ -8,9 +8,11 @@ use App\ArtefactTypeAttribute;
 use App\ConditionalReport;
 use App\ConditionalReportsSegment;
 use App\Location;
+use App\Page;
 use App\PickData;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
 use Config;
 use Dotenv\Dotenv;
 use Illuminate\Http\Request;
@@ -336,10 +338,12 @@ class AdminController extends Controller
          */
         $mail_setting = Setting::get('mail_config');
         $cico_mail = Setting::get('cico_mail', "");
+        $version = Setting::get('version.number',"");
 
 
         return view('admin.config')
             ->with('mail_config', $mail_setting)
+            ->with('version', $version)
             ->with('cico_mail', $cico_mail);
     }
 
@@ -364,5 +368,109 @@ class AdminController extends Controller
         flash('Cico Mail setting saved Succesfully', 'success');
         return response()->redirectTo('/admin/config');
 
+    }
+
+    function pages()
+    {
+
+        JavaScript::put([
+            "datas" => Page::get()
+        ]);
+        return view('admin.pages');
+    }
+
+    function addPage()
+    {
+        $page = new Page();
+        $page->short_name = request()->input('short_name');
+        $page->long_name = request()->input('long_name');
+        $page->url = request()->input('url');
+        $page->sequence_number = request()->input('sequence_number');
+        $page->is_default = request()->input('is_default');
+        $page->active = request()->input('active');
+
+        if ($page->save()) {
+            return response()->json($page);
+        }
+    }
+
+    function deletePage()
+    {
+
+    }
+
+    function updatePage()
+    {
+        $page = Page::find(request()->input('id'));
+        $page->short_name = request()->input('short_name');
+        $page->long_name = request()->input('long_name');
+        $page->url = request()->input('url');
+        $page->sequence_number = request()->input('sequence_number');
+        $page->is_default = request()->input('is_default');
+        $page->active = request()->input('active');
+
+        if ($page->save()) {
+            return response()->json($page);
+        }
+    }
+
+    function setVersion(){
+        $v = array(
+            'number'=>request()->input('version'),
+            'updated'=>Carbon::today()->toDateString()
+        );
+        Setting::set('version',$v);
+        flash('Version saved Succesfully', 'success');
+        return response()->redirectTo('/admin/config');
+    }
+
+    function git()
+    {
+        $dir = base_path();
+        $output = array();
+        chdir($dir);
+        exec("git log", $output);
+        $history = array();
+        foreach ($output as $line) {
+            if (strpos($line, 'commit') === 0) {
+                if (!empty($commit)) {
+                    array_push($history, $commit);
+                    unset($commit);
+                }
+                $commit['hash'] = substr($line, strlen('commit')) == "" ? "" : substr($line, strlen('commit'));
+            } else if (strpos($line, 'Author') === 0) {
+                $commit['author'] = substr($line, strlen('Author:'));
+                preg_match('/<([^>]+)>/', $commit['author'], $matches);
+                $ans = str_replace("<", "", $matches[0]);
+                $commit['email'] = str_replace(">", "", $ans) == "" ? "" : $ans;
+
+            } else if (strpos($line, 'Date') === 0) {
+                $commit['date'] = substr($line, strlen('Date:'))  == "" ? "" : substr($line, strlen('Date:'));
+            } else {
+                if (isset($commit['message']))
+                    $commit['message'] .= $line;
+                else
+                    $commit['message'] = $line;
+            }
+
+            if (!isset($commit['hash']))
+                $commit['hash'] ="";
+
+            if (!isset($commit['author']))
+                $commit['author'] ="";
+
+            if (!isset($commit['email']))
+                $commit['email'] ="";
+
+            if (!isset($commit['date']))
+                $commit['date'] ="";
+            if (!isset($commit['message']))
+                $commit['message'] ="";
+
+            if (!empty($commit)) {
+                array_push($history, $commit);
+            }
+        }
+        return view('admin.git')->with('gits', $history);
     }
 }

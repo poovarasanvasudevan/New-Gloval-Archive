@@ -50,6 +50,11 @@
     "url": "/admin/pages"
   },
   {
+    "name": "git",
+    "title": "Git",
+    "url": "/admin/git"
+  },
+  {
     "name": "database",
     "title": "Database Admin",
     "url": "/admin/adminer"

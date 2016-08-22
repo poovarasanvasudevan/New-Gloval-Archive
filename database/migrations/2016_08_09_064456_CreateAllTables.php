@@ -48,7 +48,6 @@ class CreateAllTables extends Migration
             $table->double('sequence_number')->nullable();
             $table->boolean('is_default')->default(false);
             $table->boolean('is_admin_page')->default(false);
-            $table->integer('order')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

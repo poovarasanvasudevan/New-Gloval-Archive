@@ -52,6 +52,7 @@ Route::get("/crReportPrint/{id?}", 'GlobalController@crReportPrint');
 Route::get("/cicoReportPrint/{start?}/{end?}", 'GlobalController@cicoReportPrint');
 
 
+
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
 Route::post("/resetmypassword", 'GlobalController@resetMyPassword');
 Route::post("/saveConditionalReport", 'GlobalController@saveConditionalReport');
@@ -75,8 +76,10 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get('/admin', 'AdminController@index');
     Route::get('/admin/artefacttypes', 'AdminController@artefacttypes');
     Route::get('/admin/getAllArtefactTypes', 'AdminController@getAllArtefactTypes');
+    Route::get('/admin/pages', 'AdminController@pages');
 
     Route::post('/admin/saveMail','AdminController@saveMail');
+    Route::post('/admin/setVersion','AdminController@setVersion');
     Route::post('/admin/saveCicoMail','AdminController@saveCicoMail');
 
     Route::any('/admin/updateArtefactTypes', 'AdminController@updateArtefactTypes');
@@ -93,6 +96,11 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::any('/admin/insertsegment/{id}', 'AdminController@insertsegment');
     Route::any('/admin/updatesegmentvalue', 'AdminController@updatesegmentvalue');
     Route::any('/admin/insertsegmentvalue/{id}', 'AdminController@insertsegmentvalue');
+    Route::any('/admin/updatePage', 'AdminController@updatePage');
+    Route::any('/admin/deletePage', 'AdminController@deletePage');
+    Route::any('/admin/addPage', 'AdminController@addPage');
+
+    Route::get("/admin/git", 'AdminController@git');
 
 
     Route::get('/admin/attributes/{id}', 'AdminController@attributes');

@@ -55,6 +55,21 @@
                             </div>
                         </fieldset>
                     </div>
+
+                    <div class="col-md-6">
+                        <fieldset class="fieldset">
+                            <legend class="legend1">Version</legend>
+                            <div>
+                                <form method="post" action="/admin/setVersion">
+                                    <div class="form-group">
+                                        <label for="artefactTypes">Version</label>
+                                        <input type="number" name="version" class="form-control" value="{{$version}}">
+                                    </div>
+                                    <input type="submit" value="Save Version" class="btn btn-success pull-right">
+                                </form>
+                            </div>
+                        </fieldset>
+                    </div>
                 </div>
             </div>
         </div>

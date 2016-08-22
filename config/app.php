@@ -159,6 +159,7 @@ return [
         Thetispro\Setting\SettingServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -223,7 +224,7 @@ return [
         'Setting' => Thetispro\Setting\Facades\Setting::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         "JavaScript"=>Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
-
+        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class
     ],
 
 ];

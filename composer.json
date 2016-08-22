@@ -23,7 +23,8 @@
     "barryvdh/laravel-dompdf": "0.6.*",
     "laracasts/utilities": "~2.0",
     "miroc/laravel-adminer": "^4.2",
-    "nwidart/laravel-config-writer": "dev-master"
+    "nwidart/laravel-config-writer": "dev-master",
+    "thomaswelton/laravel-gravatar": "~1.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

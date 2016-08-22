@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\ArchiveMigrate::class,
         Commands\TestConsole::class,
         Commands\SendMaintenenceNotification::class,
+        Commands\Backup::class,
     ];
 
     /**
@@ -33,6 +34,11 @@ class Kernel extends ConsoleKernel
         $schedule
             ->command('archive:notification')
             ->dailyAt('05:00')
+            ->sendOutputTo(storage_path('config/logs'));
+
+        $schedule
+            ->command('archive:backp')
+            ->weeklyOn(0,"01:00")
             ->sendOutputTo(storage_path('config/logs'));
     }
 }
