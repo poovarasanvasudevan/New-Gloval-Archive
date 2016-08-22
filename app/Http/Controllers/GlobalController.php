@@ -935,7 +935,7 @@ class GlobalController extends Controller
                 $full_report = array();
 
                 $res = ScheduledMaintenenceDate::find($taskId)
-                    ->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->conditionaReportSegment()->get();
+                    ->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->segment()->get();
 
                 $artefact = Artefact::find(ScheduledMaintenenceDate::find($taskId)
                     ->scheduledMaintenence()->first()->artefact_id);
@@ -1036,7 +1036,7 @@ class GlobalController extends Controller
         if ($id != 0) {
             $report = ScheduledMaintenenceDate::find($id);
             $res = ScheduledMaintenenceDate::find($id)
-                ->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->conditionaReportSegment()->get();
+                ->scheduledMaintenence()->first()->artefactId()->first()->artefactType()->first()->segment()->get();
             //dd($report);
             $user_name = User::find($report->user_id)->fname . " " . User::find($report->user_id)->lname;
             if ($report) {

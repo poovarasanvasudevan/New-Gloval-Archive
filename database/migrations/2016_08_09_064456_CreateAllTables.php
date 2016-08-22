@@ -45,6 +45,7 @@ class CreateAllTables extends Migration
             $table->string('short_name');
             $table->string('long_name');
             $table->string('url');
+            $table->double('sequence_number')->nullable();
             $table->boolean('is_default')->default(false);
             $table->boolean('is_admin_page')->default(false);
             $table->integer('order')->nullable();
@@ -78,6 +79,7 @@ class CreateAllTables extends Migration
             $table->boolean('is_developer')->default(false);
             $table->integer('role')->unsigned()->nullable();
             $table->integer("location")->unsigned()->default(1);
+            $table->boolean('active')->default(TRUE);
             $table->rememberToken();
             $table->timestamps();
 
@@ -90,6 +92,7 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->string('artefact_type_short');
             $table->string('artefact_type_long');
+            $table->double('sequence_number')->nullable();
             $table->string('artefact_description');
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
@@ -102,6 +105,7 @@ class CreateAllTables extends Migration
             $table->integer('artefact_type_id')->unsigned();
             $table->string('segment_name');
             $table->string('segment_title');
+            $table->double('sequence_number')->nullable();
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
 
@@ -118,6 +122,7 @@ class CreateAllTables extends Migration
             $table->boolean("conditional_report_pick_flag")->default(false);
             $table->json("conditional_report_pick_data")->nullable();
             $table->string("default_value")->nullable();
+            $table->double('sequence_number')->nullable();
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
 
@@ -210,6 +215,7 @@ class CreateAllTables extends Migration
             $table->integer("artefact_type_id")->unsigned();
             $table->string("attribute_title");
             $table->string("html_type");
+            $table->double('sequence_number')->nullable();
             $table->boolean("is_searchable")->default(true);
             $table->boolean("pick_flag")->default(false);
             $table->boolean("active")->default(true);

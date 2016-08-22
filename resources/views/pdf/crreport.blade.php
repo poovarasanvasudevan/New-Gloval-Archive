@@ -14,7 +14,7 @@
         <table width="100%">
             <tr>
                 <td><b><label>Done By</label> </b>&nbsp;&nbsp;{{$user}}</td>
-                <td><b> <label>Date</label></b>&nbsp;&nbsp;{{$segments->first()->conditionalReport()->get()->first()->updated_at}}</td>
+                <td><b> <label>Date</label></b>&nbsp;&nbsp;{{$segments->first()->report()->get()->first()->updated_at}}</td>
             </tr>
             <tr>
                 <td><b><label>Artefact Name :</label>&nbsp;</b>&nbsp;{{$artefact_name}}</td>
@@ -31,7 +31,7 @@
                 <legend>{{$segment->segment_title}}</legend>
                 <div class="col-md-12">
                     <table cellpadding="5px">
-                        @foreach($segment->conditionalReport()->get() as $report)
+                        @foreach($segment->report()->get() as $report)
 
                             <tr style="margin: 5px !important;">
                                 <td style="width: 70% !important;"><label>{{$report->conditional_report_title}}</label></td>

@@ -15,7 +15,7 @@
                 <div class="col-md-2">
                     @include('admin.sidebar')
                 </div>
-                <div class="col-md-10 card card-block" style="height: 92% !important;">
+                <div class="col-md-10 card card-block" style="height: 90% !important;">
                     <textarea rows="41" disabled class="logs form-control">
 {{$logs}}
                     </textarea>

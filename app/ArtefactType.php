@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,6 +38,14 @@ class ArtefactType extends Model
       'artefact_description' ,
       'active' ,
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order_scope', function(Builder $builder) {
+            $builder->orderBy('sequence_number');
+        });
+    }
 
     public function users()
     {
@@ -51,7 +60,7 @@ class ArtefactType extends Model
         return $this->hasMany('App\ArtefactTypeAttribute');
     }
 
-    public function conditionaReportSegment(){
+    public function segment(){
         return $this->hasMany('App\ConditionalReportsSegment');
     }
 }

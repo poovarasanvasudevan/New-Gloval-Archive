@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,8 +28,19 @@ use Illuminate\Database\Eloquent\Model;
 class ConditionalReportsSegment extends Model
 {
     //
+    protected static function boot()
+    {
+        parent::boot();
 
-    public function conditionalReport(){
+        static::addGlobalScope('order_scope', function(Builder $builder) {
+            $builder->orderBy('sequence_number');
+        });
+        static::deleting(function($seg) { // before delete() method call this
+            $seg->report()->delete();
+        });
+    }
+
+    public function report(){
         return $this->hasMany('App\ConditionalReport');
     }
 }

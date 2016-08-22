@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -35,11 +36,15 @@ use Illuminate\Database\Eloquent\Model;
 class ArtefactTypeAttribute extends Model
 {
     //
-    public function __construct()
+    protected static function boot()
     {
-     //   parent::__construct($attributes);
+        parent::boot();
 
+        static::addGlobalScope('order_scope', function(Builder $builder) {
+            $builder->orderBy('sequence_number');
+        });
     }
+
 
     public function pickData()
     {

@@ -106,7 +106,7 @@
                     }
                 },
                 fields: [
-                    {name: "id", type: "text", editing: false},
+                    {name: "id", type: "text", editing: false,inserting:false},
                     {name: "attribute_title", title: "Title", type: "text"},
                     {
                         name: "html_type",
@@ -124,6 +124,7 @@
                         sorting: false,
                         filtering: false
                     },
+                    {name: "sequence_number", title: "Title", type: "text"},
                     {name: "active", type: "checkbox", sorting: false, filtering: false},
                     {type: "control"}
                 ]

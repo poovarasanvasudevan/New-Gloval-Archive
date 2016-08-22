@@ -42,7 +42,7 @@
                         <fieldset>
                             <legend>{{$segment->segment_title}}</legend>
                             <div class="col-md-12">
-                                @foreach($segment->conditionalReport()->get() as $report)
+                                @foreach($segment->report()->get() as $report)
                                     <div class="col-md-6">
                                         <label>{{$report->conditional_report_title}}</label>
                                     </div>

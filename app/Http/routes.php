@@ -75,12 +75,33 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get('/admin', 'AdminController@index');
     Route::get('/admin/artefacttypes', 'AdminController@artefacttypes');
     Route::get('/admin/getAllArtefactTypes', 'AdminController@getAllArtefactTypes');
+
+    Route::post('/admin/saveMail','AdminController@saveMail');
+    Route::post('/admin/saveCicoMail','AdminController@saveCicoMail');
+
     Route::any('/admin/updateArtefactTypes', 'AdminController@updateArtefactTypes');
     Route::any('/admin/deleteArtefactTypes', 'AdminController@deleteArtefactTypes');
     Route::any('/admin/addArtefactTypes', 'AdminController@addArtefactTypes');
     Route::any('/admin/updateAttributes', 'AdminController@updateAttributes');
     Route::any('/admin/addAttributes/{id}', 'AdminController@addAttributes');
     Route::any('/admin/deleteAttributes', 'AdminController@deleteAttributes');
+    Route::any('/admin/updatepick', 'AdminController@updatepick');
+    Route::any('/admin/deletepick', 'AdminController@deletepick');
+    Route::any('/admin/insertpick', 'AdminController@insertpick');
+    Route::any('/admin/updatesegment', 'AdminController@updatesegment');
+    Route::any('/admin/deletesegment', 'AdminController@deletesegment');
+    Route::any('/admin/insertsegment/{id}', 'AdminController@insertsegment');
+    Route::any('/admin/updatesegmentvalue', 'AdminController@updatesegmentvalue');
+    Route::any('/admin/insertsegmentvalue/{id}', 'AdminController@insertsegmentvalue');
+
+
     Route::get('/admin/attributes/{id}', 'AdminController@attributes');
     Route::get('/admin/logs', 'AdminController@logs');
+    Route::get('/admin/attributelist', 'AdminController@attributelist');
+    Route::get('/admin/users', 'AdminController@users');
+    Route::get('/admin/config', 'AdminController@config');
+    Route::get('/admin/crreport/{type?}/{section?}', 'AdminController@crreport');
+
+
+    Route::any('/admin/adminer', '\Miroc\LaravelAdminer\AdminerController@index');
 });

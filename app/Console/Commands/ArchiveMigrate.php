@@ -15,6 +15,7 @@ use App\Role;
 use App\User;
 use Excel;
 use Illuminate\Console\Command;
+use Setting;
 
 class ArchiveMigrate extends Command
 {
@@ -91,10 +92,13 @@ class ArchiveMigrate extends Command
 
         $this->warn("Creating Artefact Types : ");
 
+        $i = 0;
         foreach ($artefactTypes as $artefactType) {
+            $i++;
             $artefactt = new ArtefactType();
             $artefactt->artefact_type_short = strtoupper($artefactType);
             $artefactt->artefact_type_long = $artefactType;
+            $artefactt->sequence_number = $i;
             $artefactt->artefact_description = "Set of all " . $artefactType;
             $artefactt->save();
         }
@@ -102,11 +106,14 @@ class ArchiveMigrate extends Command
 
         $this->warn("Creating Pages : ");
         $pages = json_decode(file_get_contents(storage_path("config/pages.json")));
+        $i = 0;
         foreach ($pages as $page) {
+            $i++;
             $p = new Page();
             $p->short_name = $page->name;
             $p->long_name = $page->title;
             $p->url = $page->url;
+            $p->sequence_number = $i;
             $p->is_default = $page->default;
             $p->is_admin_page = $page->isadmin;
             $p->order = $page->order;
@@ -200,7 +207,9 @@ class ArchiveMigrate extends Command
 
         $attributes = \DB::connection('mysql2')->table('attributes')->get();
         $bar = $this->output->createProgressBar(count($attributes));
+        $i = 0;
         foreach ($attributes as $attribute) {
+            $i++;
             $artefacttypecode = $this->getArtefactCode($attribute->ArtefactTypeCode);
             $pickFlag = false;
             $aListCode = "";
@@ -220,6 +229,7 @@ class ArchiveMigrate extends Command
             $attributeObj = new ArtefactTypeAttribute();
             $attributeObj->artefact_type_id = $artefacttypecode;
             $attributeObj->html_type = $htmlType;
+            $attributeObj->sequence_number = $i;
             $attributeObj->attribute_title = $attribute->Attributes;
             $attributeObj->pick_flag = $pickFlag;
 
@@ -318,21 +328,27 @@ class ArchiveMigrate extends Command
             )
         );
 
+        $i = 0;
         foreach ($arrayTite as $k => $v) {
+            $i++;
             $segment = new  ConditionalReportsSegment();
             $segment->artefact_type_id = 3;
             $segment->segment_name = preg_replace('/\s+/', '', $k);
             $segment->segment_title = $k;
+            $segment->sequence_number = $i;
             $segment->save();
 
+            $j = 0;
             foreach ($v as $val) {
                 $checklist = \DB::connection('mysql2')->table("checklist")->where("CheckListPK", $val)->first();
                 if ($checklist) {
+                    $j++;
                     $conditionalReport = new ConditionalReport();
                     $conditionalReport->conditional_reports_segment_id = $segment->id;
                     $conditionalReport->conditional_report_name = str_random(8);
                     $conditionalReport->conditional_report_title = $checklist->CheckListItem;
                     $conditionalReport->conditional_report_html_type = $checklist->DataType;
+                    $conditionalReport->sequence_number = $j;
 
                     if ($checklist->pickflag == 'y') {
                         $conditionalReport->conditional_report_pick_flag = true;
@@ -351,20 +367,26 @@ class ArchiveMigrate extends Command
 
         $this->info("importing photos report");
         $photos = json_decode(file_get_contents(storage_path("config/crreport/photos.json")));
+        $i = 0;
         foreach ($photos as $photo) {
+            $i++;
             $segment = new  ConditionalReportsSegment();
             $segment->artefact_type_id = 6;
             $segment->segment_name = preg_replace('/\s+/', '', $photo->desc);
             $segment->segment_title = $photo->desc;
+            $segment->sequence_number = $i;
             $segment->save();
 
 
+            $j = 0;
             foreach ($photo->items as $item) {
+                $j++;
                 $conditionalReport = new ConditionalReport();
                 $conditionalReport->conditional_reports_segment_id = $segment->id;
                 $conditionalReport->conditional_report_name = str_random(8);
                 $conditionalReport->conditional_report_title = $item->name;
                 $conditionalReport->conditional_report_html_type = $item->type;
+                $conditionalReport->sequence_number = $j;
 
 
                 if (is_array($item->pick)) {
@@ -380,19 +402,25 @@ class ArchiveMigrate extends Command
 
         $this->info("importing book report");
         $photos = json_decode(file_get_contents(storage_path("config/crreport/book.json")));
+        $i = 0;
         foreach ($photos as $photo) {
+            $i++;
             $segment = new  ConditionalReportsSegment();
             $segment->artefact_type_id = 2;
             $segment->segment_name = preg_replace('/\s+/', '', $photo->desc);
             $segment->segment_title = $photo->desc;
+            $segment->sequence_number = $i;
             $segment->save();
 
+            $j = 0;
             foreach ($photo->items as $item) {
+                $j++;
                 $conditionalReport = new ConditionalReport();
                 $conditionalReport->conditional_reports_segment_id = $segment->id;
                 $conditionalReport->conditional_report_name = str_random(8);
                 $conditionalReport->conditional_report_title = $item->name;
                 $conditionalReport->conditional_report_html_type = $item->type;
+                $conditionalReport->sequence_number = $j;
 
                 if (is_array($item->pick)) {
                     $pick_item = array();
@@ -405,6 +433,16 @@ class ArchiveMigrate extends Command
             }
         }
 
+        $this->info("Setting Mail Config");
+        Setting::set('mail_config', array(
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_port' => 'smtp.gmail.com',
+            'smtp_username' => 'smtp.gmail.com',
+            'smtp_password' => 'smtp.gmail.com',
+        ));
+
+        $this->info("Done..");
+
     }
 
     function migrateData($tableName, $attId)
@@ -415,7 +453,7 @@ class ArchiveMigrate extends Command
             $tmp1 = array();
             foreach (json_decode(json_encode($v)) as $key => $val) {
 
-                $my_attrs = ArtefactTypeAttribute::whereArtefactTypeId($attId)
+                $my_attrs = ArtefactTypeAttribute::withoutGlobalScopes()->whereArtefactTypeId($attId)
                     ->whereRaw("LOWER(attribute_title) = ?", [str_ireplace('"', '', strtolower($key))]);
 
                 if ($my_attrs->count() == 1) {
@@ -469,7 +507,7 @@ class ArchiveMigrate extends Command
                 $parent->location = 1;
                 $parent->artefact_name = $box;
                 $parent->parent_id = null;
-                $parent->old_artefact_id=0000;
+                $parent->old_artefact_id = 0000;
                 $parent->user_id = 3;
 
                 $parent->save();
@@ -520,7 +558,7 @@ class ArchiveMigrate extends Command
                 $child->artefact_type = 6;
                 $child->parent_id = Artefact::whereArtefactName($row['box_number'])->first()->id;
                 $child->user_id = 3;
-                $child->old_artefact_id=0000;
+                $child->old_artefact_id = 0000;
                 $child->artefact_name = $row['artefact_code'];
                 $child->artefact_values = $tmp1;
                 $child->save();

@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use App\Artefact;
 use App\ArtefactType;
 use App\ArtefactTypeAttribute;
+use App\ConditionalReport;
+use App\ConditionalReportsSegment;
+use App\Location;
+use App\PickData;
+use App\Role;
 use App\User;
+use Config;
+use Dotenv\Dotenv;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use JavaScript;
+use Nayjest\Builder\Env;
+use Setting;
 
 class AdminController extends Controller
 {
@@ -84,7 +93,7 @@ class AdminController extends Controller
     function attributes($id)
     {
 
-        flash("Deleting an Item Which is Not Recoverable ,Please be careful","warning");
+        flash("Deleting an Item Which is Not Recoverable ,Please be careful", "warning");
 
         if ($id == 0) {
             JavaScript::put([
@@ -111,6 +120,7 @@ class AdminController extends Controller
         $att->attribute_title = request()->input('attribute_title');
         $att->html_type = request()->input('html_type');
         $att->is_searchable = request()->input('is_searchable');
+        $att->sequence_number = request()->input('sequence_number');
         $att->pick_flag = request()->input('pick_flag');
         if ($att->save()) {
             return response()->json($att);
@@ -124,6 +134,7 @@ class AdminController extends Controller
         $att->pick_flag = request()->input('pick_flag');
         $att->attribute_title = request()->input('attribute_title');
         $att->html_type = request()->input('html_type');
+        $att->sequence_number = request()->input('sequence_number');
         $att->is_searchable = request()->input('is_searchable');
         $att->artefact_type_id = $id;
 
@@ -139,13 +150,219 @@ class AdminController extends Controller
         $att->delete();
     }
 
-    function logs(){
+    function logs()
+    {
         return view('admin.logs')
-            ->with('logs',file_get_contents(storage_path('logs/laravel.log')));
+            ->with('logs', file_get_contents(storage_path('logs/laravel.log')));
     }
 
     function getAllAttributes($id)
     {
         return response()->json();
+    }
+
+    function attributelist()
+    {
+        JavaScript::put([
+            "Adata" => PickData::withoutGlobalScopes()->distinct('pick_data_value')->orderBy('id')->get()
+        ]);
+        return view('admin.attrlist');
+    }
+
+    function updatepick()
+    {
+        $pick = PickData::find(request()->input('id'));
+        $pick->pick_data_value = request()->input('pick_data_value');
+        $pick->active = request()->input('active');
+        if ($pick->save()) {
+            return response()->json($pick);
+        }
+    }
+
+    function deletepick()
+    {
+        $pick = PickData::find(request()->input('id'));
+        $pick->delete();
+    }
+
+    function insertpick()
+    {
+        $pick = new PickData();
+        $pick->pick_data_value = request()->input('pick_data_value');
+        $pick->attribute_id = 1;
+        $pick->active = request()->input('active');
+
+        if ($pick->save()) {
+            return response()->json($pick);
+        }
+    }
+
+    function users()
+    {
+        JavaScript::put([
+            "Adata" => User::withoutGlobalScopes()->orderBy('id')->get(),
+            "loc" => Location::withoutGlobalScopes()->get(),
+            "role" => Role::withoutGlobalScopes()->get()
+        ]);
+        return view('admin.users');
+    }
+
+    function crreport($type = 0, $section = 0)
+    {
+        $artefact_types = ArtefactType::withoutGlobalScopes()->get();
+        if ($type == 0) {
+            $segment = null;
+            $segment_data = 0;
+
+            JavaScript::put([
+                "atype" => $type,
+                "section" => $section,
+                "segment" => "",
+                "sectionData" => $segment_data
+            ]);
+            return view('admin.crreport')
+                ->with('artefact_types', $artefact_types)
+                ->with('segment', $segment);
+        } else {
+            if ($section == 0 || $section == null) {
+                $segment = ConditionalReportsSegment::withoutGlobalScopes()->whereArtefactTypeId($type)->get();
+                $segment_data = 0;
+                JavaScript::put([
+                    "atype" => $type,
+                    "section" => $section,
+                    "segment" => $segment,
+                    "sectionData" => $segment_data
+                ]);
+                return view('admin.crreport')
+                    ->with('artefact_types', $artefact_types)
+                    ->with('segment', $segment);
+            } else {
+
+                $segment = ConditionalReportsSegment::withoutGlobalScopes()->whereArtefactTypeId($type)->get();
+                $segment_data = ConditionalReportsSegment::find($section)->report()->get();
+
+                JavaScript::put([
+                    "atype" => $type,
+                    "section" => $section,
+                    "segment" => $segment,
+                    "sectionData" => $segment_data
+                ]);
+                return view('admin.crreport')
+                    ->with('artefact_types', $artefact_types)
+                    ->with('segment', $segment);
+            }
+        }
+    }
+
+    function updatesegment()
+    {
+        $seg = ConditionalReportsSegment::find(request()->get('id'));
+        $seg->segment_name = request()->input('segment_name');
+        $seg->segment_title = request()->input('segment_title');
+        $seg->sequence_number = request()->input('sequence_number');
+        if ($seg->save()) {
+            return response()->json($seg);
+        }
+    }
+
+    function deletesegment()
+    {
+        $seg = ConditionalReportsSegment::find(request()->get('id'));
+        $seg->delete();
+    }
+
+    function insertsegment($id)
+    {
+        $seg = new ConditionalReportsSegment();
+        $seg->active = request()->input('active');
+        $seg->artefact_type_id = $id;
+        $seg->segment_name = request()->input('segment_name');
+        $seg->segment_title = request()->input('segment_title');
+        $seg->sequence_number = request()->input('sequence_number');
+        if ($seg->save()) {
+            return response()->json($seg);
+        }
+    }
+
+    function updatesegmentvalue()
+    {
+        $seg = ConditionalReport::find(request()->input('id'));
+
+        $seg->conditional_report_name = request()->input('conditional_report_name');
+        $seg->conditional_report_title = request()->input('conditional_report_title');
+        $seg->conditional_report_html_type = request()->input('conditional_report_html_type');
+        $seg->conditional_report_pick_data = explode(",", request()->input('conditional_report_pick_data'));
+        $seg->default_value = request()->input("default_value");
+        $seg->sequence_number = request()->input('sequence_number');
+        $seg->active = request()->input('active');
+
+        if ($seg->save()) {
+            return response()->json($seg);
+        }
+    }
+
+    function insertsegmentvalue($id)
+    {
+        $seg = new ConditionalReport();
+        $seg->conditional_reports_segment_id = $id;
+        $seg->conditional_report_name = str_random(8);
+        if (request()->input('conditional_report_pick_data') == "") {
+            $seg->conditional_report_pick_data = null;
+        } else {
+            $seg->conditional_report_pick_data = explode(",", request()->input('conditional_report_pick_data'));
+        }
+        $seg->conditional_report_title = request()->input('conditional_report_title');
+        $seg->conditional_report_html_type = request()->input('conditional_report_html_type');
+        $seg->default_value = request()->input("default_value");
+        $seg->sequence_number = request()->input('sequence_number');
+        $seg->active = request()->input('active');
+
+        if ($seg->save()) {
+            return response()->json($seg);
+        }
+    }
+
+
+    function config()
+    {
+        /**
+         *
+         * Setting::set('mail_config',array(
+         * 'smtp_host'=>'smtp.gmail.com',
+         * 'smtp_port'=>'smtp.gmail.com',
+         * 'smtp_username'=>'smtp.gmail.com',
+         * 'smtp_password'=>'smtp.gmail.com',
+         * ));
+         */
+        $mail_setting = Setting::get('mail_config');
+        $cico_mail = Setting::get('cico_mail', "");
+
+
+        return view('admin.config')
+            ->with('mail_config', $mail_setting)
+            ->with('cico_mail', $cico_mail);
+    }
+
+    function saveMail()
+    {
+        Setting::set('mail_config', request()->all());
+        flash('Mail setting saved Succesfully', 'success');
+
+//        Config::set('mail.host',request()->input('smtp_host'));
+//        Config::set('mail.port',request()->input('smtp_port'));
+//        Config::set('mail.from.address',request()->input('smtp_username'));
+//        Config::set('mail.username',request()->input('smtp_username'));
+//        Config::set('mail.password',request()->input('smtp_password'));
+
+        return response()->redirectTo('/admin/config');
+    }
+
+    function saveCicoMail()
+    {
+        $list = trim(request()->input('cico_mail'));
+        Setting::set('cico_mail', explode(",", $list));
+        flash('Cico Mail setting saved Succesfully', 'success');
+        return response()->redirectTo('/admin/config');
+
     }
 }

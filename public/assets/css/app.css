@@ -1814,3 +1814,13 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
     margin: 40px auto;
     position: relative;
 }
+.fieldset
+{
+    background-color:#eaeaea;
+    padding:16px;
+}
+.legend1
+{
+    margin-bottom:0px;
+    margin-left:16px;
+}

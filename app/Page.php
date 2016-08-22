@@ -4,6 +4,7 @@ namespace App;
 
 use App\Scope\DeveloperScope;
 use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -50,7 +51,10 @@ class Page extends Model
     protected static function boot()
     {
         parent::boot();
-        //static::addGlobalScope(new DeveloperScope());
+
+        static::addGlobalScope('order_scope', function(Builder $builder) {
+            $builder->orderBy('sequence_number');
+        });
     }
 
     public function roles()

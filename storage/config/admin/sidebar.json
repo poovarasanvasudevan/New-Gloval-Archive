@@ -1,5 +1,4 @@
 [
-
   {
     "name": "artefacttypes",
     "title": "Artefact Types",
@@ -39,5 +38,20 @@
     "name": "overview",
     "title": "Overview",
     "url": "/admin/overview"
+  },
+  {
+    "name": "config",
+    "title": "Configuration",
+    "url": "/admin/config"
+  },
+  {
+    "name": "pages",
+    "title": "Pages",
+    "url": "/admin/pages"
+  },
+  {
+    "name": "database",
+    "title": "Database Admin",
+    "url": "/admin/adminer"
   }
 ]
