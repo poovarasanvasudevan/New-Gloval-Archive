@@ -16,6 +16,11 @@
     "url": "/admin/attributes/0"
   },
   {
+    "name": "crreport",
+    "title": "Conditional Report",
+    "url": "/admin/crreport"
+  },
+  {
     "name": "users",
     "title": "Users",
     "url": "/admin/users"

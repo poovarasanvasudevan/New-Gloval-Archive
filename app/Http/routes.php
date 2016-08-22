@@ -79,5 +79,8 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::any('/admin/deleteArtefactTypes', 'AdminController@deleteArtefactTypes');
     Route::any('/admin/addArtefactTypes', 'AdminController@addArtefactTypes');
     Route::any('/admin/updateAttributes', 'AdminController@updateAttributes');
+    Route::any('/admin/addAttributes/{id}', 'AdminController@addAttributes');
+    Route::any('/admin/deleteAttributes', 'AdminController@deleteAttributes');
     Route::get('/admin/attributes/{id}', 'AdminController@attributes');
+    Route::get('/admin/logs', 'AdminController@logs');
 });

@@ -3,19 +3,19 @@
     <div class="full-div">
         @include('layout.adminnav')
         <div style="margin-top: 70px !important;">
-            @if (session()->has('flash_notification.message'))
-                <div class="alert alert-{{ session('flash_notification.level') }}">
-                    <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button>
-
-                    {!! session('flash_notification.message') !!}
-                </div>
-            @endif
             <div class="col-md-12">
                 <div class="col-md-2">
                     @include('admin.sidebar')
                 </div>
                 <div class="col-md-10 card card-block" style="height: 92% !important;">
+                    @if (session()->has('flash_notification.message'))
+                        <div class="alert alert-{{ session('flash_notification.level') }}">
+                            <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
+
+                            {!! session('flash_notification.message') !!}
+                        </div>
+                    @endif
                     <div class="card card-block">
                         <div class="form-group">
                             <label for="artefactTypes">Artefact Types</label>
@@ -72,7 +72,7 @@
                 }
             });
             $(".tables").jsGrid({
-                height: "85%",
+                height: "79%",
                 width: "100%",
                 filtering: false,
                 editing: true,
@@ -84,20 +84,23 @@
                         return $.ajax({
                             type: "POST",
                             url: "/admin/updateAttributes",
-                            data: item
+                            data: item,
+                            success:function (data) {
+                                console.log(data);
+                            }
                         });
                     },
                     deleteItem: function (item) {
                         return $.ajax({
                             type: "POST",
-                            url: "/admin/deleteArtefactTypes",
+                            url: "/admin/deleteAttributes",
                             data: item
                         });
                     },
                     insertItem: function (item) {
                         return $.ajax({
                             type: "POST",
-                            url: "/admin/addArtefactTypes/" + AType,
+                            url: "/admin/addAttributes/" + AType,
                             data: item
                         });
                     }
