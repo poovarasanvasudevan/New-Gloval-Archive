@@ -39,8 +39,8 @@
                 <form method="post" action="/saveConditionalReport">
                     <input type="hidden" name="taskId" value="{{$taskId}}">
                     @foreach($segments as $segment)
-                        <fieldset>
-                            <legend>{{$segment->segment_title}}</legend>
+                        <fieldset class="fieldset">
+                            <legend class="legend1">{{$segment->segment_title}}</legend>
                             <div class="col-md-12">
                                 @foreach($segment->report()->get() as $report)
                                     <div class="col-md-6">

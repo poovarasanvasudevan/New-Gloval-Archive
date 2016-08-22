@@ -338,7 +338,7 @@ class AdminController extends Controller
          */
         $mail_setting = Setting::get('mail_config');
         $cico_mail = Setting::get('cico_mail', "");
-        $version = Setting::get('version',"");
+        $version = Setting::get('version.number',"");
 
 
         return view('admin.config')

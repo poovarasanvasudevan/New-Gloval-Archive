@@ -41,14 +41,6 @@
                     </ul>
                 </li>
             </ul>
-
-
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Search" type="text">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
         </div>
     </div>
 </nav>
