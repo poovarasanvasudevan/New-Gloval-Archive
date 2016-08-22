@@ -338,7 +338,7 @@ class AdminController extends Controller
          */
         $mail_setting = Setting::get('mail_config');
         $cico_mail = Setting::get('cico_mail', "");
-        $version = Setting::get('version.number',"");
+        $version = Setting::get('version',"");
 
 
         return view('admin.config')
@@ -419,7 +419,7 @@ class AdminController extends Controller
             'number'=>request()->input('version'),
             'updated'=>Carbon::today()->toDateString()
         );
-        Setting::set('version',$v);
+        Setting::set('version',request()->input('version'));
         flash('Version saved Succesfully', 'success');
         return response()->redirectTo('/admin/config');
     }
