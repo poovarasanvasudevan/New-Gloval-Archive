@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <a href="/forget-password" class="padding15 pull-right">Forget
+                            <a href="/forget" class="padding15 pull-right">Forget
                                 Password</a>
                             <input type="submit" value="Login" class="btn btn-success pull-right"
                                    style="margin-right: 15px; !important;">

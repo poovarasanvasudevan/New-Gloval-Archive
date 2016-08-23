@@ -12,6 +12,10 @@ use App\Artefact;
 class MyHelper {
     public static function getAttrValues($id,$code) {
         $fullJson = Artefact::find($id)->artefact_values;
-        return $fullJson['data_'.$code]['attr_value'];
+        if(isset($fullJson['data_'.$code]['attr_value']))
+            return $fullJson['data_'.$code]['attr_value'];
+        else
+            return "";
+
     }
 }

@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
             ->sendOutputTo(storage_path('config/logs'));
 
         $schedule
-            ->command('archive:backp')
+            ->command('archive:backup')
             ->weeklyOn(0,"01:00")
             ->sendOutputTo(storage_path('config/logs'));
     }

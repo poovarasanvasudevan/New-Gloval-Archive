@@ -62,6 +62,21 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="location" class="col-lg-2 control-label">Location</label>
+                    <div class="col-lg-10">
+                        <select class="form-control" id="archive_location" name="archive_location">
+                            <option value="0">Select one</option>
+                            @foreach($locations as $location)
+                                @if($location->id == $user->archive_location)
+                                    <option value="{{$location->id}}" selected>{{$location->long_name}}</option>
+                                @else
+                                    <option value="{{$location->id}}">{{$location->long_name}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="role" class="col-lg-2 control-label">Role</label>

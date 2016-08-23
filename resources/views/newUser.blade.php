@@ -72,7 +72,18 @@
                                     <div class="col-lg-10">
                                         <select class="form-control" required id="location" name="location">
                                             <option value="0">Select one</option>
-                                            @foreach(\App\Location::all() as $location)
+                                            @foreach(\App\Location::active()->get() as $location)
+                                                <option value="{{$location->id}}">{{$location->long_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="location" class="col-lg-2 control-label">Archive Location</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" required id="archivelocation" name="archivelocation">
+                                            <option value="0">Select one</option>
+                                            @foreach(\App\Location::active()->whereIsArchiveLocation(true)->get() as $location)
                                                 <option value="{{$location->id}}">{{$location->long_name}}</option>
                                             @endforeach
                                         </select>

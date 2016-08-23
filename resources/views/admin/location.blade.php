@@ -16,7 +16,7 @@
                     @include('admin.sidebar')
                 </div>
                 <div class="col-md-10 card card-block" style="height: 90% !important;">
-                    <div class="users"></div>
+                    <div class="location"></div>
                 </div>
             </div>
         </div>
@@ -26,58 +26,47 @@
 @section('js')
     <script>
         $(function () {
-            $(".users").jsGrid({
-                height: "90%",
+            $(".location").jsGrid({
+                height: "85%",
                 width: "100%",
                 filtering: false,
                 editing: true,
                 sorting: true,
-                inserting: false,
-                data: Adata,
+                inserting: true,
+                data: AData,
                 controller: {
                     updateItem: function (item) {
                         return $.ajax({
                             type: "POST",
-                            url: "/admin/updateuser",
+                            url: "/admin/updatelocation",
                             data: item
                         });
                     },
                     deleteItem: function (item) {
                         return $.ajax({
                             type: "POST",
-                            url: "/admin/deletepick",
+                            url: "/admin/deletelocation",
+                            data: item
+                        });
+                    },
+                    insertItem: function (item) {
+                        return $.ajax({
+                            type: "POST",
+                            url: "/admin/insertlocation",
                             data: item
                         });
                     }
                 },
                 fields: [
-                    {name: "id", type: "text", editing: false},
-                    {name: "abhyasiid", title: "Abhyasi Id", type: "text"},
-                    {name: "fname", title: "First Name", type: "text"},
-                    {name: "lname", title: "Last Name", type: "text"},
-                    {name: "email", title: "Email", type: "text"},
-                    {name: "password", title: "Password", type: "text"},
-                    {name: "is_developer", title: "Admin", type: "checkbox"},
-                    {
-                        name: "role",
-                        title: "Role",
-                        type: "select",
-                        items: role,
-                        valueField: "id",
-                        textField: "long_name"
-                    },
-                    {
-                        name: "location",
-                        title: "Location",
-                        type: "select",
-                        items: loc,
-                        valueField: "id",
-                        textField: "long_name"
-                    },
+                    {name: "id", type: "text", editing: false,inserting:false},
+                    {name: "short_name", title: "Short Name", type: "text"},
+                    {name: "long_name", title: "Long Name", type: "text"},
+                    {name: "is_archive_location", title: "Is Archive Location", type: "checkbox"},
                     {name: "active", type: "checkbox", sorting: false, filtering: false},
                     {type: "control"}
                 ]
             });
-        });
+        })
+
     </script>
 @endsection

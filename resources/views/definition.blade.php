@@ -55,7 +55,7 @@
                                     <div class="col-md-3">
                                         <a href="" id="crlink" class="btn btn-info">Conditional Report</a>
                                         <input type="submit" value="Save" class="btn btn-primary">
-                                        <input type="button" value="Print" class="btn btn-info">
+                                        <a href="" id="printa" target="_blank" class="btn btn-info">Print</a>
                                     </div>
                                 </div>
                                 <div id="detailPanel" class="card card-block"

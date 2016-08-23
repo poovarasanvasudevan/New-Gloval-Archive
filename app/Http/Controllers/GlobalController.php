@@ -58,7 +58,9 @@ class GlobalController extends Controller
         $userName = request()->input("username");
         $password = request()->input("password");
 
-        $user = User::whereAbhyasiid(strtolower($userName))->wherePassword(md5($password));
+        $user = User::whereAbhyasiid(strtolower($userName))
+            ->wherePassword(md5($password))
+            ->whereActive(true);
         if ($user && $user->count() == 1) {
             Auth::login($user->first());
             return response()->redirectTo("/home");
@@ -67,6 +69,82 @@ class GlobalController extends Controller
         }
     }
 
+    function artefactview($id = 0)
+    {
+        $artefact = Artefact::find($id);
+        $attr = ArtefactTypeAttribute::whereArtefactTypeId($artefact->artefact_type)->get();
+
+        if ($artefact) {
+            return view('artefactview')
+                ->with('artefact', $artefact)
+                ->with('attr', $attr);
+        } else {
+            return response()->redirectTo('/');
+        }
+        //3477
+    }
+
+    function artefactprint($id = 0)
+    {
+        $artefact = Artefact::find($id);
+        $attr = ArtefactTypeAttribute::whereArtefactTypeId($artefact->artefact_type)->get();
+
+        if ($artefact) {
+            $pdf = \PDF::loadView('pdf.artefactprint', array(
+                'artefact' => $artefact,
+                'attr' => $attr,
+            ));
+
+            return $pdf->stream();
+        } else {
+            return response()->redirectTo('/');
+        }
+
+    }
+
+    function forget()
+    {
+        return response()->view('forget');
+    }
+
+    function reset()
+    {
+        $user = User::whereAbhyasiid(request()->input('abhyasiid'))
+            ->whereEmail(request()->input('email'))
+            ->get();
+
+        if ($user->count() == 1) {
+            $userGet = $user->first();
+            $pwd = str_random(8);
+            \Debugbar::addMessage($userGet);
+
+            $u = User::find($userGet->id);
+            $u->password = md5($pwd);
+            if ($u->save()) {
+
+
+                Mail::send('email.resetpassword', array(
+                    'username' => $u->abhyasiid,
+                    'password' => $pwd,
+                    'url' => base_path('/')
+                ), function ($message) use ($u) {
+                    $message
+                        ->to($u->email, $u->fname . " " . $u->lname)
+                        ->subject('Password Reset!');
+                });
+
+                flash("Password Reset Succesfully,Check Your Email", "success");
+                return response()->redirectTo('/forget');
+            } else {
+                flash("Password Reset Failed", "error");
+                return response()->redirectTo('/forget');
+            }
+
+        } else {
+            flash("Password Reset Failed unknown User", "error");
+            return response()->redirectTo('/forget');
+        }
+    }
 
     public function logout()
     {
@@ -148,7 +226,7 @@ class GlobalController extends Controller
         if (Auth::user()) {
 
             $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
-            $location = Location::active()->get();
+            $location = Location::active()->whereIsArchiveLocation(true)->get();
             return view('definition')
                 ->with('locations', $location)
                 ->with('artefacttypes', $artefactTypes);
@@ -279,7 +357,7 @@ class GlobalController extends Controller
         if (Auth::user()) {
 
             $user = User::find($id);
-            $location = Location::all();
+            $location = Location::active()->get();
             $role = Role::all();
             $artefacts = ArtefactType::all();
             $availableArtefact = $user->artefact_type()->get();
@@ -307,6 +385,7 @@ class GlobalController extends Controller
             $abhyasiid = request()->input("abhayasiId");
             $role = request()->input("role");
             $location = request()->input("location");
+            $archive_location = request()->input("archive_location");
             $artefact_type = request()->input("artefact");
 
             $validator = Validator::make($request->all(), [
@@ -315,6 +394,7 @@ class GlobalController extends Controller
                 'abhayasiId' => 'required',
                 'role' => 'required',
                 'location' => 'required',
+                'archive_location' => 'required',
                 'email' => 'required',
             ]);
 
@@ -343,6 +423,7 @@ class GlobalController extends Controller
                 $user->abhyasiid = $abhyasiid;
                 $user->role = $role;
                 $user->location = $location;
+                $user->archive_location = $archive_location;
                 $user->artefact_type()->sync($artefact_type);
                 $user->save();
 
@@ -427,7 +508,7 @@ class GlobalController extends Controller
         $newArtefcat->artefact_name = $val;
         $newArtefcat->old_artefact_id = '00000';
         $newArtefcat->user_id = Auth::user()->id;
-        $newArtefcat->location = Auth::user()->location;
+        $newArtefcat->location = Auth::user()->archive_location;
 
         if ($newArtefcat->save()) {
             return response()->json(array(
@@ -538,7 +619,7 @@ class GlobalController extends Controller
                 foreach ($sett as $s) {
                     $message->to($s);
                 }
-                $message->subject("Artefact Chedout");
+                $message->subject("Artefact Checkout");
             });
 
             flash('Checkout Successfull', 'success');
@@ -595,6 +676,7 @@ class GlobalController extends Controller
             $abhyasiid = request()->input("abhayasiId");
             $role = request()->input("role");
             $location = request()->input("location");
+            $archivelocation = request()->input("archivelocation");
             $artefact_type = request()->input("artefact");
 
             $validator = Validator::make($request->all(), [
@@ -604,6 +686,7 @@ class GlobalController extends Controller
                 'role' => 'required',
                 'location' => 'required',
                 'email' => 'required',
+                'archivelocation' => 'required',
                 'artefact' => 'required'
             ]);
 
@@ -634,8 +717,10 @@ class GlobalController extends Controller
                 $user->role = $role;
                 $user->password = md5($password);
                 $user->location = $location;
-                $user->artefact_type()->sync($artefact_type);
+                $user->archive_location = $archivelocation;
                 if ($user->save()) {
+
+                    $user->artefact_type()->sync($artefact_type);
 
                     Mail::send('email.newuser', array(
                         'username' => $abhyasiid,
@@ -754,7 +839,7 @@ class GlobalController extends Controller
     function maintenence()
     {
         if (Auth::user()) {
-            $location = Location::get();
+            $location = Location::active()->whereIsArchiveLocation(true)->get();
             $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
             return view('maintenance')
                 ->with('artefacttypes', $artefactTypes)
@@ -1146,7 +1231,7 @@ class GlobalController extends Controller
     {
         if (Auth::user()) {
             $artefactTypes = User::find(Auth::user()->id)->artefact_type()->get();
-            $location = Location::active()->get();
+            $location = Location::active()->whereIsArchiveLocation(true)->get();
 
             $codes = null;
 
@@ -1172,6 +1257,7 @@ class GlobalController extends Controller
 
         $myResult = Artefact::with("location", "parent", "user")
             ->select(array(
+                "artefacts.id",
                 "artefact_name",
                 "artefact_values",
                 "parent_id"

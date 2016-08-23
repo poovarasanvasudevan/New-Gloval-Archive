@@ -47,13 +47,15 @@ $(function () {
             data: setDat,
             success: function (res) {
                 html = "";
-                if(res.length > 0) {
+                if (res.length > 0) {
                     for (i = 0; i < res.length; i++) {
                         html += "<div class='col-md-3'>";
                         html += "<div class='card card-block'>";
                         html += "<h4 class='card-title'>" + res[i].artefact_name + "</h4>"
                         html += "<p class='card-text'>" + res[i].parent.artefact_name + "</p>"
-                        html += "<a class='btn btn-success pull-right'>View Artefact</a>"
+
+                        url = '/artefactview/' + res[i].id;
+                        html += "<a class='btn btn-success pull-right' target='_blank' href='" + url + "'>View Artefact</a>"
                         html += "</div>";
                         html += "</div>";
                     }

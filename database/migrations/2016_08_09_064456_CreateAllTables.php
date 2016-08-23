@@ -78,11 +78,13 @@ class CreateAllTables extends Migration
             $table->boolean('is_developer')->default(false);
             $table->integer('role')->unsigned()->nullable();
             $table->integer("location")->unsigned()->default(1);
+            $table->integer("archive_location")->unsigned()->default(1);
             $table->boolean('active')->default(TRUE);
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign("location")->references('id')->on('locations');
+            $table->foreign("archive_location")->references('id')->on('locations');
             $table->foreign("role")->references('id')->on('roles');
         });
 

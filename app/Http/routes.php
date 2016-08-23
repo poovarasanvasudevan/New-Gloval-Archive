@@ -20,9 +20,13 @@ Route::get('/', function () {
 });
 
 Route::post("/login", 'GlobalController@login');
+Route::get("/artefactview/{id?}", 'GlobalController@artefactview');
+Route::get("/artefactprint/{id?}", 'GlobalController@artefactprint');
+Route::get("/forget", 'GlobalController@forget');
 Route::post("/saveArtefact", 'GlobalController@saveArtefact');
 Route::get("/home", 'GlobalController@home');
 Route::get("/logout", 'GlobalController@logout');
+Route::post("/resetPassword", 'GlobalController@reset');
 Route::get("/reset-password", 'GlobalController@resetPassword');
 Route::get("/definition", 'GlobalController@definition');
 Route::get("/userrole", 'GlobalController@roleUsers');
@@ -99,8 +103,12 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::any('/admin/updatePage', 'AdminController@updatePage');
     Route::any('/admin/deletePage', 'AdminController@deletePage');
     Route::any('/admin/addPage', 'AdminController@addPage');
+    Route::any('/admin/insertlocation', 'AdminController@insertlocation');
+    Route::any('/admin/updatelocation', 'AdminController@updatelocation');
+    Route::any('/admin/updateuser', 'AdminController@updateuser');
 
     Route::get("/admin/git", 'AdminController@git');
+    Route::get("/admin/location", 'AdminController@location');
 
 
     Route::get('/admin/attributes/{id}', 'AdminController@attributes');

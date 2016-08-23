@@ -30,6 +30,11 @@
     "url": "/admin/attributelist"
   },
   {
+    "name": "location",
+    "title": "Location",
+    "url": "/admin/location"
+  },
+  {
     "name": "logs",
     "title": "Logs",
     "url": "/admin/logs"

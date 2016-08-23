@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use JavaScript;
+use Mail;
 use Nayjest\Builder\Env;
 use Setting;
 
@@ -209,6 +210,42 @@ class AdminController extends Controller
         return view('admin.users');
     }
 
+    function updateuser(){
+        $user = User::find(request()->input('id'));
+        $pwf = false;
+        if(request()->input('password')=="" || request()->input('password')==null){
+
+        } else {
+            $user->password = md5(request()->input('password'));
+            $pwf = true;
+        }
+        $user->abhyasiid = request()->input('abhyasiid');
+        $user->fname = request()->input('fname');
+        $user->lname = request()->input('lname');
+        $user->email = request()->input('email');
+        $user->role = request()->input('role');
+        $user->location = request()->input('location');
+
+        if($user->save()){
+            if($pwf){
+                if ($user->email){
+                    Mail::send('email.updateuser', array(
+                        'username' => $user->abhyasiid,
+                        'password' => request()->input('password'),
+                        'url' => base_path('/')
+                    ), function ($message) use ($user) {
+                        $message
+                            ->to($user->email, $user->fname . " " . $user->lname)
+                            ->subject('Global Archive Password Updated!');
+                    });
+                }
+            }
+
+            return response()->json($user);
+        }
+
+    }
+
     function crreport($type = 0, $section = 0)
     {
         $artefact_types = ArtefactType::withoutGlobalScopes()->get();
@@ -338,7 +375,7 @@ class AdminController extends Controller
          */
         $mail_setting = Setting::get('mail_config');
         $cico_mail = Setting::get('cico_mail', "");
-        $version = Setting::get('version.number',"");
+        $version = Setting::get('version.number', "");
 
 
         return view('admin.config')
@@ -414,12 +451,13 @@ class AdminController extends Controller
         }
     }
 
-    function setVersion(){
+    function setVersion()
+    {
         $v = array(
-            'number'=>request()->input('version'),
-            'updated'=>Carbon::today()->toDateString()
+            'number' => request()->input('version'),
+            'updated' => Carbon::today()->toDateString()
         );
-        Setting::set('version',request()->input('version'));
+        Setting::set('version',$v);
         flash('Version saved Succesfully', 'success');
         return response()->redirectTo('/admin/config');
     }
@@ -445,7 +483,7 @@ class AdminController extends Controller
                 $commit['email'] = str_replace(">", "", $ans) == "" ? "" : $ans;
 
             } else if (strpos($line, 'Date') === 0) {
-                $commit['date'] = substr($line, strlen('Date:'))  == "" ? "" : substr($line, strlen('Date:'));
+                $commit['date'] = substr($line, strlen('Date:')) == "" ? "" : substr($line, strlen('Date:'));
             } else {
                 if (isset($commit['message']))
                     $commit['message'] .= $line;
@@ -454,23 +492,57 @@ class AdminController extends Controller
             }
 
             if (!isset($commit['hash']))
-                $commit['hash'] ="";
+                $commit['hash'] = "";
 
             if (!isset($commit['author']))
-                $commit['author'] ="";
+                $commit['author'] = "";
 
             if (!isset($commit['email']))
-                $commit['email'] ="";
+                $commit['email'] = "";
 
             if (!isset($commit['date']))
-                $commit['date'] ="";
+                $commit['date'] = "";
             if (!isset($commit['message']))
-                $commit['message'] ="";
+                $commit['message'] = "";
 
             if (!empty($commit)) {
                 array_push($history, $commit);
             }
         }
         return view('admin.git')->with('gits', $history);
+    }
+
+    function location()
+    {
+        JavaScript::put([
+            'AData' => Location::get()
+        ]);
+
+        return view('admin.location');
+    }
+
+    function updatelocation()
+    {
+        $loc = Location::find(request()->input('id'));
+        $loc->short_name = request()->input('short_name');
+        $loc->long_name = request()->input('long_name');
+        $loc->is_archive_location = request()->input('is_archive_location');
+        $loc->active = request()->input('active');
+
+        if ($loc->save()) {
+            return response()->json($loc);
+        }
+    }
+
+    function insertlocation()
+    {
+        $loc = new Location();
+        $loc->short_name = request()->input('short_name');
+        $loc->long_name = request()->input('long_name');
+        $loc->is_archive_location = request()->input('is_archive_location');
+        $loc->active = request()->input('active');
+        if ($loc->save()) {
+            return response()->json($loc);
+        }
     }
 }

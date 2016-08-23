@@ -57,10 +57,13 @@
                                         <span class="label label-info">{{$r->maintenence_date}}</span>
                                     </p>
 
-                                    @if($r->maintenence_date == \Carbon\Carbon::now()->toDateString())
-                                        <a type="button" class="btn btn-success pull-right" href="/doTask/{{$r->id}}">Make Report Now</a>
+                                    @if(\Carbon\Carbon::createFromFormat("Y-m-d",$r->maintenence_date)->diffInDays(\Carbon\Carbon::now(),false)>=0)
+
+                                        <a type="button" class="btn btn-success pull-right" href="/doTask/{{$r->id}}">Make
+                                            Report Now</a>
                                     @else
-                                        <a type="button" class="btn btn-success pull-right" disabled >Make Report Now</a>
+
+                                        <a type="button" class="btn btn-success pull-right" disabled>Make Report Now</a>
                                     @endif
                                 </div>
                             </div>

@@ -13,6 +13,7 @@ use App\Pages;
 use App\PickData;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
 use Excel;
 use Illuminate\Console\Command;
 use Setting;
@@ -441,50 +442,13 @@ class ArchiveMigrate extends Command
         ));
 
         $this->info("Done..");
-
-    }
-
-    function migrateData($tableName, $attId)
-    {
-        $videoDatas = \DB::connection('mysql2')->table($tableName)->get();
-        $bar = $this->output->createProgressBar(count($videoDatas));
-        foreach ($videoDatas as $k => $v) {
-            $tmp1 = array();
-            foreach (json_decode(json_encode($v)) as $key => $val) {
-
-                $my_attrs = ArtefactTypeAttribute::withoutGlobalScopes()->whereArtefactTypeId($attId)
-                    ->whereRaw("LOWER(attribute_title) = ?", [str_ireplace('"', '', strtolower($key))]);
-
-                if ($my_attrs->count() == 1) {
-
-                    $tmp = array();
-                    $attrId = 'data_' . $my_attrs->first()->id;
-                    $tmp['attr_id'] = $attrId;
-                    $tmp['attr_value'] = $val;
-
-                    $tmp1[$attrId] = $tmp;
-                }
-            }
-
-            $oldCode = "";
-            if ($tableName == 'videoattributes') {
-                $oldCode = $v->artefactCode;
-            } else {
-                $oldCode = $v->artefactcode;
-            }
-
-            $arte = Artefact::whereOldArtefactId($oldCode);
-
-            if ($arte->count() == 1) {
-                $arte1 = $arte->first();
-                $arte1->artefact_values = $tmp1;
-                $arte1->save();
-            }
-            $bar->advance();
-        }
-        $bar->finish();
-
-        $this->info("done");
+        $this->info("Setting Version");
+        $v = array(
+            'number'=>request()->input('version'),
+            'updated'=>Carbon::today()->toDateString()
+        );
+        Setting::set('version',request()->input('version'));
+        $this->info('done');
 
 
         $this->info("Migrating Excel Attributes for photo given on 20-08-2016");
@@ -565,6 +529,52 @@ class ArchiveMigrate extends Command
 
         });
         $this->info("Done");
+
+    }
+
+    function migrateData($tableName, $attId)
+    {
+        $videoDatas = \DB::connection('mysql2')->table($tableName)->get();
+        $bar = $this->output->createProgressBar(count($videoDatas));
+        foreach ($videoDatas as $k => $v) {
+            $tmp1 = array();
+            foreach (json_decode(json_encode($v)) as $key => $val) {
+
+                $my_attrs = ArtefactTypeAttribute::withoutGlobalScopes()->whereArtefactTypeId($attId)
+                    ->whereRaw("LOWER(attribute_title) = ?", [str_ireplace('"', '', strtolower($key))]);
+
+                if ($my_attrs->count() == 1) {
+
+                    $tmp = array();
+                    $attrId = 'data_' . $my_attrs->first()->id;
+                    $tmp['attr_id'] = $attrId;
+                    $tmp['attr_value'] = $val;
+
+                    $tmp1[$attrId] = $tmp;
+                }
+            }
+
+            $oldCode = "";
+            if ($tableName == 'videoattributes') {
+                $oldCode = $v->artefactCode;
+            } else {
+                $oldCode = $v->artefactcode;
+            }
+
+            $arte = Artefact::whereOldArtefactId($oldCode);
+
+            if ($arte->count() == 1) {
+                $arte1 = $arte->first();
+                $arte1->artefact_values = $tmp1;
+                $arte1->save();
+            }
+            $bar->advance();
+        }
+        $bar->finish();
+
+        $this->info("done");
+
+
 
     }
 
