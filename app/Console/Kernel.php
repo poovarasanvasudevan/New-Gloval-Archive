@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\TestConsole::class,
         Commands\SendMaintenenceNotification::class,
         Commands\Backup::class,
+        Commands\HI8::class,
     ];
 
     /**

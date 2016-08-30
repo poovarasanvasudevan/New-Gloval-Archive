@@ -4,27 +4,24 @@ namespace App\Console\Commands;
 
 use App\Artefact;
 use App\ArtefactTypeAttribute;
-use App\ConditionalReport;
-use App\ConditionalReportsSegment;
-use App\User;
 use Excel;
 use Illuminate\Console\Command;
 
-class TestConsole extends Command
+class HI8 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'test';
+    protected $signature = 'archive:hi8';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Import hi8 attributes';
 
     /**
      * Create a new command instance.
@@ -43,8 +40,10 @@ class TestConsole extends Command
      */
     public function handle()
     {
-        $this->info("Importing HI8 Attributes : ");
+        //
+        ini_set('memory_limit', '-1');
 
+        $this->info("Importing HI8 Attributes : ");
         $attr_array = array();
         Excel::load(
             storage_path('config/data/HI8/HI8.xlsx'),

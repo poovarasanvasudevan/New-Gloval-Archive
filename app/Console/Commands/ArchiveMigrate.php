@@ -88,7 +88,9 @@ class ArchiveMigrate extends Command
             "PersonalItems",
             "Photos",
             "Video",
-            "LTO Tapes"
+            "LTO Tapes",
+            "HI8",
+            "Mini Disk"
         );
 
         $this->warn("Creating Artefact Types : ");
@@ -444,10 +446,10 @@ class ArchiveMigrate extends Command
         $this->info("Done..");
         $this->info("Setting Version");
         $v = array(
-            'number'=>request()->input('version'),
-            'updated'=>Carbon::today()->toDateString()
+            'number' => request()->input('version'),
+            'updated' => Carbon::today()->toDateString()
         );
-        Setting::set('version',request()->input('version'));
+        Setting::set('version', request()->input('version'));
         $this->info('done');
 
 
@@ -530,6 +532,8 @@ class ArchiveMigrate extends Command
         });
         $this->info("Done");
 
+
+
     }
 
     function migrateData($tableName, $attId)
@@ -573,7 +577,6 @@ class ArchiveMigrate extends Command
         $bar->finish();
 
         $this->info("done");
-
 
 
     }
