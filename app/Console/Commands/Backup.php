@@ -41,6 +41,7 @@ class Backup extends Command
      */
     public function handle()
     {
+        ini_set('memory_limit', '-1');
         $path = storage_path('config/backup/'.date('d-m-Y'));
         if(!File::exists($path)) {
             File::makeDirectory($path, $mode = 0777, true, true);

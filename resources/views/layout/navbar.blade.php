@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Global Archive</a>
+            <a class="navbar-brand" href="/">{{env('APP_NAME')}}</a>
         </div>
 
 

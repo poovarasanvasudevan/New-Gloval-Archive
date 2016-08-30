@@ -130,7 +130,7 @@ class GlobalController extends Controller
                 ), function ($message) use ($u) {
                     $message
                         ->to($u->email, $u->fname . " " . $u->lname)
-                        ->subject('Password Reset!');
+                        ->subject(env('APP_NAME') . 'Password Reset!');
                 });
 
                 flash("Password Reset Succesfully,Check Your Email", "success");
@@ -619,7 +619,7 @@ class GlobalController extends Controller
                 foreach ($sett as $s) {
                     $message->to($s);
                 }
-                $message->subject("Artefact Checkout");
+                $message->subject( env('APP_NAME') . "Artefact Checkout");
             });
 
             flash('Checkout Successfull', 'success');
@@ -729,7 +729,7 @@ class GlobalController extends Controller
                     ), function ($message) use ($user) {
                         $message
                             ->to($user->email, $user->fname . " " . $user->lname)
-                            ->subject('Welcome to Global Archive!');
+                            ->subject('Welcome to '.env('APP_NAME').'!');
                     });
 
                     flash('User created succesfully', 'success');

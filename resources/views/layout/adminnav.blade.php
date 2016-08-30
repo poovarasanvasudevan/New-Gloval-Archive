@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">GAS Developer</a>
+            <a class="navbar-brand" href="/">{{env('APP_NAME')}} Developer</a>
         </div>
 
 

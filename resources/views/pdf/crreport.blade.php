@@ -21,7 +21,9 @@
                 <td><b><label>Artefact Type :</label>&nbsp;</b>&nbsp;{{$type}}</td>
             </tr>
         </table>
-    </div>
+    </div
+    <br/>
+
     <hr/>
 
     <div>
