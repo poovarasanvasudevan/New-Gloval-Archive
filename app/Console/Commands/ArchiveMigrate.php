@@ -464,9 +464,9 @@ class ArchiveMigrate extends Command
                 array_push($boxes, $row['box_number']);
             }
 
-            array_unique($boxes);
+            $unique_boxes = array_unique($boxes);
 
-            foreach ($boxes as $box) {
+            foreach ($unique_boxes as $box) {
                 $parent = new Artefact();
                 $parent->artefact_type = 6;
                 $parent->location = 1;
