@@ -856,6 +856,7 @@ class GlobalController extends Controller
         $scheduledMaintenence = new ScheduledMaintenence();
         $scheduledMaintenence->artefact_id = request()->input('artefact_id');
         $scheduledMaintenence->maintenence_type = 'Sperodic';
+        $scheduledMaintenence->maintenence_description = request()->input('maintenence_description');
         $scheduledMaintenence->save();
         if ($scheduledMaintenence->id) {
             $scDate = new ScheduledMaintenenceDate();
@@ -894,6 +895,7 @@ class GlobalController extends Controller
             $scheduledMaintenence = new ScheduledMaintenence();
             $scheduledMaintenence->artefact_id = request()->input('artefact_id');
             $scheduledMaintenence->maintenence_type = 'Perodic';
+            $scheduledMaintenence->maintenence_description = request()->input('maintenence_description');
             $scheduledMaintenence->save();
 
             while ($start->lte($end)) {
@@ -909,6 +911,7 @@ class GlobalController extends Controller
             $scheduledMaintenence = new ScheduledMaintenence();
             $scheduledMaintenence->artefact_id = request()->input('artefact_id');
             $scheduledMaintenence->maintenence_type = 'Perodic';
+            $scheduledMaintenence->maintenence_description = request()->input('maintenence_description');
             $scheduledMaintenence->save();
             while ($start_d->lt($end)) {
                 $scDate = new ScheduledMaintenenceDate();
@@ -937,6 +940,7 @@ class GlobalController extends Controller
                     'artefacts.artefact_name',
                     'artefact_types.artefact_type_long',
                     'scheduled_maintenence_dates.maintenence_date',
+                    'scheduled_maintenences.maintenence_description',
                     'scheduled_maintenence_dates.id'
                 ))
                 ->leftJoin('artefact_types', 'artefacts.artefact_type', '=', 'artefact_types.id')

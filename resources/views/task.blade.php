@@ -49,12 +49,14 @@
                 <div class="col-md-12" style="margin: 0px !important;padding: 0px !important;">
                     @if($result)
                         @foreach($result as $r)
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card card-block">
                                     <h3 class="card-title">{{$r->artefact_name}}</h3>
                                     <p class="card-text">
                                         {{$r->artefact_type_long}}
                                         <span class="label label-info">{{$r->maintenence_date}}</span>
+                                        <br/>
+                                        {{$r->maintenence_description}}
                                     </p>
 
                                     @if(\Carbon\Carbon::createFromFormat("Y-m-d",$r->maintenence_date)->diffInDays(\Carbon\Carbon::now(),false)>=0)

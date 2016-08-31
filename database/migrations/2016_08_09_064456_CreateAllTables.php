@@ -156,6 +156,7 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->integer('artefact_id')->unsigned();
             $table->string('maintenence_type');
+            $table->string('maintenence_description')->nullable();
             $table->boolean('active')->default(TRUE);
             $table->timestamps();
 

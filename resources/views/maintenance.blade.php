@@ -168,10 +168,20 @@
                                     <label for="fname" class="col-lg-2 control-label">Description</label>
                                     <div class="col-lg-10">
                                         <textarea disabled name="maintenenceDesc" id="maintenenceDesc"
-                                                  class="form-control" rows="5"></textarea>
+                                                  class="form-control" rows="2"></textarea>
                                     </div>
                                 </div>
 
+                                <br/>
+                                <br/>
+
+                                <div class="form-group" style="margin-top: 10px !important;">
+                                    <label for="fname" class="col-lg-2 control-label">Schedule-Description</label>
+                                    <div class="col-lg-10">
+                                        <textarea  name="maintenence_description" id="maintenence_description"
+                                                   class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
                                 <hr/>
                                 <br/>
                                 <div>
@@ -198,9 +208,17 @@
                                 <br/>
 
                                 <div class="form-group">
-                                    <label for="fname" class="col-lg-2 control-label">Description</label>
+                                    <label for="fname" class="col-lg-2 control-label">Schedule-Description</label>
                                     <div class="col-lg-10">
                                         <textarea disabled name="maintenenceDesc" id="maintenenceDesc"
+                                                  class="form-control" rows="2"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 10px !important;">
+                                    <label for="fname" class="col-lg-2 control-label">Description</label>
+                                    <div class="col-lg-10">
+                                        <textarea  name="maintenence_description" id="maintenence_description"
                                                   class="form-control" rows="5"></textarea>
                                     </div>
                                 </div>
