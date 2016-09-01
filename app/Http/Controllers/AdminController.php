@@ -464,52 +464,8 @@ class AdminController extends Controller
 
     function git()
     {
-        $dir = base_path();
-        $output = array();
-        chdir($dir);
-        exec("git log", $output);
-        $history = array();
-        foreach ($output as $line) {
-            if (strpos($line, 'commit') === 0) {
-                if (!empty($commit)) {
-                    array_push($history, $commit);
-                    unset($commit);
-                }
-                $commit['hash'] = substr($line, strlen('commit')) == "" ? "" : substr($line, strlen('commit'));
-            } else if (strpos($line, 'Author') === 0) {
-                $commit['author'] = substr($line, strlen('Author:'));
-                preg_match('/<([^>]+)>/', $commit['author'], $matches);
-                $ans = str_replace("<", "", $matches[0]);
-                $commit['email'] = str_replace(">", "", $ans) == "" ? "" : $ans;
-
-            } else if (strpos($line, 'Date') === 0) {
-                $commit['date'] = substr($line, strlen('Date:')) == "" ? "" : substr($line, strlen('Date:'));
-            } else {
-                if (isset($commit['message']))
-                    $commit['message'] .= $line;
-                else
-                    $commit['message'] = $line;
-            }
-
-            if (!isset($commit['hash']))
-                $commit['hash'] = "";
-
-            if (!isset($commit['author']))
-                $commit['author'] = "";
-
-            if (!isset($commit['email']))
-                $commit['email'] = "";
-
-            if (!isset($commit['date']))
-                $commit['date'] = "";
-            if (!isset($commit['message']))
-                $commit['message'] = "";
-
-            if (!empty($commit)) {
-                array_push($history, $commit);
-            }
-        }
-        return view('admin.git')->with('gits', $history);
+        $org =json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
+        return view('admin.git')->with('data', $org);
     }
 
     function location()

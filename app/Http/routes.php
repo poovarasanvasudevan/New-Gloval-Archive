@@ -25,6 +25,7 @@ Route::get("/artefactprint/{id?}", 'GlobalController@artefactprint');
 Route::get("/forget", 'GlobalController@forget');
 Route::post("/saveArtefact", 'GlobalController@saveArtefact');
 Route::get("/home", 'GlobalController@home');
+Route::get("/about", 'GlobalController@about');
 Route::get("/logout", 'GlobalController@logout');
 Route::post("/resetPassword", 'GlobalController@reset');
 Route::get("/reset-password", 'GlobalController@resetPassword');

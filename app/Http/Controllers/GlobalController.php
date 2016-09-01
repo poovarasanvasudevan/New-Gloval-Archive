@@ -16,8 +16,10 @@ use App\ScheduledMaintenenceDate;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use Curl;
 use DB;
 use DebugBar\DebugBar;
+use GitHub;
 use Illuminate\Http\Request;
 use Grids;
 use HTML;
@@ -1288,7 +1290,7 @@ class GlobalController extends Controller
                         $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
                         // $myResult->whereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
                     } else {
-                        $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
+                        $myResult->orwhere("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
                         //$myResult->orWhereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
                     }
                 }
@@ -1300,5 +1302,18 @@ class GlobalController extends Controller
         $res = $myResult->take(env('LIMIT_RANGE', 30))->skip($page * env('LIMIT_RANGE', 30));
         \Log::info($res->toSql());
         return response()->json($res->get());
+    }
+
+
+    function about()
+    {
+        $org =json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
+
+        $detail = GitHub::repo()->show('poovarasanvasudevan', 'New-Gloval-Archive');
+
+        dd($detail);
+        return view('about')
+            ->with('details',$detail)
+            ->with('data',$org);
     }
 }

@@ -16,26 +16,32 @@
                     @include('admin.sidebar')
                 </div>
                 <div class="col-md-10 card card-block" style="height: 90% !important;overflow-y: auto">
-                    @foreach($gits as $git)
-                        <div class="">
-                            <div class="col-md-12">
-                                <div class="media card card-block">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object"  src="{{Gravatar::src($git['email'], 50)}}" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">{{$git['author']}}</h4>
-                                        <label>Hash :</label>{{$git['hash']}}<br/>
-                                        <label>Email :</label><a href="mailto:{{str_replace(">","",$git['email'])}}"> {{str_replace(">","",$git['email'])}}</a><br/>
-                                        <label>Date :</label>{{$git['date']}}<br/>
-                                        <label>Message :</label>{{$git['message']}}<br/>
+
+                    <div class="list-group">
+                        @foreach($data as $datas)
+                            <div class="">
+                                <div class="col-md-12">
+                                    <div class="media card card-block">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="media-object" width="60" height="60"
+                                                     src="{{$datas->author->avatar_url}}"/>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{$datas->author->login}}</h4>
+                                            <label>Hash :</label>{{$datas->sha}}<br/>
+                                            <label>Email :</label><a
+                                                    href="mailto:{{str_replace(">","",$datas->commit->author->email)}}"> {{str_replace(">","",$datas->commit->author->email)}}</a><br/>
+                                            <label>Date :</label>{{$datas->commit->author->date}}<br/>
+                                            <label>Message :</label>{{$datas->commit->message}}<br/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+
                 </div>
             </div>
         </div>

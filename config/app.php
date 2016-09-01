@@ -160,6 +160,9 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
+        GrahamCampbell\GitHub\GitHubServiceProvider::class,
+        Ixudra\Curl\CurlServiceProvider::class,
+        Kozz\Laravel\Providers\Guzzle::class,
 
         /*
          * Application Service Providers...
@@ -223,8 +226,11 @@ return [
         'Helper' => App\Helpers\MyHelper::class,
         'Setting' => Thetispro\Setting\Facades\Setting::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        "JavaScript"=>Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
-        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class
+        "JavaScript" => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
+        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'GitHub' => GrahamCampbell\GitHub\Facades\GitHub::class,
+        'Curl'          => Ixudra\Curl\Facades\Curl::class,
+        'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
     ],
 
 ];

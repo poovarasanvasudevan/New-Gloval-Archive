@@ -34,6 +34,7 @@
                         @if(Auth::user()->is_developer == true)
                             <li><a href="/admin">Developer</a></li>
                         @endif
+                        <li><a href="/about">About</a></li>
                         <li class="divider"></li>
                         <li><a href="/reset-password">Reset Password</a></li>
                         <li class="divider"></li>

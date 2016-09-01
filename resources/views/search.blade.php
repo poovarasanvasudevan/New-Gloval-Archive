@@ -59,7 +59,7 @@
         </div>
 
         <div class="col-md-12">
-            <div class="col-md-2 card card-block" style="height: 87% !important;overflow-y: auto;">
+            <div class="col-md-2 card card-block" style="height: 85% !important;overflow-y: auto;">
                 @if($attributes)
                     <form id="searchAttr">
                         <input type="hidden" value="{{$attr_id}}" name="artefact_type">
@@ -94,7 +94,7 @@
                     <center><label>No Attributes Found</label></center>
                 @endif
             </div>
-            <div id="topBlock" class="col-md-10 card card-block" style="height: 87% !important;">
+            <div id="topBlock" class="col-md-10 card card-block" style="height: 85% !important;">
                 <div class="card card-block">
                     <div class="pull-right">
                         <input type="button" id="next" class="btn btn-primary" value="Next >>">

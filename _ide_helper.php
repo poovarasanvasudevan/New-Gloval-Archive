@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.43 on 2016-08-22.
+ * Generated for Laravel 5.2.45 on 2016-09-01.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -4843,7 +4843,7 @@ namespace {
          * Retrieve the minimum value of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function min($column){
@@ -4854,7 +4854,7 @@ namespace {
          * Retrieve the maximum value of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function max($column){
@@ -4865,7 +4865,7 @@ namespace {
          * Retrieve the sum of the values of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function sum($column){
@@ -4876,7 +4876,7 @@ namespace {
          * Retrieve the average of the values of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function avg($column){
@@ -4887,7 +4887,7 @@ namespace {
          * Alias for the "avg" method.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function average($column){
@@ -4899,11 +4899,23 @@ namespace {
          *
          * @param string $function
          * @param array $columns
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function aggregate($function, $columns = array()){
             return \Illuminate\Database\Query\Builder::aggregate($function, $columns);
+        }
+        
+        /**
+         * Execute a numeric aggregate function on the database.
+         *
+         * @param string $function
+         * @param array $columns
+         * @return float|int 
+         * @static 
+         */
+        public static function numericAggregate($function, $columns = array()){
+            return \Illuminate\Database\Query\Builder::numericAggregate($function, $columns);
         }
         
         /**
@@ -7199,7 +7211,7 @@ namespace {
         }
         
         /**
-         * Get a subset of the items from the input data.
+         * Get a subset containing the provided keys with values from the input data.
          *
          * @param array|mixed $keys
          * @return array 
@@ -11556,6 +11568,7 @@ namespace {
          *
          * @param string $name
          * @return \DebugBar\DataCollectorInterface 
+         * @throws DebugBarException
          * @static 
          */
         public static function getCollector($name){
@@ -11578,6 +11591,7 @@ namespace {
          * Sets the request id generator
          *
          * @param \DebugBar\RequestIdGeneratorInterface $generator
+         * @return $this 
          * @static 
          */
         public static function setRequestIdGenerator($generator){
@@ -11611,6 +11625,7 @@ namespace {
          * Sets the storage backend to use to store the collected data
          *
          * @param \DebugBar\StorageInterface $storage
+         * @return $this 
          * @static 
          */
         public static function setStorage($storage = null){
@@ -11644,6 +11659,7 @@ namespace {
          * Sets the HTTP driver
          *
          * @param \DebugBar\HttpDriverInterface $driver
+         * @return $this 
          * @static 
          */
         public static function setHttpDriver($driver){
@@ -11696,6 +11712,7 @@ namespace {
          * @param bool $useOpenHandler
          * @param string $headerName
          * @param integer $maxHeaderLength
+         * @return $this 
          * @static 
          */
         public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096){
@@ -11740,6 +11757,7 @@ namespace {
          * Sets the key to use in the $_SESSION array
          *
          * @param string $ns
+         * @return $this 
          * @static 
          */
         public static function setStackDataSessionNamespace($ns){
@@ -11763,6 +11781,7 @@ namespace {
          * if a storage is enabled
          *
          * @param boolean $enabled
+         * @return $this 
          * @static 
          */
         public static function setStackAlwaysUseSessionStorage($enabled = true){
@@ -13083,7 +13102,7 @@ namespace {
         }
         
         /**
-         * Get a subset of the items from the input data.
+         * Get a subset containing the provided keys with values from the input data.
          *
          * @param array|mixed $keys
          * @return array 
@@ -14929,6 +14948,194 @@ namespace {
         public static function get($email, $hash_email = true){
             //Method inherited from \thomaswelton\GravatarLib\Gravatar            
             return \Thomaswelton\LaravelGravatar\Gravatar::get($email, $hash_email);
+        }
+        
+    }
+
+
+    class GitHub extends \GrahamCampbell\GitHub\Facades\GitHub{
+        
+        /**
+         * Get the factory instance.
+         *
+         * @return \GrahamCampbell\GitHub\GitHubFactory 
+         * @static 
+         */
+        public static function getFactory(){
+            return \GrahamCampbell\GitHub\GitHubManager::getFactory();
+        }
+        
+        /**
+         * Get a connection instance.
+         *
+         * @param string $name
+         * @return object 
+         * @static 
+         */
+        public static function connection($name = null){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \GrahamCampbell\GitHub\GitHubManager::connection($name);
+        }
+        
+        /**
+         * Reconnect to the given connection.
+         *
+         * @param string $name
+         * @return object 
+         * @static 
+         */
+        public static function reconnect($name = null){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \GrahamCampbell\GitHub\GitHubManager::reconnect($name);
+        }
+        
+        /**
+         * Disconnect from the given connection.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */
+        public static function disconnect($name = null){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            \GrahamCampbell\GitHub\GitHubManager::disconnect($name);
+        }
+        
+        /**
+         * Get the configuration for a connection.
+         *
+         * @param string $name
+         * @throws \InvalidArgumentException
+         * @return array 
+         * @static 
+         */
+        public static function getConnectionConfig($name){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \GrahamCampbell\GitHub\GitHubManager::getConnectionConfig($name);
+        }
+        
+        /**
+         * Get the default connection name.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDefaultConnection(){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \GrahamCampbell\GitHub\GitHubManager::getDefaultConnection();
+        }
+        
+        /**
+         * Set the default connection name.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */
+        public static function setDefaultConnection($name){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            \GrahamCampbell\GitHub\GitHubManager::setDefaultConnection($name);
+        }
+        
+        /**
+         * Register an extension connection resolver.
+         *
+         * @param string $name
+         * @param callable $resolver
+         * @return void 
+         * @static 
+         */
+        public static function extend($name, $resolver){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            \GrahamCampbell\GitHub\GitHubManager::extend($name, $resolver);
+        }
+        
+        /**
+         * Return all of the created connections.
+         *
+         * @return object[] 
+         * @static 
+         */
+        public static function getConnections(){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \GrahamCampbell\GitHub\GitHubManager::getConnections();
+        }
+        
+        /**
+         * Get the config instance.
+         *
+         * @return \Illuminate\Contracts\Config\Repository 
+         * @static 
+         */
+        public static function getConfig(){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \GrahamCampbell\GitHub\GitHubManager::getConfig();
+        }
+        
+    }
+
+
+    class Curl extends \Ixudra\Curl\Facades\Curl{
+        
+        /**
+         * 
+         *
+         * @param $url string   The URL to which the request is to be sent
+         * @return \Ixudra\Curl\Builder 
+         * @static 
+         */
+        public static function to($url){
+            return \Ixudra\Curl\CurlService::to($url);
+        }
+        
+    }
+
+
+    class Guzzle extends \Kozz\Laravel\Facades\Guzzle{
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function sendAsync($request, $options = array()){
+            return \GuzzleHttp\Client::sendAsync($request, $options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function send($request, $options = array()){
+            return \GuzzleHttp\Client::send($request, $options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function requestAsync($method, $uri = '', $options = array()){
+            return \GuzzleHttp\Client::requestAsync($method, $uri, $options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function request($method, $uri = '', $options = array()){
+            return \GuzzleHttp\Client::request($method, $uri, $options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getConfig($option = null){
+            return \GuzzleHttp\Client::getConfig($option);
         }
         
     }

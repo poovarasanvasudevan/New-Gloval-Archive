@@ -39,13 +39,13 @@
         </div>
         <div>
             <div class="col-md-12">
-                <div class="col-md-2 scroll scroll1 panel panel-default" style="height: 86% !important;overflow: auto;">
+                <div class="col-md-2 scroll scroll1 panel panel-default" style="height: 85% !important;overflow: auto;">
                     <div id="parent"></div>
                 </div>
                 <div class="col-md-10">
                     <form id="artefactForm" method="post" action="/saveArtefact">
                         <div class="panel panel-default"
-                             style="height: 86% !important;overflow: auto;padding-right: 0px !important;">
+                             style="height: 85% !important;overflow: auto;padding-right: 0px !important;">
                             <div class="panel-body">
                                 <div class="card card-block" id="card-block">
                                     <div class="col-md-3">
@@ -59,9 +59,9 @@
                                     </div>
                                 </div>
                                 <div id="detailPanel" class="card card-block"
-                                     style="height: 86% !important;overflow: auto;padding-right: 0px !important;">
+                                     style="height: 84% !important;overflow: auto;padding-right: 0px !important;">
                                     <center style="margin-top: 23% !important;">
-                                        <img src="/image/logo.png">
+                                        <img src="/image/logo.png" height="150" width="150">
                                     </center>
                                 </div>
                             </div>
