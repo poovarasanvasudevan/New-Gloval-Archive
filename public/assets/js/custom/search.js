@@ -5,7 +5,7 @@ $(function () {
     var pages = 0;
     $('#topBlock').hide();
     $("input.autocomplete").easyAutocomplete({
-        url: "/attrs",
+        url: "/attrs/",
         getValue: "value",
         list: {
             match: {
@@ -13,6 +13,8 @@ $(function () {
             }
         }
     });
+
+
     $('.date').datepicker();
 
     $('#artefactTypes').change(function () {

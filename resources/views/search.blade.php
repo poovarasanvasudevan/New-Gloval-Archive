@@ -40,7 +40,7 @@
                                 <label for="fname" class="col-lg-2 control-label">Artefact Types</label>
                                 <div class="col-lg-10">
                                     <select class="form-control" id="artefactTypes">
-                                        <option value="0">select Location</option>
+                                        <option value="0">select Aretfacts</option>
                                         @foreach($artefacttypes as $artefacttype)
                                             @if($attr_id == $artefacttype->id)
                                                 <option value="{{$artefacttype->id}}" selected>{{$artefacttype->artefact_type_long}}</option>
@@ -69,13 +69,13 @@
                                 <p class="card-title">{{$attribute->attribute_title}}</p>
                                 <div>
                                     @if($attribute->html_type =='text')
-                                        <input type="text" class="form-control" name="{{$attribute->id}}"
+                                        <input type="text" class="form-control nac" name="{{$attribute->id}}"
                                                id="{{$attribute->id}}">
                                     @elseif($attribute->html_type=='number')
                                         <input type="number" class="form-control" name="{{$attribute->id}}"
                                                id="{{$attribute->id}}">
                                     @elseif($attribute->html_type=='textarea')
-                                        <textarea class="form-control" rows="4" cols="5" name="{{$attribute->id}}"
+                                        <textarea class="form-control nac" rows="4" cols="5" name="{{$attribute->id}}"
                                                   id="{{$attribute->id}}"> </textarea>
                                     @elseif($attribute->html_type=='select')
                                         <input type="text" class="form-control autocomplete" name="{{$attribute->id}}"

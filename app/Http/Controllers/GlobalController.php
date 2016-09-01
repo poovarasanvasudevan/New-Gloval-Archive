@@ -619,7 +619,7 @@ class GlobalController extends Controller
                 foreach ($sett as $s) {
                     $message->to($s);
                 }
-                $message->subject( env('APP_NAME') . "Artefact Checkout");
+                $message->subject(env('APP_NAME') . "Artefact Checkout");
             });
 
             flash('Checkout Successfull', 'success');
@@ -729,7 +729,7 @@ class GlobalController extends Controller
                     ), function ($message) use ($user) {
                         $message
                             ->to($user->email, $user->fname . " " . $user->lname)
-                            ->subject('Welcome to '.env('APP_NAME').'!');
+                            ->subject('Welcome to ' . env('APP_NAME') . '!');
                     });
 
                     flash('User created succesfully', 'success');
@@ -1187,6 +1187,7 @@ class GlobalController extends Controller
         }
     }
 
+
     function getCRWithDates()
     {
         if (Auth::user()) {
@@ -1256,6 +1257,15 @@ class GlobalController extends Controller
         }
     }
 
+    function getAutocomplete($attr)
+    {
+        $dValue = DB::table('artefact')
+            ->select('artefact_values->' . $attr . '->attr_value')
+            ->get();
+
+        return response()->json($dValue);
+    }
+
     function searchTable($page = 0)
     {
 
@@ -1278,7 +1288,7 @@ class GlobalController extends Controller
                         $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
                         // $myResult->whereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
                     } else {
-                        $myResult->orWhere("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
+                        $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
                         //$myResult->orWhereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
                     }
                 }

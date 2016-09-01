@@ -11,4 +11,6 @@ $(function () {
     //     if (scroll >= stickyOffset) sticky.addClass('fixed');
     //     else sticky.removeClass('fixed');
     // });
+    var active = window.location.pathname;
+    $(".nav a[href|='" + active + "']").parent().addClass("active");
 })

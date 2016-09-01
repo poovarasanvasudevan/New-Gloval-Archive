@@ -25,7 +25,10 @@
                     <div class="card card-block" title="{{$artefacttype->artefact_description}}">
                         <h4 class="card-title">{{$artefacttype->artefact_type_long}}</h4>
                         <p class="card-text">{{$artefacttype->artefact_description}}</p>
-                        <a href="/task" class="btn btn-success pull-right" title="View Schedules">View Schedules</a>
+                        <div class="pull-right">
+                            <a href="/search/{{$artefacttype->id}}" class="btn btn-danger" title="Search Artefacts">Search Artefacts</a>
+                            <a href="/task" class="btn btn-success" title="View Schedules">View Schedules</a>
+                        </div>
                     </div>
                 </div>
 

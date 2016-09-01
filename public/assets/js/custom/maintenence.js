@@ -87,6 +87,7 @@ $(function () {
                 $('#schedulePanel').show();
                 $('#artefact_name').html(node.title);
                 $('.artefact_id').val(node.key);
+                $('#crlink').prop('href', '/crview/' + node.key);
 
 
                 $('#content').html("");

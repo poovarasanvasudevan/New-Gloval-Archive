@@ -26,7 +26,7 @@
                             <label for="fname" class="col-lg-2 control-label">Artefact Types</label>
                             <div class="col-lg-10">
                                 <select class="form-control" id="artefactTypes">
-                                    <option value="0">select Location</option>
+                                    <option value="0">select Artefact</option>
                                     @foreach($artefacttypes as $artefacttype)
                                         <option value="{{$artefacttype->id}}">{{$artefacttype->artefact_type_long}}</option>
                                     @endforeach
@@ -69,7 +69,8 @@
 
                         <h3 id="artefact_name"></h3>
                     </div>
-                    <div class="pull-right col-md-2 col-md-offset-7">
+                    <div class="pull-right col-md-3 col-md-offset-6">
+                        <a href="" id="crlink" class="btn btn-success">Conditional Report</a>
                         <a id="periodicOpener" href="#newPerodicMaintenance" class="btn btn-info">Perodic</a>
                         <form id="newPerodicMaintenance" class="white-popup-block mfp-hide" method="post"
                               action="/addPerodicMaintenance">

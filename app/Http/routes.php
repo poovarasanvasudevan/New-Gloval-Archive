@@ -52,6 +52,7 @@ Route::get("/getSchedule/{id}", 'GlobalController@getSchedule');
 Route::get("/task/{id?}", 'GlobalController@task');
 Route::get("/doTask/{taskId?}", 'GlobalController@doTask');
 Route::get("/crview/{id?}", 'GlobalController@crview');
+Route::get("/nac/{attr}", 'GlobalController@getAutocomplete');
 Route::get("/crReportPrint/{id?}", 'GlobalController@crReportPrint');
 Route::get("/cicoReportPrint/{start?}/{end?}", 'GlobalController@cicoReportPrint');
 
