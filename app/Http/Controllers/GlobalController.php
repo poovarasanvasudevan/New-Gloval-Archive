@@ -1309,9 +1309,8 @@ class GlobalController extends Controller
     {
         $org =json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
 
-        $detail = GitHub::repo()->show('poovarasanvasudevan', 'New-Gloval-Archive');
+        $detail = json_decode(\Guzzle::get('https://api.github.com/repos/poovarasanvasudevan/New-Gloval-Archive')->getBody());
 
-        dd($detail);
         return view('about')
             ->with('details',$detail)
             ->with('data',$org);
