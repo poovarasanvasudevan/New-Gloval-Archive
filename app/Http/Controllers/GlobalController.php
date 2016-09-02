@@ -252,6 +252,7 @@ class GlobalController extends Controller
             $artefactFind->where('parent_id', $parentId);
 
         $artefactFind->where('active', true);
+        $artefactFind->orderBy('artefact_name');
         $artefactFinds = $artefactFind->get();
         $result = array();
         foreach ($artefactFinds as $af) {
@@ -1279,7 +1280,9 @@ class GlobalController extends Controller
                 "parent_id"
             ))
             ->where('artefact_type', request()->input('artefact_type'))
+            ->whereNotNull('parent_id')
             ->where('active', true);
+
         $i = 0;
         foreach (request()->all() as $key => $data) {
             if ($key == 'artefact_name') {
@@ -1303,7 +1306,10 @@ class GlobalController extends Controller
         //ini_set('zend.enable_gc', '0');
 
 
-        $res = $myResult->take(env('LIMIT_RANGE', 30))->skip($page * env('LIMIT_RANGE', 30));
+        $res = $myResult
+            ->orderBy('parent_id','DESC')
+            ->take(env('LIMIT_RANGE', 30))
+            ->skip($page * env('LIMIT_RANGE', 30));
         \Log::info($res->toSql());
         return response()->json($res->get());
     }

@@ -1,9 +1,9 @@
 .body {
-    background-image: url("/image/poster.jpg");
+   background: #eaeaea;
 }
 
 .center-form {
-    margin-top: 30% !important;
+    margin-top: 20% !important;
 }
 
 .padding15 {

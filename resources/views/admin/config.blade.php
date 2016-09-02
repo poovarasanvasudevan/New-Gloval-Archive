@@ -51,6 +51,41 @@
                         <fieldset class="fieldset">
                             <legend class="legend1">Scheduler Configuration</legend>
                             <div>
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <p>Dispatch Scheduler Notification that executed once a day</p>
+                                            <a href="/admin/notify" class="btn btn-danger">Dispatch Schedule
+                                                Notification</a>
+                                        </div>
+                                        <br/>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <p>Site Up Or Down</p>
+                                            @if(App::isDownForMaintenance())
+                                                <b>Status : </b> <label class="label label-danger">Maintenence Mode</label>
+                                            <br/>
+                                            <br/>
+                                                <a href="/admin/up" class="btn btn-danger">Site Up</a>
+                                            @else
+                                                <b>Status : </b> <label class="label label-success">Running</label>
+                                                <br/>
+                                                <br/>
+                                                <a href="/admin/down" class="btn btn-danger">Site Down</a>
+                                            @endif
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div>
+                                            <p>Clear Cache</p>
+                                            <a href="/admin/cacheclear" class="btn btn-info">Clear Cache</a>
+                                        </div>
+                                        <br/>
+                                    </li>
+                                </ul>
+
 
                             </div>
                         </fieldset>

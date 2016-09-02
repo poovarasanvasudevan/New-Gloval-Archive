@@ -43,6 +43,7 @@ $(function () {
 
     function requestData(page) {
         setDat = $('#searchAttr').serialize();
+        $('#searchTable').html("");
         $.ajax({
             url: '/searchTable/' + page,
             method: 'POST',
@@ -54,7 +55,7 @@ $(function () {
                         html += "<div class='col-md-3'>";
                         html += "<div class='card card-block'>";
                         html += "<h4 class='card-title'>" + res[i].artefact_name + "</h4>"
-                        html += "<p class='card-text'>" + res[i].parent.artefact_name + "</p>"
+                        html += "<p class='card-text'>" + res[i].parent.artefact_name == null ? "parent" : res[i].parent.artefact_name  + "</p>"
 
                         url = '/artefactview/' + res[i].id;
                         html += "<a class='btn btn-success pull-right' target='_blank' href='" + url + "'>View Artefact</a>"
@@ -63,7 +64,7 @@ $(function () {
                     }
                 } else {
                     $('#next').attr('disabled','disabled');
-                    html +="<center><h3>No Attributes Found</h3></center>"
+                    html +="<center><h3>No Artefact Found</h3></center>"
                 }
                 $('#searchTable').html(html);
             }

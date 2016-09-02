@@ -26,7 +26,7 @@
                             <label for="fname" class="col-lg-2 control-label">Artefact Types</label>
                             <div class="col-lg-10">
                                 <select class="form-control" id="artefactTypes">
-                                    <option value="0">select Location</option>
+                                    <option value="0">select Artefact</option>
                                     @foreach($artefacttypes as $artefacttype)
                                         <option value="{{$artefacttype->id}}">{{$artefacttype->artefact_type_long}}</option>
                                     @endforeach

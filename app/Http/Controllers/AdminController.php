@@ -226,6 +226,7 @@ class AdminController extends Controller
         $user->email = request()->input('email');
         $user->role = request()->input('role');
         $user->location = request()->input('location');
+        $user->is_developer = request()->input('is_developer');
 
         if ($user->save()) {
             if ($pwf) {
