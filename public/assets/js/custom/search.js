@@ -62,9 +62,9 @@ $(function () {
                         html += "</div>";
                     }
                 } else {
-
+                    $('#next').attr('disabled','disabled');
+                    html +="<center><h3>No Attributes Found</h3></center>"
                 }
-
                 $('#searchTable').html(html);
             }
         })

@@ -1282,15 +1282,19 @@ class GlobalController extends Controller
             ->where('active', true);
         $i = 0;
         foreach (request()->all() as $key => $data) {
-            if ($key != 'artefact_type') {
-                if ($data != "") {
+            if ($key == 'artefact_name') {
+                if (trim($data) != '') {
+                    $myResult->where('artefact_name', 'like', '%' . trim($data) . '%');
+                }
+            } else if ($key != 'artefact_type') {
+                if (trim($data) != "") {
                     $i++;
                     $key_column = "data_" . $key;
                     if ($i == 1) {
-                        $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
+                        $myResult->where("artefact_values->" . $key_column . "->attr_value", 'like', '%' . trim($data) . '%');
                         // $myResult->whereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
                     } else {
-                        $myResult->orwhere("artefact_values->" . $key_column . "->attr_value", 'like', '%' . $data . '%');
+                        $myResult->orwhere("artefact_values->" . $key_column . "->attr_value", 'like', '%' . trim($data) . '%');
                         //$myResult->orWhereRaw("artefact_values->'" . $key_column . "'->'attr_value' like '%?%'", [$data]);
                     }
                 }
@@ -1307,12 +1311,12 @@ class GlobalController extends Controller
 
     function about()
     {
-        $org =json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
+        $org = json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
 
         $detail = json_decode(\Guzzle::get('https://api.github.com/repos/poovarasanvasudevan/New-Gloval-Archive')->getBody());
 
         return view('about')
-            ->with('details',$detail)
-            ->with('data',$org);
+            ->with('details', $detail)
+            ->with('data', $org);
     }
 }

@@ -6,7 +6,7 @@
 
         <div class="col-md-12" style="margin-top: 70px !important;">
 
-            <div class="col-md-3">
+            <div class="col-md-3" style="position: fixed !important;">
 
                 <div class="card padding15">
                     <img class="card-img-top col-md-12" src="/image/logo.png" alt="Card image cap">
@@ -15,22 +15,22 @@
                     </div>
                     <ul class="list-group list-group-flush">
 
-                        <li class="list-group-item"><b>App Name : </b>{{$details['name']}}</li>
-                        <li class="list-group-item"><b>App ID : </b>{{$details['id']}}</li>
-                        <li class="list-group-item"><b>Full Name : </b>{{$details['full_name']}}</li>
-                        <li class="list-group-item"><b>Repo URL : </b>{{$details['html_url']}}</li>
-                        <li class="list-group-item"><b>Branch : </b>{{$details['default_branch']}}</li>
+                        <li class="list-group-item"><b>App Name : </b>{{env('APP_NAME')}}</li>
+                        <li class="list-group-item"><b>App ID : </b>{{$details->id}}</li>
+                        <li class="list-group-item"><b>Full Name : </b>{{$details->full_name}}</li>
+                        <li class="list-group-item"><b>Repo URL : </b>{{$details->html_url}}</li>
+                        <li class="list-group-item"><b>Branch : </b>{{$details->default_branch}}</li>
                         <li class="list-group-item"><b>Version : </b>{{Setting::get('version.number', "2")}}
                             .{{sizeof($data)}}</li>
 
                     </ul>
                     <div class="card-block">
-                        <a target="_blank" href="{{$details['html_url']}}" class="card-link">Visit Repo</a>
+                        <a target="_blank" href="{{$details->html_url}}" class="card-link">Visit Repo</a>
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-md-offset-3">
                 <div class="list-group">
                     @foreach($data as $datas)
                         <div class="">
@@ -38,7 +38,7 @@
                                 <div class="media card card-block">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img class="media-object" width="60" height="60"
+                                            <img class="media-object img-thumbnail" width="70" height="70"
                                                  src="{{$datas->author->avatar_url}}"/>
                                         </a>
                                     </div>

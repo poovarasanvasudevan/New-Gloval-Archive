@@ -43,7 +43,8 @@
                                         <option value="0">select Aretfacts</option>
                                         @foreach($artefacttypes as $artefacttype)
                                             @if($attr_id == $artefacttype->id)
-                                                <option value="{{$artefacttype->id}}" selected>{{$artefacttype->artefact_type_long}}</option>
+                                                <option value="{{$artefacttype->id}}"
+                                                        selected>{{$artefacttype->artefact_type_long}}</option>
                                             @else
                                                 <option value="{{$artefacttype->id}}">{{$artefacttype->artefact_type_long}}</option>
                                             @endif
@@ -63,6 +64,13 @@
                 @if($attributes)
                     <form id="searchAttr">
                         <input type="hidden" value="{{$attr_id}}" name="artefact_type">
+                        <div class="card card-block">
+                            <p class="card-title">Artefact Name</p>
+                            <div>
+                                <input type="text" class="form-control nac" name="artefact_name"
+                                       id="artefact_name">
+                            </div>
+                        </div>
                         @foreach($attributes as $attribute)
 
                             <div class="card card-block">

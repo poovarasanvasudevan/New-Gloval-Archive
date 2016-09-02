@@ -69,7 +69,7 @@ $(function () {
         $('#card-block').hide();
         $('#artefacttitle').html('');
 
-        $('#detailPanel').html('<center style="margin-top: 23% !important;"> <img src="/image/logo.png"> </center>');
+        $('#detailPanel').html('<center style="margin-top: 23% !important;"> <img src="/image/logo.png" height="150" width="150"> </center>');
 
         var tree = $("#tree").fancytree("getTree");
         if (tree) {
@@ -113,7 +113,7 @@ $(function () {
                 }
                 $('#crlink').prop('href', '/crview/' + node.key);
                 $('#printa').prop('href', '/artefactprint/' + node.key);
-                $('#detailPanel').html('<center style="margin-top: 23% !important;"> <img src="/image/logo.png"> </center>');
+                $('#detailPanel').html('<center style="margin-top: 23% !important;"> <img src="/image/logo.png" width="150" height="150"> </center>');
                 $.ajax({
                     url: '/getArtefact/' + artefactSelected + '/' + node.key,
                     success: function (data) {
