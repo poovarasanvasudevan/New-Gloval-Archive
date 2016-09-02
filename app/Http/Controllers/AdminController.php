@@ -210,10 +210,11 @@ class AdminController extends Controller
         return view('admin.users');
     }
 
-    function updateuser(){
+    function updateuser()
+    {
         $user = User::find(request()->input('id'));
         $pwf = false;
-        if(request()->input('password')=="" || request()->input('password')==null){
+        if (request()->input('password') == "" || request()->input('password') == null) {
 
         } else {
             $user->password = md5(request()->input('password'));
@@ -226,9 +227,9 @@ class AdminController extends Controller
         $user->role = request()->input('role');
         $user->location = request()->input('location');
 
-        if($user->save()){
-            if($pwf){
-                if ($user->email){
+        if ($user->save()) {
+            if ($pwf) {
+                if ($user->email) {
                     Mail::send('email.updateuser', array(
                         'username' => $user->abhyasiid,
                         'password' => request()->input('password'),
@@ -457,14 +458,14 @@ class AdminController extends Controller
             'number' => request()->input('version'),
             'updated' => Carbon::today()->toDateString()
         );
-        Setting::set('version',$v);
+        Setting::set('version', $v);
         flash('Version saved Succesfully', 'success');
         return response()->redirectTo('/admin/config');
     }
 
     function git()
     {
-        $org =json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
+        $org = json_decode(\Guzzle::get(env('APP_GIT'))->getBody());
         return view('admin.git')->with('data', $org);
     }
 
@@ -500,5 +501,28 @@ class AdminController extends Controller
         if ($loc->save()) {
             return response()->json($loc);
         }
+    }
+
+    function firetask()
+    {
+        \Artisan::call('archive:notification');
+        \Artisan::call('test');
+
+        return response()->redirectTo('/admin/config');
+    }
+
+    function downServer() {
+        \Artisan::call('down');
+        return response()->redirectTo('/admin/config');
+    }
+
+    function upServer() {
+        \Artisan::call('up');
+        return response()->redirectTo('/admin/config');
+    }
+
+    function cacheclear() {
+        \Artisan::call('cache:clear');
+        return response()->redirectTo('/admin/config');
     }
 }

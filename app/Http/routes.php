@@ -78,11 +78,13 @@ Route::get("/getCheckout", 'GlobalController@getCheckout');
 Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');
 
 
+
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function () {
     Route::get('/admin', 'AdminController@index');
     Route::get('/admin/artefacttypes', 'AdminController@artefacttypes');
     Route::get('/admin/getAllArtefactTypes', 'AdminController@getAllArtefactTypes');
     Route::get('/admin/pages', 'AdminController@pages');
+    Route::get('/admin/cacheclear','AdminController@cacheclear');
 
     Route::post('/admin/saveMail','AdminController@saveMail');
     Route::post('/admin/setVersion','AdminController@setVersion');
@@ -110,6 +112,9 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::any('/admin/updateuser', 'AdminController@updateuser');
 
     Route::get("/admin/git", 'AdminController@git');
+    Route::get("/admin/notify", 'AdminController@firetask');
+    Route::get("/admin/up", 'AdminController@upServer');
+    Route::get("/admin/down", 'AdminController@downServer');
     Route::get("/admin/location", 'AdminController@location');
 
 

@@ -57,17 +57,19 @@ class SendMaintenenceNotification extends Command
             ->leftJoin('scheduled_maintenence_dates', 'scheduled_maintenences.id', '=', 'scheduled_maintenence_dates.scheduled_maintenence_id')
             ->whereRaw('scheduled_maintenence_dates.maintenence_date = ?', [Carbon::now()->toDateString()])
             ->get();
-        if($artefacts){
+        if ($artefacts) {
             foreach (User::get() as $user) {
-                if($user->email){
+                if ($user->email) {
                     Mail::send('email.notification', array(
                         'artefacts' => $artefacts,
-                        'name' => $user->fname ." ".$user->lname,
+                        'name' => $user->fname . " " . $user->lname,
                     ), function ($message) use ($user) {
                         $message
                             ->to($user->email, $user->fname . " " . $user->lname)
                             ->subject('Conditional Report Notification!');
                     });
+
+                    \Log::info("Email Sent To : " . $user->email);
                 }
             }
         }
