@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         Commands\SendMaintenenceNotification::class,
         Commands\Backup::class,
         Commands\HI8::class,
+        Commands\Run::class,
     ];
 
     /**
@@ -31,6 +32,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
+        $schedule->command('test')
+            ->everyMinute()
+            ->sendOutputTo(storage_path('config/logs'));
 
         $schedule
             ->command('archive:notification')
