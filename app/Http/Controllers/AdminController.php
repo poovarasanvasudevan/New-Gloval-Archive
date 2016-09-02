@@ -155,8 +155,9 @@ class AdminController extends Controller
 
     function logs()
     {
+        $dte = date('Y-m-d');
         return view('admin.logs')
-            ->with('logs', file_get_contents(storage_path('logs/laravel.log')));
+            ->with('logs', file_get_contents(storage_path('logs/laravel-' . $dte . '.log')));
     }
 
     function getAllAttributes($id)
@@ -509,21 +510,26 @@ class AdminController extends Controller
         \Artisan::call('archive:notification');
         \Artisan::call('test');
 
+        flash("Notification Sent Succesfully...", "success");
         return response()->redirectTo('/admin/config');
     }
 
-    function downServer() {
+    function downServer()
+    {
         \Artisan::call('down');
         return response()->redirectTo('/admin/config');
     }
 
-    function upServer() {
+    function upServer()
+    {
         \Artisan::call('up');
         return response()->redirectTo('/admin/config');
     }
 
-    function cacheclear() {
+    function cacheclear()
+    {
         \Artisan::call('cache:clear');
+        flash("Cache Cleared Succesfully...", "success");
         return response()->redirectTo('/admin/config');
     }
 }

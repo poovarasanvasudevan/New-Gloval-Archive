@@ -64,6 +64,7 @@ $(function () {
                     }
                 } else {
                     $('#next').attr('disabled','disabled');
+                    pages--;
                     html +="<center><h3>No Artefact Found</h3></center>"
                 }
                 $('#searchTable').html(html);
