@@ -97,6 +97,7 @@
                                             <input type="text" required class="form-control scheduleDate"
                                                    name="end_date" id="end_date"
                                                    placeholder="End Date"
+                                                   min="1"
                                                    value="">
                                         </div>
                                     </div>
@@ -158,6 +159,7 @@
                                             <input type="number" class="form-control"
                                                    name="month_day" id="month_day"
                                                    placeholder="Day"
+                                                   min="1"
                                                    value="">
                                         </div>
                                     </div>
