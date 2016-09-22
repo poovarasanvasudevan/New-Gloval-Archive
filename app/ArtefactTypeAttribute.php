@@ -35,6 +35,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ArtefactTypeAttribute extends Model
 {
+    protected $casts = [
+        'select_pick_data' => 'json'
+    ];
     //
     protected static function boot()
     {

@@ -93,7 +93,16 @@
                                                id="{{$attribute->id}}">
                                     @elseif($attribute->html_type=='file')
                                         <input type="file" class="form-control" id="{{$attribute->id}}">
+                                    @elseif($attribute->html_type=='dropdown')
+                                        <select name="{{$attribute->id}}" title="{{$attribute->attribute_title}}"
+                                                id="{{$attribute->id}}" class="form-control">
+                                            <option value="">select one</option>
+                                            @foreach($attribute->select_pick_data as $pick)
+                                                <option value="{{$pick}}">{{$pick}}</option>
+                                            @endforeach
+                                        </select>
                                     @endif
+
                                 </div>
                             </div>
                         @endforeach

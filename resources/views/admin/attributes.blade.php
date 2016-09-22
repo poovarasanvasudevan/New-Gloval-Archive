@@ -64,6 +64,10 @@
                 {
                     id: "number",
                     value: "number"
+                },
+                {
+                    id: "dropdown",
+                    value: "dropdown"
                 }
             ];
             var allData;
@@ -130,6 +134,24 @@
                         filtering: false
                     },
                     {name: "is_box", title: "Is Box", type: "checkbox", sorting: false, filtering: false},
+                    {
+                        name: "select_pick_data",
+                        title: "Picks",
+                        type: "textarea",
+                        sorting: false,
+                        filtering: false,
+                        itemTemplate: function (value) {
+                            if (value != null) {
+                                var txt = "";
+                                for (i = 0; i < value.length; i++) {
+                                    txt += value[i] + "@" + "\n";
+                                }
+                                return "<textarea class='form-control' rows='6' cols='5'>"+txt+"</textarea>";
+                            } else {
+                                return "<textarea class='form-control'></textarea>";
+                            }
+                        }
+                    },
                     {name: "sequence_number", title: "Sequence", type: "text"},
                     {name: "active", type: "checkbox", sorting: false, filtering: false},
                     {type: "control"}

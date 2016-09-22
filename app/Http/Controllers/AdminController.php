@@ -127,6 +127,7 @@ class AdminController extends Controller
         $att->is_searchable = request()->input('is_searchable');
         $att->is_box = request()->input('is_box');
         $att->sequence_number = request()->input('sequence_number');
+        $att->select_pick_data = explode(",", request()->input('select_pick_data'));
         $att->pick_flag = request()->input('pick_flag');
         if ($att->save()) {
             return response()->json($att);
@@ -143,6 +144,7 @@ class AdminController extends Controller
         $att->sequence_number = request()->input('sequence_number');
         $att->is_box = request()->input('is_box');
         $att->is_searchable = request()->input('is_searchable');
+        $att->select_pick_data = explode(",", request()->input('select_pick_data'));
         $att->artefact_type_id = $id;
 
         if ($att->save()) {
