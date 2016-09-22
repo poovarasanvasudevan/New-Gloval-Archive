@@ -30,6 +30,11 @@
     "url": "/admin/attributelist"
   },
   {
+    "name": "importexcel",
+    "title": "Import Artefact",
+    "url": "/admin/importartefact"
+  },
+  {
     "name": "location",
     "title": "Location",
     "url": "/admin/location"

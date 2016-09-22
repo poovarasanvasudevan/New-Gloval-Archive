@@ -90,7 +90,7 @@ class HI8 extends Command
 
                 $this->info("Processing The Year : " . $sheet->getTitle());
                 $this->info("Creating Parent :" . $sheet->getTitle());
-                $parent = new Artefact();
+                $parent = Artefact::firstOrNew(['artefact_name' => $sheet->getTitle(), 'artefact_type' => 9]);
                 $parent->artefact_type = 9;
                 $parent->old_artefact_id = 0000;
                 $parent->artefact_name = $sheet->getTitle();
@@ -102,7 +102,11 @@ class HI8 extends Command
                     $bar = $this->output->createProgressBar($count);
                     $sheet->each(function ($row) use ($bar, $parent, $attr_array) {
                         if ($row->mediaid != null) {
-                            $child = new Artefact();
+                            $child = Artefact::firstOrNew([
+                                'artefact_name' => $row->mediaid,
+                                'artefact_type' => 9,
+                                'parent_id' => $parent->id
+                            ]);
                             $child->artefact_type = 9;
                             $child->old_artefact_id = 0000;
                             $child->parent_id = $parent->id;

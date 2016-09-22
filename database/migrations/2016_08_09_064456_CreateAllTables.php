@@ -218,6 +218,7 @@ class CreateAllTables extends Migration
             $table->string("attribute_title");
             $table->string("html_type");
             $table->double('sequence_number')->nullable();
+            $table->boolean("is_box")->default(false);
             $table->boolean("is_searchable")->default(true);
             $table->boolean("pick_flag")->default(false);
             $table->boolean("active")->default(true);

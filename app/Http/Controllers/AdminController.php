@@ -15,10 +15,12 @@ use App\User;
 use Carbon\Carbon;
 use Config;
 use Dotenv\Dotenv;
+use Excel;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use JavaScript;
+use Log;
 use Mail;
 use Nayjest\Builder\Env;
 use Setting;
@@ -108,7 +110,7 @@ class AdminController extends Controller
         } else {
             JavaScript::put([
                 "AType" => $id,
-                "Adata" => ArtefactTypeAttribute::withoutGlobalScopes()->whereArtefactTypeId($id)->orderBy('id')->get()
+                "Adata" => ArtefactTypeAttribute::withoutGlobalScopes()->whereArtefactTypeId($id)->orderBy('sequence_number')->get()
             ]);
             return view('admin.attributes')
                 ->with('ats', ArtefactType::withoutGlobalScopes()->get());
@@ -123,6 +125,7 @@ class AdminController extends Controller
         $att->attribute_title = request()->input('attribute_title');
         $att->html_type = request()->input('html_type');
         $att->is_searchable = request()->input('is_searchable');
+        $att->is_box = request()->input('is_box');
         $att->sequence_number = request()->input('sequence_number');
         $att->pick_flag = request()->input('pick_flag');
         if ($att->save()) {
@@ -138,6 +141,7 @@ class AdminController extends Controller
         $att->attribute_title = request()->input('attribute_title');
         $att->html_type = request()->input('html_type');
         $att->sequence_number = request()->input('sequence_number');
+        $att->is_box = request()->input('is_box');
         $att->is_searchable = request()->input('is_searchable');
         $att->artefact_type_id = $id;
 
@@ -531,5 +535,70 @@ class AdminController extends Controller
         \Artisan::call('cache:clear');
         flash("Cache Cleared Succesfully...", "success");
         return response()->redirectTo('/admin/config');
+    }
+
+    function excelImportSheet($id)
+    {
+        $artefactType = ArtefactType::find($id);
+
+        Excel::create($artefactType->artefact_type_long . '_format', function ($excel) use ($artefactType) {
+            $excel->setTitle('Excel format for ' . $artefactType->artefact_type_long);
+            $excel->setCreator('SRCM')
+                ->setCompany('SRCM');
+            $excel->setDescription('Import excel for Archive');
+
+
+            $excel->sheet('artefacts', function ($sheet) use ($artefactType) {
+                $attributes = $artefactType->attributes;
+                $data = array([
+                    'Artefact Name'
+                ]);
+                foreach ($attributes as $attribute) {
+                    array_push($data, $attribute->attribute_title . "(" . $attribute->id . ")");
+                }
+                $sheet->fromArray($data, null, 'A1', true);
+                $sheet->row(1, function ($row) {
+                    $row->setBackground('#3ba84b');
+                    $row->setFontColor('#ffffff');
+                    $row->setFontFamily('Calibri');
+                    $row->setFontSize(12);
+                    $row->setFontWeight('bold');
+                });
+            });
+
+        })->download('xlsx');
+    }
+
+
+    function importExcel()
+    {
+
+        $artefact_types = ArtefactType::withoutGlobalScopes()->get();
+        return view('admin.importartefact')
+            ->with('ats', $artefact_types);
+    }
+
+
+    function importArtefactExcel()
+    {
+
+        ini_set('max_execution_time', 600);
+
+        $artefactName = request()->input("artefacttype");
+        $artefactfile = request()->file('file');
+
+
+        $fileName = "hello" . "." . $artefactfile->getClientOriginalExtension();
+        $path = storage_path('config/excel/');
+        $name = str_random(6) . "_" . $artefactName;
+        $artefactfile->move($path, $name . '.' . $artefactfile->getClientOriginalExtension());
+
+
+        \Artisan::call('archive:excel ' . $name);
+
+        return response()->json([
+            'result' => 'Success',
+            'command' => 'php artisan archive:excel ' . $name
+        ]);
     }
 }

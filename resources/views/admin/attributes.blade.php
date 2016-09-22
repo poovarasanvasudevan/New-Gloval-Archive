@@ -17,7 +17,7 @@
                         </div>
                     @endif
                     <div class="card card-block">
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label for="artefactTypes">Artefact Types</label>
                             <select class="form-control" name="artefactTypes" id="artefactTypes">
                                 <option value="0">Select One</option>
@@ -25,6 +25,10 @@
                                     <option value="{{$at->id}}">{{$at->artefact_type_long}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-md-6">
+                            <br/>
+                            <a href="#" id="excelImportSheet" class="btn btn-success">Download Excel Import</a>
                         </div>
                     </div>
                     <div class="tables"></div>
@@ -64,13 +68,14 @@
             ];
             var allData;
 
-            $.ajax({
-                type: "GET",
-                url: "/admin/getAllAttributes/" + $(this).val(),
-                success: function (data) {
-                    allData = data;
-                }
-            });
+
+            if (AType == 0) {
+                $('#excelImportSheet').attr('href', '#')
+                //alert("please select the artefact");
+            } else {
+                $('#excelImportSheet').attr('href', '/admin/exportexcel/' + AType)
+
+            }
             $(".tables").jsGrid({
                 height: "79%",
                 width: "100%",
@@ -85,7 +90,7 @@
                             type: "POST",
                             url: "/admin/updateAttributes",
                             data: item,
-                            success:function (data) {
+                            success: function (data) {
                                 console.log(data);
                             }
                         });
@@ -106,7 +111,7 @@
                     }
                 },
                 fields: [
-                    {name: "id", type: "text", editing: false,inserting:false},
+                    {name: "id", type: "text", editing: false, inserting: false},
                     {name: "attribute_title", title: "Title", type: "text"},
                     {
                         name: "html_type",
@@ -124,6 +129,7 @@
                         sorting: false,
                         filtering: false
                     },
+                    {name: "is_box", title: "Is Box", type: "checkbox", sorting: false, filtering: false},
                     {name: "sequence_number", title: "Sequence", type: "text"},
                     {name: "active", type: "checkbox", sorting: false, filtering: false},
                     {type: "control"}

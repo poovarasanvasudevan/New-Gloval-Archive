@@ -72,7 +72,7 @@ class ArchiveMigrate extends Command
             $this->warn("Creating User : ");
             $users = \DB::connection("mysql2")->table("user")->get();
             foreach ($users as $user) {
-                $user1 = new User();
+                $user1 = User::firstOrNew(['abhyasiid' => strtolower($user->AbhyasiID)]);
                 $user1->abhyasiid = strtolower($user->AbhyasiID);
                 $user1->fname = $user->FirstName;
                 $user1->lname = $user->LastName;
@@ -99,7 +99,7 @@ class ArchiveMigrate extends Command
             $i = 0;
             foreach ($artefactTypes as $artefactType) {
                 $i++;
-                $artefactt = new ArtefactType();
+                $artefactt = ArtefactType::firstOrNew(['artefact_type_short' => strtoupper($artefactType)]);
                 $artefactt->artefact_type_short = strtoupper($artefactType);
                 $artefactt->artefact_type_long = $artefactType;
                 $artefactt->sequence_number = $i;
@@ -157,7 +157,7 @@ class ArchiveMigrate extends Command
             $bar = $this->output->createProgressBar(count($artefacts));
 
             foreach ($artefacts as $artefact) {
-                $a = new Artefact();
+                $a = Artefact::firstOrNew(['artefact_name' => $artefact->ArtefactName, 'artefact_type' => $this->getArtefactCode($artefact->ArtefactTypeCode)]);
                 $a->artefact_type = $this->getArtefactCode($artefact->ArtefactTypeCode);
                 $a->location = 1;
                 $a->old_artefact_id = $artefact->ArtefactCode;
@@ -188,7 +188,11 @@ class ArchiveMigrate extends Command
                 if (Artefact::whereArtefactName($artefact->ArtefactPID)->count() > 0) {
                     if ($artefact->ArtefactPID != '') {
 
-                        $a = new Artefact();
+                        $a =  Artefact::firstOrNew([
+                            'artefact_name' => $artefact->ArtefactName,
+                            'artefact_type' => $this->getArtefactCode($artefact->ArtefactTypeCode),
+                            'parent_id'=> Artefact::whereArtefactName($artefact->ArtefactPID)->first()->id
+                        ]);
                         $a->artefact_type = $this->getArtefactCode($artefact->ArtefactTypeCode);
                         $a->location = 1;
                         $a->old_artefact_id = $artefact->ArtefactCode;
@@ -468,7 +472,7 @@ class ArchiveMigrate extends Command
                 $unique_boxes = array_unique($boxes);
 
                 foreach ($unique_boxes as $box) {
-                    $parent = new Artefact();
+                    $parent =  Artefact::firstOrNew(['artefact_name' => $box, 'artefact_type' => 6]);
                     $parent->artefact_type = 6;
                     $parent->location = 1;
                     $parent->artefact_name = $box;
@@ -519,7 +523,11 @@ class ArchiveMigrate extends Command
                         $tmp1[$attrId] = $tmp;
                     }
 
-                    $child = new Artefact();
+                    $child =  Artefact::firstOrNew([
+                        'artefact_name' => $row['artefact_code'],
+                        'artefact_type' => 6,
+                        'parent_id'=> Artefact::whereArtefactName($row['box_number'])->first()->id
+                    ]);
                     $child->location = 1;
                     $child->artefact_type = 6;
                     $child->parent_id = Artefact::whereArtefactName($row['box_number'])->first()->id;

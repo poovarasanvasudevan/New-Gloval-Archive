@@ -116,6 +116,8 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get("/admin/up", 'AdminController@upServer');
     Route::get("/admin/down", 'AdminController@downServer');
     Route::get("/admin/location", 'AdminController@location');
+    Route::get("/admin/importartefact", 'AdminController@importExcel');
+    Route::get("/admin/exportexcel/{id}", 'AdminController@excelImportSheet');
 
 
     Route::get('/admin/attributes/{id}', 'AdminController@attributes');
@@ -123,6 +125,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get('/admin/attributelist', 'AdminController@attributelist');
     Route::get('/admin/users', 'AdminController@users');
     Route::get('/admin/config', 'AdminController@config');
+    Route::post('/admin/importartefact', 'AdminController@importArtefactExcel');
     Route::get('/admin/crreport/{type?}/{section?}', 'AdminController@crreport');
 
 

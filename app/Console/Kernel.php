@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\Backup::class,
         Commands\HI8::class,
         Commands\Run::class,
+        Commands\ExcelImport::class,
     ];
 
     /**
