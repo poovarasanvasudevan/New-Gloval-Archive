@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         Commands\HI8::class,
         Commands\Run::class,
         Commands\ExcelImport::class,
+        Commands\Photos::class,
     ];
 
     /**

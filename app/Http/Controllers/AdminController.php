@@ -550,9 +550,7 @@ class AdminController extends Controller
 
             $excel->sheet('artefacts', function ($sheet) use ($artefactType) {
                 $attributes = $artefactType->attributes;
-                $data = array([
-                    'Artefact Name'
-                ]);
+                $data = array('Artefact Name');
                 foreach ($attributes as $attribute) {
                     array_push($data, $attribute->attribute_title . "(" . $attribute->id . ")");
                 }
@@ -566,7 +564,7 @@ class AdminController extends Controller
                 });
             });
 
-        })->download('xlsx');
+        })->download('csv');
     }
 
 
