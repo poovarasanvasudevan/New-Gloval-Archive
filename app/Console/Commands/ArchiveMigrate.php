@@ -266,10 +266,10 @@ class ArchiveMigrate extends Command
             $this->migrateData('videoattributes', 7);
             $this->info("done");
 
-
-            $this->warn("migrating Photo Data : ");
-            $this->migrateData('photoboxattributes', 6);
-            $this->info("done");
+//
+//            $this->warn("migrating Photo Data : ");
+//            $this->migrateData('photoboxattributes', 6);
+//            $this->info("done");
 
             $this->warn("migrating Book Data : ");
             $this->migrateData('bboxattributes', 2);

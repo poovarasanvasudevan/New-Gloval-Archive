@@ -221,6 +221,7 @@ class CreateAllTables extends Migration
             $table->boolean("is_box")->default(false);
             $table->boolean("is_searchable")->default(true);
             $table->boolean("pick_flag")->default(false);
+            $table->json("select_pick_data")->nullable();
             $table->boolean("active")->default(true);
             $table->timestamps();
             $table->foreign("artefact_type_id")->references('id')->on('artefact_types')->onDelete('cascade');
