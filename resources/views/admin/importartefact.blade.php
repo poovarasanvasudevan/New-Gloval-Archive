@@ -51,7 +51,7 @@
                 maxFilesize: 4,
                 addRemoveLinks: true,
                 autoProcessQueue: false,
-                acceptedFiles: ".xls,.xlsx,.csv",
+                acceptedFiles: ".csv",
                 init: function () {
                     var myDropzone = this;
 

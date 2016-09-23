@@ -46,22 +46,22 @@ class ExcelImport extends Command
         $artefactTypeId = $arr[1];
 
         $path = storage_path('config/excel/');
-        $cols = array('ArtefactName');
+        $cols = array(preg_replace('/\s+/', '_', 'artefactname'));
 
         $attr = ArtefactType::find($artefactTypeId)->attributes;
         foreach ($attr as $item) {
-            array_push($cols, $item->attribute_title);
+            array_push($cols, preg_replace('/\s+/', '_', strtolower($item->attribute_title)));
         }
+
 
         Excel::selectSheetsByIndex(0)
             ->load($path . $id . '.csv', function ($reader) use ($cols) {
-            $result = $reader->select($cols)->get()->toArray();
 
-            foreach ($result as $item) {
-
-            }
-
-        });
+                $dd = $reader->select($cols)->get()->toArray();
+                foreach ($dd as $item) {
+                    \Log::info(json_encode($item));
+                }
+            });
 
     }
 }

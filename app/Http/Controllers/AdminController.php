@@ -554,7 +554,7 @@ class AdminController extends Controller
                 $attributes = $artefactType->attributes;
                 $data = array('Artefact Name');
                 foreach ($attributes as $attribute) {
-                    array_push($data, $attribute->attribute_title . "(" . $attribute->id . ")");
+                    array_push($data, $attribute->attribute_title);
                 }
                 $sheet->fromArray($data, null, 'A1', true);
                 $sheet->row(1, function ($row) {
@@ -591,10 +591,10 @@ class AdminController extends Controller
         $fileName = "hello" . "." . $artefactfile->getClientOriginalExtension();
         $path = storage_path('config/excel/');
         $name = str_random(6) . "_" . $artefactName;
-        $artefactfile->move($path, $name . '.' . $artefactfile->getClientOriginalExtension());
+        $artefactfile->move($path, $name . '.' . "csv");
 
 
-        \Artisan::call('archive:excel ' . $name);
+        \Artisan::call('archive:excel', ['id' => $name]);
 
         return response()->json([
             'result' => 'Success',
