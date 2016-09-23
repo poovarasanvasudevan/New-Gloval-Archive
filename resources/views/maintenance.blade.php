@@ -70,7 +70,7 @@
                         <h3 id="artefact_name"></h3>
                     </div>
                     <div class="pull-right col-md-3 col-md-offset-6">
-                        <a href="" id="crlink" class="btn btn-success">Conditional Report</a>
+                        <a href="" id="crlink" class="btn btn-success">Condition Report</a>
                         <a id="periodicOpener" href="#newPerodicMaintenance" class="btn btn-info">Perodic</a>
                         <form id="newPerodicMaintenance" class="white-popup-block mfp-hide" method="post"
                               action="/addPerodicMaintenance">

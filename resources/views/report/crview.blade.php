@@ -55,7 +55,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <center><h4>No Conditional Report Found</h4></center>
+                            <center><h4>No Condition Report Found</h4></center>
                         @endif
 
                     </div>

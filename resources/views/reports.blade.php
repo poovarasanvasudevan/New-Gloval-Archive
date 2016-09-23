@@ -23,7 +23,7 @@
 
                 <div>
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#home" data-toggle="tab">Conditional Report</a></li>
+                        <li class="active"><a href="#home" data-toggle="tab">Condition Report</a></li>
                         <li><a href="#profile" data-toggle="tab">CheckIn/Out Report</a></li>
                     </ul>
                     <hr/>

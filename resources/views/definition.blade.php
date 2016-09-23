@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col-md-6"><center id="status"></center></div>
                                     <div class="col-md-3">
-                                        <a href="" id="crlink" class="btn btn-info">Conditional Report</a>
+                                        <a href="" id="crlink" class="btn btn-info">Condition Report</a>
                                         <input type="submit" value="Save" class="btn btn-primary">
                                         <a href="" id="printa" target="_blank" class="btn btn-info">Print</a>
                                     </div>
