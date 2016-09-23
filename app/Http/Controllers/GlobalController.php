@@ -109,6 +109,18 @@ class GlobalController extends Controller
         return response()->view('forget');
     }
 
+    function myprofile()
+    {
+        if (Auth::user()) {
+
+            $user = Auth::user();
+            return view('myprofile')->with('user', $user);
+        } else {
+
+            return response()->redirectTo('/');
+        }
+    }
+
     function reset()
     {
         $user = User::whereAbhyasiid(request()->input('abhyasiid'))
@@ -145,6 +157,39 @@ class GlobalController extends Controller
         } else {
             flash("Password Reset Failed unknown User", "error");
             return response()->redirectTo('/forget');
+        }
+    }
+
+
+    function myUserUpdate()
+    {
+
+        $validator = Validator::make(request()->all(), [
+            'fname' => 'required|max:25',
+            'lname' => 'required',
+            'abhayasiId' => 'required',
+            'email' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->redirectTo('/myprofile')
+                ->withErrors($validator);
+        } else {
+
+            $user = User::find(Auth::user()->id);
+            $user->fname = request()->input('fname');
+            $user->lname = request()->input('lname');
+            $user->email = request()->input('email');
+            $user->abhyasiid = request()->input('abhayasiId');
+
+            if ($user->save()) {
+                flash('Profile updated Successfully', 'success');
+                return response()->redirectTo('/myprofile');
+            } else {
+                flash('Failed to update profile due to some reason', 'danger');
+                return response()->redirectTo('/myprofile');
+            }
         }
     }
 
@@ -1307,7 +1352,7 @@ class GlobalController extends Controller
 
 
         $res = $myResult
-            ->orderBy('parent_id','DESC')
+            ->orderBy('parent_id', 'DESC')
             ->take(env('LIMIT_RANGE', 30))
             ->skip($page * env('LIMIT_RANGE', 30));
         \Log::info($res->toSql());

@@ -28,7 +28,7 @@
                        aria-expanded="false">{{Auth::user()->fname}} {{Auth::user()->lname}}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">My Account</a></li>
+                        <li><a href="/myprofile">My Account</a></li>
                         <li><a target="_blank" href="/help">Help</a></li>
                         <li><a href="#">Feedback & bugs</a></li>
                         @if(Auth::user()->is_developer == true)

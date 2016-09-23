@@ -18,7 +18,7 @@ php artisan archive:photos
 php artisan serve --port 80  //needs Sudo Access
 ```
 
-#### for help and other commands
+#### For help and other commands
 ```
 php artisan 
 ```
