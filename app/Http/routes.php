@@ -61,8 +61,8 @@ Route::get("/nac/{attr}", 'GlobalController@getAutocomplete');
 Route::get("/crReportPrint/{id?}", 'GlobalController@crReportPrint');
 Route::get("/cicoReportPrint/{start?}/{end?}", 'GlobalController@cicoReportPrint');
 
-
-
+Route::post("/artefact/import/{id}",'GlobalController@saveAttachement');
+Route::post("/artefact/delete/{id}/{attachid}",'GlobalController@deleteAttachement');
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');
 Route::post("/resetmypassword", 'GlobalController@resetMyPassword');
 Route::post("/saveConditionalReport", 'GlobalController@saveConditionalReport');

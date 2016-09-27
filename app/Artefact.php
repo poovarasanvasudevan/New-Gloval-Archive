@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
 /**
  * App\Artefact
@@ -28,8 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User $userId
  * @property-read \App\Artefact $parentId
  */
-class Artefact extends Model
+class Artefact extends Model implements HasMedia
 {
+    use HasMediaTrait;
     //
     protected $fillable = [
         "old_artefact_id",

@@ -68,6 +68,10 @@
                 {
                     id: "dropdown",
                     value: "dropdown"
+                },
+                {
+                    id: "file",
+                    value: "file"
                 }
             ];
             var allData;

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => 'public',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,13 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/attachement'),
+            'visibility' => 'public',
+        ],
+
+        'media' => [
+            'driver' => 'local',
+            'root' => public_path('attachement'),
             'visibility' => 'public',
         ],
 

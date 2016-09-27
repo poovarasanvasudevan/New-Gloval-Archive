@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="/assets/css/jsgrid.min.css">
     <link rel="stylesheet" href="/assets/css/jsgrid-theme.css">
     <link rel="stylesheet" href="/assets/css/dropzone.css">
+    <link rel="stylesheet" href="/assets/css/carousel.css">
+    <link rel="stylesheet" href="/assets/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
    </head>
 

@@ -24,8 +24,6 @@ $(function () {
     });
 
 
-
-
     $('#newArtefact').click(function () {
         swal({
             title: "Artefact!",
@@ -59,7 +57,7 @@ $(function () {
     $('#artefactTypes').on('change', function () {
 
         artefactSelected = $(this).val();
-        if(artefactSelected == '0' || artefactSelected == 0){
+        if (artefactSelected == '0' || artefactSelected == 0) {
             $('#newArtefact').hide();
             $('#card-block').hide();
             return false;
@@ -129,8 +127,47 @@ $(function () {
                             }
                         });
 
-                        $('.date').datepicker({
-                            startDate: '-3y'
+                        $('.date').datepicker({});
+                        $('.carousel').carousel({
+                            show: 10
+                        });
+                        $('.img-media').lightbox();
+
+                        $('.delete').on('click', function () {
+                            var attr2 = $(this).attr('id');
+                            $.post('/artefact/delete/' + node.key + '/' + attr2, function (data) {
+                                $(".cc" + attr2).html("");
+                            })
+                        });
+
+                        $('.dropzone').dropzone({
+                            maxFiles: 5,
+                            paramName: 'file',
+                            url: "/artefact/import/" + node.key,
+                            maxFilesize: 10,
+                            addRemoveLinks: true,
+                            autoProcessQueue: false,
+                            acceptedFiles: ".pdf,.png,.jpg,.csv,.xls,.xlsx",
+                            init: function () {
+                                var myDropzone = this;
+
+                                $("#attUpload").click(function (e) {
+                                    e.preventDefault();
+
+                                    if ($('#artefactTypes').val() != 0) {
+                                        e.stopPropagation();
+                                        myDropzone.processQueue();
+                                    } else {
+                                        alert('Select the artefact type')
+                                    }
+                                });
+                            },
+                            sending: function (file, xhr, formData) {
+                                formData.append('artefacttype', $('#artefactTypes').val());
+                            },
+                            success: function (file, response) {
+
+                            }
                         });
                     }
                 })
@@ -201,7 +238,7 @@ $(function () {
                             break;
                         }
                         case 'cut' : {
-                            if(node.isFolder()){
+                            if (node.isFolder()) {
                                 swal("Error", "Your can't move Parent :)", "error");
                                 return false;
                             }
@@ -232,7 +269,7 @@ $(function () {
                         case 'rename' : {
                             swal({
                                 title: "Rename!",
-                                text: "Enter New Artefact Name for "+node.title,
+                                text: "Enter New Artefact Name for " + node.title,
                                 type: "input",
                                 showCancelButton: true,
                                 closeOnConfirm: false,

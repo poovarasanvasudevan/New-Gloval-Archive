@@ -163,6 +163,7 @@ return [
         GrahamCampbell\GitHub\GitHubServiceProvider::class,
         Ixudra\Curl\CurlServiceProvider::class,
         Kozz\Laravel\Providers\Guzzle::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
 
         /*
          * Application Service Providers...

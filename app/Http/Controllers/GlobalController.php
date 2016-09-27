@@ -543,6 +543,21 @@ class GlobalController extends Controller
         }
     }
 
+
+    function saveAttachement($id) {
+        $files = request()->file('file');
+        $artefact = Artefact::find($id);
+
+        $artefact->addMedia($files)
+            ->toCollection('attachement');
+
+    }
+
+    function deleteAttachement($id,$attachid) {
+        $artefact = Artefact::find($id);
+        $artefact->deleteMedia($attachid);
+    }
+
     function addArtefact($type, $id, $val)
     {
         $parentId = null;
