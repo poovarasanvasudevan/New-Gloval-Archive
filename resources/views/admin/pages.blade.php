@@ -54,7 +54,6 @@
                     {name: "id", type: "text", editing: false},
                     {name: "short_name", title: "Short Name", type: "text"},
                     {name: "long_name", title: "Long Name", type: "text"},
-                    {name: "url", title: "URL", type: "text"},
                     {name: "sequence_number", title: "Sequence", type: "text"},
                     {name: "is_default", title: "Default", type: "checkbox"},
                     {name: "active",title:"Active", type: "checkbox", sorting: false, filtering: false},
