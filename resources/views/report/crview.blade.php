@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-10 card card-block col-md-offset-1">
                 <fieldset>
-                    <legend>{{$artefact->first()->artefact_name}}</legend>
+                    <legend>Conditional Reports</legend>
                     <div>
                         @if($schedule)
                             @foreach($schedule as $sc)

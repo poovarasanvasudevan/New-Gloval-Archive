@@ -135,9 +135,22 @@ $(function () {
 
                         $('.delete').on('click', function () {
                             var attr2 = $(this).attr('id');
-                            $.post('/artefact/delete/' + node.key + '/' + attr2, function (data) {
-                                $(".cc" + attr2).html("");
-                            })
+                            swal({
+                                title: "Are you sure?",
+                                text: "You will not be able to recover this attachement!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Yes, delete it!",
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true,
+                            }, function () {
+
+                                $.post('/artefact/delete/' + node.key + '/' + attr2, function (data) {
+                                    $(".cc" + attr2).html("");
+                                    swal("Your Attachement has been deleted.");
+                                })
+                            });
                         });
 
                         $('.dropzone').dropzone({
