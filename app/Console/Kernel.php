@@ -34,9 +34,6 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('test')
-            ->everyMinute()
-            ->sendOutputTo(storage_path('config/logs'));
 
         $schedule
             ->command('archive:notification')

@@ -60,7 +60,7 @@ class SendMaintenenceNotification extends Command
         if ($artefacts) {
             foreach (User::get() as $user) {
                 if ($user->email) {
-                    Mail::send('email.notification', array(
+                    \Mail::send('email.notification', array(
                         'artefacts' => $artefacts,
                         'name' => $user->fname . " " . $user->lname,
                     ), function ($message) use ($user) {

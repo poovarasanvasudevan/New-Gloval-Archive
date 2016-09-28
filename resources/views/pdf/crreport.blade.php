@@ -36,7 +36,7 @@
                         @foreach($segment->report()->get() as $report)
 
                             <tr style="margin: 5px !important;">
-                                <td style="width: 70% !important;"><label>{{$report->conditional_report_title}}</label></td>
+                                <td style="width: 70% !important;"><b>{{$report->conditional_report_title}}</b></td>
                                 <td style="width: 70% !important;">
 
                                     @foreach($report2->conditional_report_result_data as $resultData)
@@ -44,7 +44,7 @@
                                             @if($report->conditional_report_html_type=='dropdown' && $resultData['cr_value']=='0')
 
                                             @else
-                                                {{$resultData['cr_value']}}
+                                               <center> {{$resultData['cr_value']}}</center>
                                             @endif
                                         @endif
                                     @endforeach

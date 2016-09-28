@@ -22,3 +22,12 @@ php artisan serve --port 80  //needs Sudo Access
 ```
 php artisan 
 ```
+
+### Adding Scheduler Commands
+```
+crontab -e
+```
+and then add the command
+```
+* * * * * /usr/local/bin/php /home/archive/artisan schedule:run
+```
