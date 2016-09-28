@@ -7,6 +7,7 @@ use App\ArtefactType;
 use App\ArtefactTypeAttribute;
 use App\Cico;
 use App\ConditionalReportsSegment;
+use App\Jobs\ResetPasswordJob;
 use App\Location;
 use App\Page;
 use App\PickData;
@@ -136,6 +137,7 @@ class GlobalController extends Controller
             $u->password = md5($pwd);
             if ($u->save()) {
 
+                //$this->dispatch(new ResetPasswordJob($u,$pwd));
 
                 Mail::send('email.resetpassword', array(
                     'username' => $u->abhyasiid,

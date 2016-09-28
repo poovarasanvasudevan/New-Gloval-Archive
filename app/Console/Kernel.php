@@ -42,7 +42,12 @@ class Kernel extends ConsoleKernel
 
         $schedule
             ->command('archive:backup')
-            ->weeklyOn(0,"01:00")
+            ->weeklyOn(0, "01:00")
+            ->sendOutputTo(storage_path('config/logs'));
+
+        $schedule
+            ->command('queue:work')
+            ->everyMinute()
             ->sendOutputTo(storage_path('config/logs'));
     }
 }
