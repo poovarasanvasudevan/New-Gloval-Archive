@@ -9,6 +9,8 @@ use App\ConditionalReportsSegment;
 use App\User;
 use Excel;
 use Illuminate\Console\Command;
+use Mail;
+use Queue;
 
 class TestConsole extends Command
 {
@@ -43,7 +45,11 @@ class TestConsole extends Command
      */
     public function handle()
     {
-        \Log::info("My Scheduler Task");
-        $this->info("test Scheduler");
+        Queue::push(Mail::raw("Hello World", function ($message) {
+            //
+            $message
+                ->to("poovarasan.devan@htcindia.com", "Poovarasan")
+                ->subject(env('APP_NAME') . 'Password Reset!');
+        }));
     }
 }
