@@ -81,7 +81,8 @@
                                    name="{{$attribute->id}}" id="{{$attribute->id}}"
                                    value="{{Helper::getAttrValues($artefact->id,$attribute->id)}}">
                         @elseif($attribute->html_type=='file')
-                            <div id="excelimports" id="{{$attribute->id}}" name="{{$attribute->id}}" class="dropzone"
+                            <div id="excelimports"
+                                 id="{{$attribute->id}}" name="{{$attribute->id}}" class="dropzone"
                                  title="{{$attribute->attribute_title}}">
 
                                 <input type="button" class="btn btn-primary btn-block" id="attUpload" value="Upload">

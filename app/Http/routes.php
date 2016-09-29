@@ -76,14 +76,9 @@ Route::post("/addPerodicMaintenance", 'GlobalController@addPerodicMaintenance');
 Route::post("/getCicoWithDates", 'GlobalController@getCicoWithDates');
 Route::post("/getCRWithDates", 'GlobalController@getCRWithDates');
 Route::any("/searchTable/{page?}", 'GlobalController@searchTable');
-
 Route::post("/crreport/import/{id}",'GlobalController@crimport');
-
-
 Route::get("/getCheckout", 'GlobalController@getCheckout');
 Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');
-
-
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function () {
     Route::get('/admin', 'AdminController@index');
@@ -91,11 +86,9 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get('/admin/getAllArtefactTypes', 'AdminController@getAllArtefactTypes');
     Route::get('/admin/pages', 'AdminController@pages');
     Route::get('/admin/cacheclear','AdminController@cacheclear');
-
     Route::post('/admin/saveMail','AdminController@saveMail');
     Route::post('/admin/setVersion','AdminController@setVersion');
     Route::post('/admin/saveCicoMail','AdminController@saveCicoMail');
-
     Route::any('/admin/updateArtefactTypes', 'AdminController@updateArtefactTypes');
     Route::any('/admin/deleteArtefactTypes', 'AdminController@deleteArtefactTypes');
     Route::any('/admin/addArtefactTypes', 'AdminController@addArtefactTypes');
@@ -116,7 +109,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::any('/admin/insertlocation', 'AdminController@insertlocation');
     Route::any('/admin/updatelocation', 'AdminController@updatelocation');
     Route::any('/admin/updateuser', 'AdminController@updateuser');
-
     Route::get("/admin/git", 'AdminController@git');
     Route::get("/admin/notify", 'AdminController@firetask');
     Route::get("/admin/up", 'AdminController@upServer');
@@ -124,8 +116,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get("/admin/location", 'AdminController@location');
     Route::get("/admin/importartefact", 'AdminController@importExcel');
     Route::get("/admin/exportexcel/{id}", 'AdminController@excelImportSheet');
-
-
     Route::get('/admin/attributes/{id}', 'AdminController@attributes');
     Route::get('/admin/logs', 'AdminController@logs');
     Route::get('/admin/attributelist', 'AdminController@attributelist');
@@ -133,6 +123,8 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     Route::get('/admin/config', 'AdminController@config');
     Route::post('/admin/importartefact', 'AdminController@importArtefactExcel');
     Route::get('/admin/crreport/{type?}/{section?}', 'AdminController@crreport');
+
+
 
 
     Route::any('/admin/adminer', '\Miroc\LaravelAdminer\AdminerController@index');

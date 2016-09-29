@@ -14,7 +14,8 @@
         <table width="100%">
             <tr>
                 <td><b><label>Done By</label> </b>&nbsp;&nbsp;{{$user}}</td>
-                <td><b> <label>Date</label></b>&nbsp;&nbsp;{{$segments->first()->report()->get()->first()->updated_at}}</td>
+                <td><b> <label>Date</label></b>&nbsp;&nbsp;{{$segments->first()->report()->get()->first()->updated_at}}
+                </td>
             </tr>
             <tr>
                 <td><b><label>Artefact Name :</label>&nbsp;</b>&nbsp;{{$artefact_name}}</td>
@@ -43,8 +44,15 @@
                                         @if($resultData['cr_id'] == $report->id)
                                             @if($report->conditional_report_html_type=='dropdown' && $resultData['cr_value']=='0')
 
+                                            @elseif($report->conditional_report_html_type=='file')
+                                                @if($report->hasMedia())
+                                                    @foreach($report->getMedia() as $media)
+                                                        <b><a href="{{$media->getUrl()}}">Download</a> </b><br/>
+                                                    @endforeach
+                                                @endif
+                                                jkghku
                                             @else
-                                               <center> {{$resultData['cr_value']}}</center>
+                                                <center> {{$resultData['cr_value']}}</center>
                                             @endif
                                         @endif
                                     @endforeach
