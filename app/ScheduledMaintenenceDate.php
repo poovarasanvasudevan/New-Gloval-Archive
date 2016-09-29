@@ -4,9 +4,12 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
-class ScheduledMaintenenceDate extends Model
+class ScheduledMaintenenceDate extends Model implements HasMedia
 {
+    use HasMediaTrait;
     //
     protected $table = 'scheduled_maintenence_dates';
     protected $dates = ['maintenence_date'];

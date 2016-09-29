@@ -49,32 +49,57 @@
 
 
                                     <div class="col-md-6">
+                                        @php($default_val = $report->default_value)
+                                        @if($report->default_value =='user')
+                                            @php($default_val = Auth::user()->fname . " " . Auth::user()->lname)
+                                        @elseif($report->default_value=='today')
+                                            @php($default_val = \Carbon\Carbon::now()->format('d/m/Y'))
+                                        @endif
+
+
                                         @if($report->conditional_report_html_type == "text" || $report->conditional_report_html_type == 'tect')
                                             <input title="{{$report->conditional_report_title}}"
                                                    type="text"
                                                    placeholder="{{$report->conditional_report_title}}"
+                                                   value="{{$default_val}}"
                                                    class="form-control" name="{{$report->id}}">
                                             <br/>
                                         @elseif($report->conditional_report_html_type == "textarea")
                                             <textarea title="{{$report->conditional_report_title}}"
                                                       placeholder="{{$report->conditional_report_title}}"
                                                       class="form-control"
-                                                      rows="5" name="{{$report->id}}"></textarea><br/>
+                                                      rows="5"
+                                                      name="{{$report->id}}">{{$default_val}}</textarea><br/>
                                         @elseif($report->conditional_report_html_type == "dropdown")
-                                            <select title="{{$report->conditional_report_title}}" class="form-control" name="{{$report->id}}">
+                                            <select title="{{$report->conditional_report_title}}" class="form-control"
+                                                    name="{{$report->id}}">
                                                 <option value="0">--select One--</option>
                                                 @foreach($report->conditional_report_pick_data as $pick_data)
-                                                    <option value="{{$pick_data}}">{{$pick_data}}</option>
+                                                    @if(strtolower($default_val) == strtolower($pick_data))
+                                                        <option selected value="{{$pick_data}}">{{$pick_data}}</option>
+                                                    @else
+                                                        <option value="{{$pick_data}}">{{$pick_data}}</option>
+                                                    @endif
                                                 @endforeach
                                             </select><br/>
                                         @elseif($report->conditional_report_html_type == "number")
                                             <input title="{{$report->conditional_report_title}}" type="number"
                                                    placeholder="{{$report->conditional_report_title}}"
+                                                   value="{{$default_val}}"
                                                    class="form-control" name="{{$report->id}}"><br/>
                                         @elseif($report->conditional_report_html_type == "date")
                                             <input title="{{$report->conditional_report_title}}" type="text"
                                                    placeholder="{{$report->conditional_report_title}}"
+                                                   value="{{$default_val}}"
                                                    class="form-control date" name="{{$report->id}}"><br/>
+
+                                        @elseif($report->conditional_report_html_type == "file")
+                                            <div
+                                                    id="{{$report->id}}" name="{{$report->id}}" class="dropzone"
+                                                    title="{{$report->conditional_report_title}}">
+                                                <input type="button" class="btn btn-primary btn-block" id="attUpload"
+                                                       value="Upload">
+                                            </div>
                                         @endif
                                     </div>
                                 @endforeach
@@ -94,7 +119,7 @@
         </div>
     </div>
 @endsection
-
+@include('admin.js')
 @section('js')
     <script>
         $(function () {
@@ -102,6 +127,28 @@
                 autoclose: true,
                 todayHighlight: true,
                 format: 'dd/mm/yyyy'
+            });
+            $('.dropzone').dropzone({
+                maxFiles: 5,
+                paramName: 'file',
+                url: "/crreport/import/" + taskID,
+                maxFilesize: 10,
+                addRemoveLinks: true,
+                autoProcessQueue: false,
+                acceptedFiles: ".pdf,.png,.jpg,.csv,.xls,.xlsx",
+                init: function () {
+                    var myDropzone = this;
+
+                    $("#attUpload").click(function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+
+                    });
+                },
+                success: function (file, response) {
+
+                }
             });
         })
     </script>

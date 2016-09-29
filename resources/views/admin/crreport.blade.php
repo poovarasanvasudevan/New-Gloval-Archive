@@ -131,6 +131,10 @@
                 {
                     id: "number",
                     value: "number"
+                },
+                {
+                    id: "file",
+                    value: "file"
                 }
             ];
             if (atype != 0 || atype != '0') {

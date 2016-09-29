@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 use Grids;
 use HTML;
 use Illuminate\Support\Facades\Config;
+use JavaScript;
 use Mail;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\Components\ColumnHeadersRow;
@@ -546,7 +547,8 @@ class GlobalController extends Controller
     }
 
 
-    function saveAttachement($id) {
+    function saveAttachement($id)
+    {
         $files = request()->file('file');
         $artefact = Artefact::find($id);
 
@@ -555,7 +557,8 @@ class GlobalController extends Controller
 
     }
 
-    function deleteAttachement($id,$attachid) {
+    function deleteAttachement($id, $attachid)
+    {
         $artefact = Artefact::find($id);
         $artefact->deleteMedia($attachid);
     }
@@ -1107,6 +1110,11 @@ class GlobalController extends Controller
                 $type = ArtefactType::find($artefact->artefact_type);
 
                 \Debugbar::addMessage($artefact);
+
+                JavaScript::put([
+                    'taskID' => $taskId
+                ]);
+
                 return view('dotask')
                     ->with('artefact', $artefact)
                     ->with('type', $type)
@@ -1119,6 +1127,16 @@ class GlobalController extends Controller
         } else {
             return response()->redirectTo('/');
         }
+    }
+
+    function crimport($id)
+    {
+        $crd = ScheduledMaintenenceDate::find($id);
+        $files = request()->file('file');
+
+        $crd->addMedia($files)
+            ->toCollectionOnDisk('attachment', 'crmedia');
+
     }
 
     function saveConditionalReport()

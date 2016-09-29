@@ -59,6 +59,12 @@ return [
             'root' => public_path('attachement'),
             'visibility' => 'public',
         ],
+        'crmedia' => [
+            'driver' => 'local',
+            'root' => public_path('crattachement'),
+            'visibility' => 'public',
+        ],
+
 
         's3' => [
             'driver' => 's3',

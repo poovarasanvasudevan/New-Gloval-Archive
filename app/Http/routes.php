@@ -77,6 +77,8 @@ Route::post("/getCicoWithDates", 'GlobalController@getCicoWithDates');
 Route::post("/getCRWithDates", 'GlobalController@getCRWithDates');
 Route::any("/searchTable/{page?}", 'GlobalController@searchTable');
 
+Route::post("/crreport/import/{id}",'GlobalController@crimport');
+
 
 Route::get("/getCheckout", 'GlobalController@getCheckout');
 Route::any("/checkInAutocomplete", 'GlobalController@checkInAutocomplete');
