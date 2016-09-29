@@ -227,7 +227,7 @@ class AdminController extends Controller
             $user->password = md5(request()->input('password'));
             $pwf = true;
         }
-        $user->abhyasiid = request()->input('abhyasiid');
+        $user->abhyasiid = strtolower(request()->input('abhyasiid'));
         $user->fname = request()->input('fname');
         $user->lname = request()->input('lname');
         $user->email = request()->input('email');
