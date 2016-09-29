@@ -22,8 +22,6 @@ Route::get('/', function () {
 Route::post("/login", 'GlobalController@login');
 Route::get("/myprofile", 'GlobalController@myprofile');
 Route::post("/myUserUpdate", 'GlobalController@myUserUpdate');
-
-
 Route::get("/artefactview/{id?}", 'GlobalController@artefactview');
 Route::get("/artefactprint/{id?}", 'GlobalController@artefactprint');
 Route::get("/forget", 'GlobalController@forget');
@@ -60,7 +58,6 @@ Route::get("/crview/{id?}", 'GlobalController@crview');
 Route::get("/nac/{attr}", 'GlobalController@getAutocomplete');
 Route::get("/crReportPrint/{id?}", 'GlobalController@crReportPrint');
 Route::get("/cicoReportPrint/{start?}/{end?}", 'GlobalController@cicoReportPrint');
-
 Route::post("/artefact/import/{id}",'GlobalController@saveAttachement');
 Route::post("/artefact/delete/{id}/{attachid}",'GlobalController@deleteAttachement');
 Route::post("/userEdit/{id}/update", 'GlobalController@updateUser');

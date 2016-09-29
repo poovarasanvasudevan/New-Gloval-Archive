@@ -22,7 +22,7 @@
                 <td><b><label>Artefact Type :</label>&nbsp;</b>&nbsp;{{$type}}</td>
             </tr>
         </table>
-    </div
+    </div>
     <br/>
 
     <hr/>
@@ -50,7 +50,6 @@
                                                         <b><a href="{{$media->getUrl()}}">Download</a> </b><br/>
                                                     @endforeach
                                                 @endif
-                                                jkghku
                                             @else
                                                 <center> {{$resultData['cr_value']}}</center>
                                             @endif
