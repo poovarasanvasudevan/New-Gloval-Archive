@@ -45,11 +45,11 @@ class TestConsole extends Command
      */
     public function handle()
     {
-        Queue::push(Mail::raw("Hello World", function ($message) {
+        Mail::raw("Hello World", function ($message) {
             //
             $message
-                ->to("poovarasan.devan@htcindia.com", "Poovarasan")
+                ->to("poosan9@gmail.com", "Poovarasan")
                 ->subject(env('APP_NAME') . 'Password Reset!');
-        }));
+        });
     }
 }
