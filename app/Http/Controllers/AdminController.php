@@ -238,15 +238,17 @@ class AdminController extends Controller
         if ($user->save()) {
             if ($pwf) {
                 if ($user->email) {
-                    Mail::send('email.updateuser', array(
-                        'username' => $user->abhyasiid,
-                        'password' => request()->input('password'),
-                        'url' => base_path('/')
-                    ), function ($message) use ($user) {
-                        $message
-                            ->to($user->email, $user->fname . " " . $user->lname)
-                            ->subject('Global Archive Password Updated!');
-                    });
+                    if(env('MAIL_ENABLE') =='yes') {
+                        Mail::send('email.updateuser', array(
+                            'username' => $user->abhyasiid,
+                            'password' => request()->input('password'),
+                            'url' => base_path('/')
+                        ), function ($message) use ($user) {
+                            $message
+                                ->to($user->email, $user->fname . " " . $user->lname)
+                                ->subject('Global Archive Password Updated!');
+                        });
+                    }
                 }
             }
 

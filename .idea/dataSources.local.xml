@@ -16,7 +16,6 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-scope>president:</introspection-scope>
       <resolve-scope>president:</resolve-scope>
     </data-source>
   </component>

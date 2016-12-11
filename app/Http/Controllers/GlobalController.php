@@ -140,15 +140,17 @@ class GlobalController extends Controller
 
                 //$this->dispatch(new ResetPasswordJob($u,$pwd));
 
-                Mail::send('email.resetpassword', array(
-                    'username' => $u->abhyasiid,
-                    'password' => $pwd,
-                    'url' => base_path('/')
-                ), function ($message) use ($u) {
-                    $message
-                        ->to($u->email, $u->fname . " " . $u->lname)
-                        ->subject(env('APP_NAME') . 'Password Reset!');
-                });
+                if(env('MAIL_ENABLE') =='yes') {
+                    Mail::send('email.resetpassword', array(
+                        'username' => $u->abhyasiid,
+                        'password' => $pwd,
+                        'url' => base_path('/')
+                    ), function ($message) use ($u) {
+                        $message
+                            ->to($u->email, $u->fname . " " . $u->lname)
+                            ->subject(env('APP_NAME') . 'Password Reset!');
+                    });
+                }
 
                 flash("Password Reset Succesfully,Check Your Email", "success");
                 return response()->redirectTo('/forget');
@@ -683,13 +685,14 @@ class GlobalController extends Controller
 
         if ($cico->save()) {
 
-            Mail::send('email.cico', ['cico' => $cico], function ($message) use ($sett) {
-                foreach ($sett as $s) {
-                    $message->to($s);
-                }
-                $message->subject(env('APP_NAME') . "Artefact Checkout");
-            });
-
+            if(env('MAIL_ENABLE') =='yes') {
+                Mail::send('email.cico', ['cico' => $cico], function ($message) use ($sett) {
+                    foreach ($sett as $s) {
+                        $message->to($s);
+                    }
+                    $message->subject(env('APP_NAME') . "Artefact Checkout");
+                });
+            }
             flash('Checkout Successfull', 'success');
             return response()->redirectTo('/cico');
         } else {
@@ -790,16 +793,17 @@ class GlobalController extends Controller
 
                     $user->artefact_type()->sync($artefact_type);
 
-                    Mail::send('email.newuser', array(
-                        'username' => $abhyasiid,
-                        'password' => $password,
-                        'url' => base_path('/')
-                    ), function ($message) use ($user) {
-                        $message
-                            ->to($user->email, $user->fname . " " . $user->lname)
-                            ->subject('Welcome to ' . env('APP_NAME') . '!');
-                    });
-
+                    if(env('MAIL_ENABLE') =='yes') {
+                        Mail::send('email.newuser', array(
+                            'username' => $abhyasiid,
+                            'password' => $password,
+                            'url' => base_path('/')
+                        ), function ($message) use ($user) {
+                            $message
+                                ->to($user->email, $user->fname . " " . $user->lname)
+                                ->subject('Welcome to ' . env('APP_NAME') . '!');
+                        });
+                    }
                     flash('User created succesfully', 'success');
                     return response()
                         ->redirectTo('/userrole/');
