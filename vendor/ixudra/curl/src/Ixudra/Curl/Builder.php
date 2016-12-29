@@ -176,6 +176,21 @@ class Builder {
     }
 
     /**
+     * Add multiple HTTP header at the same time to the request
+     *
+     * @param   array $headers      Array of HTTP headers that must be added to the request
+     * @return Builder
+     */
+    public function withHeaders(array $headers)
+    {
+        $this->curlOptions[ 'HTTPHEADER' ] = array_merge(
+            $this->curlOptions[ 'HTTPHEADER' ], $headers
+        );
+
+        return $this;
+    }
+
+    /**
      * Add a content type HTTP header to the request
      *
      * @param   string $contentType    The content type of the file you would like to download
@@ -227,12 +242,7 @@ class Builder {
      */
     public function get()
     {
-        $parameterString = '';
-        if( is_array($this->packageOptions[ 'data' ]) && count($this->packageOptions[ 'data' ]) != 0 ) {
-            $parameterString = '?'. http_build_query($this->packageOptions[ 'data' ]);
-        }
-
-        $this->curlOptions[ 'URL' ] .= $parameterString;
+        $this->appendDataToURL();
 
         return $this->send();
     }
@@ -310,6 +320,8 @@ class Builder {
      */
     public function delete()
     {
+        $this->appendDataToURL();
+
         return $this->withOption('CUSTOMREQUEST', 'DELETE')
             ->send();
     }
@@ -343,6 +355,10 @@ class Builder {
         $responseData = array();
         if( $this->packageOptions[ 'responseObject' ] ) {
             $responseData = curl_getinfo( $this->curlObject );
+
+            if( curl_errno($this->curlObject) ) {
+                $responseData[ 'errorMessage' ] = curl_error($this->curlObject);
+            }
         }
 
         curl_close( $this->curlObject );
@@ -379,6 +395,9 @@ class Builder {
         $object = new stdClass();
         $object->content = $content;
         $object->status = $responseData[ 'http_code' ];
+        if( array_key_exists('errorMessage', $responseData) ) {
+            $object->error = $responseData[ 'errorMessage' ];
+        }
 
         return $object;
     }
@@ -402,6 +421,21 @@ class Builder {
         }
 
         return $results;
+    }
+
+    /**
+     * Append set data to the query string for GET and DELETE cURL requests
+     *
+     * @return string
+     */
+    protected function appendDataToURL()
+    {
+        $parameterString = '';
+        if( is_array($this->packageOptions[ 'data' ]) && count($this->packageOptions[ 'data' ]) != 0 ) {
+            $parameterString = '?'. http_build_query($this->packageOptions[ 'data' ]);
+        }
+
+        return $this->curlOptions[ 'URL' ] .= $parameterString;
     }
 
 }
