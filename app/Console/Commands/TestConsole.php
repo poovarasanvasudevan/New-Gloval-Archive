@@ -45,11 +45,31 @@ class TestConsole extends Command
      */
     public function handle()
     {
-        Mail::raw("Hello World", function ($message) {
-            //
-            $message
-                ->to("poosan9@gmail.com", "Poovarasan")
-                ->subject(env('APP_NAME') . 'Password Reset!');
-        });
+        ini_set('memory_limit', '-1');
+
+        $this->info("Importing HI8 Attributes : ");
+        Excel::selectSheetsByIndex(0)
+            ->load(storage_path('app/public/shpt/cod.xlsx'), function ($reader) {
+
+                //$this->info(json_encode($reader->first()->toArray()));
+
+                $my = $reader->toArray();
+                $boxes = array();
+
+                $this->warn("Total rows : " . sizeof($my));
+
+
+                foreach ($my as $row) {
+                    if($row['postal_code'] !=null) {
+                       // $this->info(json_encode($row));
+
+                        $ddf = "INSERT INTO `cod_pincodes` (`pin_id`, `state`, `city`, `pin_code`, `shipping_vendor`, `active`, `created_date`) VALUES (NULL, '".$row['state']."', '".$row['city_name']."', '".$row['postal_code']."', 'Fedex', '1', CURRENT_TIMESTAMP);";
+
+                        \Log::info($ddf);
+                        $this->info($ddf);
+                    }
+                }
+            });
+
     }
 }
