@@ -1,0 +1,1307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="PostgreSQL - archive@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.6">
+    <database id="1" name="archive">
+      <object-id>16384</object-id>
+      <visible>1</visible>
+    </database>
+    <database id="2" name="postgres">
+      <object-id>12415</object-id>
+    </database>
+    <database id="3" name="gar">
+      <object-id>16575</object-id>
+    </database>
+    <schema id="4" parent="1" name="public">
+      <object-id>2200</object-id>
+      <comment>standard public schema</comment>
+      <visible>1</visible>
+      <introspection-state-number>1289330</introspection-state-number>
+      <introspection-timestamp>2016-09-28.17:29:27.888</introspection-timestamp>
+    </schema>
+    <schema id="5" parent="1" name="pg_catalog">
+      <object-id>11</object-id>
+    </schema>
+    <schema id="6" parent="1" name="pg_toast">
+      <object-id>99</object-id>
+    </schema>
+    <schema id="7" parent="1" name="pg_temp_1">
+      <object-id>11816</object-id>
+    </schema>
+    <schema id="8" parent="1" name="pg_toast_temp_1">
+      <object-id>11817</object-id>
+    </schema>
+    <schema id="9" parent="1" name="information_schema">
+      <object-id>12123</object-id>
+    </schema>
+    <sequence id="10" parent="4" name="artefact_type_attributes_id_seq">
+      <object-id>65496</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="11" parent="4" name="artefact_type_user_id_seq">
+      <object-id>65455</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="12" parent="4" name="artefact_types_id_seq">
+      <object-id>65336</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="13" parent="4" name="artefacts_id_seq">
+      <object-id>65383</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="14" parent="4" name="cico_id_seq">
+      <object-id>65473</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="15" parent="4" name="conditional_reports_id_seq">
+      <object-id>65365</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="16" parent="4" name="conditional_reports_segments_id_seq">
+      <object-id>65348</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="17" parent="4" name="jobs_id_seq">
+      <object-id>65546</object-id>
+      <state-number>1289329</state-number>
+    </sequence>
+    <sequence id="18" parent="4" name="locations_id_seq">
+      <object-id>65244</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="19" parent="4" name="media_id_seq">
+      <object-id>65534</object-id>
+      <state-number>1289250</state-number>
+    </sequence>
+    <sequence id="20" parent="4" name="page_role_id_seq">
+      <object-id>65286</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="21" parent="4" name="pages_id_seq">
+      <object-id>65272</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="22" parent="4" name="pick_data_id_seq">
+      <object-id>65516</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="23" parent="4" name="roles_id_seq">
+      <object-id>65259</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="24" parent="4" name="scheduled_maintenence_dates_id_seq">
+      <object-id>65432</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="25" parent="4" name="scheduled_maintenences_id_seq">
+      <object-id>65415</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <sequence id="26" parent="4" name="users_id_seq">
+      <object-id>65304</object-id>
+      <state-number>1288449</state-number>
+    </sequence>
+    <table id="27" parent="4" name="artefact_type_attributes">
+      <object-id>65498</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="28" parent="4" name="artefact_type_user">
+      <object-id>65457</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="29" parent="4" name="artefact_types">
+      <object-id>65338</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="30" parent="4" name="artefacts">
+      <object-id>65385</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="31" parent="4" name="cico">
+      <object-id>65475</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="32" parent="4" name="conditional_reports">
+      <object-id>65367</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="33" parent="4" name="conditional_reports_segments">
+      <object-id>65350</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="34" parent="4" name="jobs">
+      <object-id>65548</object-id>
+      <state-number>1289329</state-number>
+    </table>
+    <table id="35" parent="4" name="locations">
+      <object-id>65246</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="36" parent="4" name="media">
+      <object-id>65536</object-id>
+      <state-number>1289250</state-number>
+    </table>
+    <table id="37" parent="4" name="migrations">
+      <object-id>31659</object-id>
+      <state-number>565575</state-number>
+    </table>
+    <table id="38" parent="4" name="page_role">
+      <object-id>65288</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="39" parent="4" name="pages">
+      <object-id>65274</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="40" parent="4" name="pick_data">
+      <object-id>65518</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="41" parent="4" name="roles">
+      <object-id>65261</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="42" parent="4" name="scheduled_maintenence_dates">
+      <object-id>65434</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="43" parent="4" name="scheduled_maintenences">
+      <object-id>65417</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <table id="44" parent="4" name="users">
+      <object-id>65306</object-id>
+      <state-number>1288449</state-number>
+    </table>
+    <column id="45" parent="27" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;artefact_type_attributes_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="46" parent="27" name="artefact_type_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="47" parent="27" name="attribute_title">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="48" parent="27" name="html_type">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="49" parent="27" name="sequence_number">
+      <state-number>1288449</state-number>
+      <data-type>double precision|0</data-type>
+    </column>
+    <column id="50" parent="27" name="is_box">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="51" parent="27" name="is_searchable">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="52" parent="27" name="pick_flag">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="53" parent="27" name="select_pick_data">
+      <state-number>1288449</state-number>
+      <data-type>json|0</data-type>
+    </column>
+    <column id="54" parent="27" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="55" parent="27" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="56" parent="27" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="57" parent="27" name="artefact_type_attributes_pkey">
+      <object-id>65509</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="58" parent="27" name="artefact_type_attributes_pkey">
+      <object-id>65510</object-id>
+      <columns>id</columns>
+      <underlying-index>artefact_type_attributes_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="59" parent="27" name="artefact_type_attributes_artefact_type_id_foreign">
+      <object-id>65511</object-id>
+      <columns>artefact_type_id</columns>
+      <ref-key>~.artefact_types.artefact_types_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="60" parent="28" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;artefact_type_user_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="61" parent="28" name="artefact_type_id">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="62" parent="28" name="user_id">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="63" parent="28" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="64" parent="28" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="65" parent="28" name="artefact_type_user_pkey">
+      <object-id>65461</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="66" parent="28" name="artefact_type_user_pkey">
+      <object-id>65462</object-id>
+      <columns>id</columns>
+      <underlying-index>artefact_type_user_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="67" parent="28" name="artefact_type_user_artefact_type_id_foreign">
+      <object-id>65463</object-id>
+      <columns>artefact_type_id</columns>
+      <ref-key>~.artefact_types.artefact_types_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="68" parent="28" name="artefact_type_user_user_id_foreign">
+      <object-id>65468</object-id>
+      <columns>user_id</columns>
+      <ref-key>~.users.users_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="69" parent="29" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;artefact_types_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="70" parent="29" name="artefact_type_short">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="71" parent="29" name="artefact_type_long">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="72" parent="29" name="sequence_number">
+      <state-number>1288449</state-number>
+      <data-type>double precision|0</data-type>
+    </column>
+    <column id="73" parent="29" name="artefact_description">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="74" parent="29" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="75" parent="29" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="76" parent="29" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="77" parent="29" name="artefact_types_pkey">
+      <object-id>65346</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="78" parent="29" name="artefact_types_pkey">
+      <object-id>65347</object-id>
+      <columns>id</columns>
+      <underlying-index>artefact_types_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="79" parent="30" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;artefacts_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="80" parent="30" name="old_artefact_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="81" parent="30" name="parent_id">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="82" parent="30" name="artefact_name">
+      <state-number>1288449</state-number>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="83" parent="30" name="location">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="84" parent="30" name="artefact_type">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="85" parent="30" name="artefact_values">
+      <state-number>1288449</state-number>
+      <data-type>json|0</data-type>
+    </column>
+    <column id="86" parent="30" name="user_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="87" parent="30" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="88" parent="30" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="89" parent="30" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="90" parent="30" name="artefacts_pkey">
+      <object-id>65393</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="91" parent="30" name="artefacts_pkey">
+      <object-id>65394</object-id>
+      <columns>id</columns>
+      <underlying-index>artefacts_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="92" parent="30" name="artefacts_parent_id_foreign">
+      <object-id>65400</object-id>
+      <columns>parent_id</columns>
+      <ref-key>artefacts_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="93" parent="30" name="artefacts_location_foreign">
+      <object-id>65395</object-id>
+      <columns>location</columns>
+      <ref-key>~.locations.locations_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="94" parent="30" name="artefacts_artefact_type_foreign">
+      <object-id>65410</object-id>
+      <columns>artefact_type</columns>
+      <ref-key>~.artefact_types.artefact_types_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="95" parent="30" name="artefacts_user_id_foreign">
+      <object-id>65405</object-id>
+      <columns>user_id</columns>
+      <ref-key>~.users.users_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="96" parent="31" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;cico_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="97" parent="31" name="artefact_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="98" parent="31" name="user_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="99" parent="31" name="check_out_status">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="100" parent="31" name="check_out_description">
+      <state-number>1288449</state-number>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="101" parent="31" name="check_in_description">
+      <state-number>1288449</state-number>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="102" parent="31" name="remarks">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;No Remarks Found&apos;::character varying</default-expression>
+    </column>
+    <column id="103" parent="31" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="104" parent="31" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="105" parent="31" name="cico_pkey">
+      <object-id>65484</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="106" parent="31" name="cico_pkey">
+      <object-id>65485</object-id>
+      <columns>id</columns>
+      <underlying-index>cico_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="107" parent="31" name="cico_artefact_id_foreign">
+      <object-id>65491</object-id>
+      <columns>artefact_id</columns>
+      <ref-key>~.artefacts.artefacts_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="108" parent="31" name="cico_user_id_foreign">
+      <object-id>65486</object-id>
+      <columns>user_id</columns>
+      <ref-key>~.users.users_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="109" parent="32" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;conditional_reports_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="110" parent="32" name="conditional_reports_segment_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="111" parent="32" name="conditional_report_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="112" parent="32" name="conditional_report_title">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="113" parent="32" name="conditional_report_html_type">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="114" parent="32" name="conditional_report_pick_flag">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="115" parent="32" name="conditional_report_pick_data">
+      <state-number>1288449</state-number>
+      <data-type>json|0</data-type>
+    </column>
+    <column id="116" parent="32" name="default_value">
+      <state-number>1288449</state-number>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="117" parent="32" name="sequence_number">
+      <state-number>1288449</state-number>
+      <data-type>double precision|0</data-type>
+    </column>
+    <column id="118" parent="32" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="119" parent="32" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="120" parent="32" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="121" parent="32" name="conditional_reports_pkey">
+      <object-id>65376</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="122" parent="32" name="conditional_reports_pkey">
+      <object-id>65377</object-id>
+      <columns>id</columns>
+      <underlying-index>conditional_reports_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="123" parent="32" name="conditional_reports_conditional_reports_segment_id_foreign">
+      <object-id>65378</object-id>
+      <columns>conditional_reports_segment_id</columns>
+      <ref-key>~.conditional_reports_segments.conditional_reports_segments_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="124" parent="33" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;conditional_reports_segments_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="125" parent="33" name="artefact_type_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="126" parent="33" name="segment_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="127" parent="33" name="segment_title">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="128" parent="33" name="sequence_number">
+      <state-number>1288449</state-number>
+      <data-type>double precision|0</data-type>
+    </column>
+    <column id="129" parent="33" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="130" parent="33" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="131" parent="33" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="132" parent="33" name="conditional_reports_segments_pkey">
+      <object-id>65358</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="133" parent="33" name="conditional_reports_segments_pkey">
+      <object-id>65359</object-id>
+      <columns>id</columns>
+      <underlying-index>conditional_reports_segments_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="134" parent="33" name="conditional_reports_segments_artefact_type_id_foreign">
+      <object-id>65360</object-id>
+      <columns>artefact_type_id</columns>
+      <ref-key>~.artefact_types.artefact_types_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="135" parent="34" name="id">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>bigint|0</data-type>
+      <default-expression>nextval(&apos;jobs_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="136" parent="34" name="queue">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="137" parent="34" name="payload">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="138" parent="34" name="attempts">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>smallint|0</data-type>
+    </column>
+    <column id="139" parent="34" name="reserved">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>smallint|0</data-type>
+    </column>
+    <column id="140" parent="34" name="reserved_at">
+      <state-number>1289329</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="141" parent="34" name="available_at">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="142" parent="34" name="created_at">
+      <state-number>1289329</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <index id="143" parent="34" name="jobs_pkey">
+      <object-id>65555</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="144" parent="34" name="jobs_queue_reserved_reserved_at_index">
+      <object-id>65557</object-id>
+      <columns>queue
+reserved
+reserved_at</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="145" parent="34" name="jobs_pkey">
+      <object-id>65556</object-id>
+      <columns>id</columns>
+      <underlying-index>jobs_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="146" parent="35" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;locations_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="147" parent="35" name="short_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="148" parent="35" name="long_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="149" parent="35" name="is_archive_location">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="150" parent="35" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="151" parent="35" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="152" parent="35" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="153" parent="35" name="locations_pkey">
+      <object-id>65255</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="154" parent="35" name="locations_short_name_unique">
+      <object-id>65257</object-id>
+      <columns>short_name</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="155" parent="35" name="locations_pkey">
+      <object-id>65256</object-id>
+      <columns>id</columns>
+      <underlying-index>locations_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <key id="156" parent="35" name="locations_short_name_unique">
+      <object-id>65258</object-id>
+      <columns>short_name</columns>
+      <underlying-index>locations_short_name_unique</underlying-index>
+    </key>
+    <column id="157" parent="36" name="id">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;media_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="158" parent="36" name="model_id">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="159" parent="36" name="model_type">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="160" parent="36" name="collection_name">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="161" parent="36" name="name">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="162" parent="36" name="file_name">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="163" parent="36" name="disk">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="164" parent="36" name="size">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="165" parent="36" name="manipulations">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="166" parent="36" name="custom_properties">
+      <state-number>1289250</state-number>
+      <mandatory>1</mandatory>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="167" parent="36" name="order_column">
+      <state-number>1289250</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="168" parent="36" name="created_at">
+      <state-number>1289250</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="169" parent="36" name="updated_at">
+      <state-number>1289250</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="170" parent="36" name="media_pkey">
+      <object-id>65543</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="171" parent="36" name="media_model_id_model_type_index">
+      <object-id>65545</object-id>
+      <columns>model_id
+model_type</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="172" parent="36" name="media_pkey">
+      <object-id>65544</object-id>
+      <columns>id</columns>
+      <underlying-index>media_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="173" parent="37" name="migration">
+      <state-number>565575</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="174" parent="37" name="batch">
+      <state-number>565575</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="175" parent="38" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;page_role_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="176" parent="38" name="role_id">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="177" parent="38" name="page_id">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="178" parent="38" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="179" parent="38" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="180" parent="38" name="page_role_pkey">
+      <object-id>65292</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="181" parent="38" name="page_role_pkey">
+      <object-id>65293</object-id>
+      <columns>id</columns>
+      <underlying-index>page_role_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="182" parent="38" name="page_role_role_id_foreign">
+      <object-id>65294</object-id>
+      <columns>role_id</columns>
+      <ref-key>~.roles.roles_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="183" parent="38" name="page_role_page_id_foreign">
+      <object-id>65299</object-id>
+      <columns>page_id</columns>
+      <ref-key>~.pages.pages_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="184" parent="39" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;pages_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="185" parent="39" name="short_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="186" parent="39" name="long_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="187" parent="39" name="url">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="188" parent="39" name="sequence_number">
+      <state-number>1288449</state-number>
+      <data-type>double precision|0</data-type>
+    </column>
+    <column id="189" parent="39" name="is_default">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="190" parent="39" name="is_admin_page">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="191" parent="39" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="192" parent="39" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="193" parent="39" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="194" parent="39" name="pages_pkey">
+      <object-id>65284</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="195" parent="39" name="pages_pkey">
+      <object-id>65285</object-id>
+      <columns>id</columns>
+      <underlying-index>pages_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="196" parent="40" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;pick_data_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="197" parent="40" name="attribute_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="198" parent="40" name="pick_data_value">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="199" parent="40" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="200" parent="40" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="201" parent="40" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="202" parent="40" name="pick_data_pkey">
+      <object-id>65523</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="203" parent="40" name="pick_data_pkey">
+      <object-id>65524</object-id>
+      <columns>id</columns>
+      <underlying-index>pick_data_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="204" parent="40" name="pick_data_attribute_id_foreign">
+      <object-id>65525</object-id>
+      <columns>attribute_id</columns>
+      <ref-key>~.artefact_type_attributes.artefact_type_attributes_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="205" parent="41" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;roles_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="206" parent="41" name="short_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="207" parent="41" name="long_name">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="208" parent="41" name="is_developer">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="209" parent="41" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="210" parent="41" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="211" parent="41" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="212" parent="41" name="roles_pkey">
+      <object-id>65270</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="213" parent="41" name="roles_pkey">
+      <object-id>65271</object-id>
+      <columns>id</columns>
+      <underlying-index>roles_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="214" parent="42" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;scheduled_maintenence_dates_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="215" parent="42" name="scheduled_maintenence_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="216" parent="42" name="maintenence_date">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="217" parent="42" name="is_completed">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="218" parent="42" name="conditional_report_result_data">
+      <state-number>1288449</state-number>
+      <data-type>json|0</data-type>
+    </column>
+    <column id="219" parent="42" name="user_id">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="220" parent="42" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="221" parent="42" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="222" parent="42" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="223" parent="42" name="scheduled_maintenence_dates_pkey">
+      <object-id>65443</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="224" parent="42" name="scheduled_maintenence_dates_pkey">
+      <object-id>65444</object-id>
+      <columns>id</columns>
+      <underlying-index>scheduled_maintenence_dates_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="225" parent="42" name="scheduled_maintenence_dates_scheduled_maintenence_id_foreign">
+      <object-id>65445</object-id>
+      <columns>scheduled_maintenence_id</columns>
+      <ref-key>~.scheduled_maintenences.scheduled_maintenences_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="226" parent="42" name="scheduled_maintenence_dates_user_id_foreign">
+      <object-id>65450</object-id>
+      <columns>user_id</columns>
+      <ref-key>~.users.users_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="227" parent="43" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;scheduled_maintenences_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="228" parent="43" name="artefact_id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="229" parent="43" name="maintenence_type">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="230" parent="43" name="maintenence_description">
+      <state-number>1288449</state-number>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="231" parent="43" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="232" parent="43" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="233" parent="43" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="234" parent="43" name="scheduled_maintenences_pkey">
+      <object-id>65425</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="235" parent="43" name="scheduled_maintenences_pkey">
+      <object-id>65426</object-id>
+      <columns>id</columns>
+      <underlying-index>scheduled_maintenences_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="236" parent="43" name="scheduled_maintenences_artefact_id_foreign">
+      <object-id>65427</object-id>
+      <columns>artefact_id</columns>
+      <ref-key>~.artefacts.artefacts_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="237" parent="44" name="id">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;users_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="238" parent="44" name="abhyasiid">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="239" parent="44" name="fname">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="240" parent="44" name="lname">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="241" parent="44" name="email">
+      <state-number>1288449</state-number>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="242" parent="44" name="password">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="243" parent="44" name="is_developer">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="244" parent="44" name="role">
+      <state-number>1288449</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="245" parent="44" name="location">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>1</default-expression>
+    </column>
+    <column id="246" parent="44" name="archive_location">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>1</default-expression>
+    </column>
+    <column id="247" parent="44" name="active">
+      <state-number>1288449</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+      <default-expression>true</default-expression>
+    </column>
+    <column id="248" parent="44" name="remember_token">
+      <state-number>1288449</state-number>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="249" parent="44" name="created_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <column id="250" parent="44" name="updated_at">
+      <state-number>1288449</state-number>
+      <data-type>timestamp(0)|0</data-type>
+    </column>
+    <index id="251" parent="44" name="users_pkey">
+      <object-id>65317</object-id>
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="252" parent="44" name="users_email_unique">
+      <object-id>65334</object-id>
+      <columns>email</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="253" parent="44" name="users_pkey">
+      <object-id>65318</object-id>
+      <columns>id</columns>
+      <underlying-index>users_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <key id="254" parent="44" name="users_email_unique">
+      <object-id>65335</object-id>
+      <columns>email</columns>
+      <underlying-index>users_email_unique</underlying-index>
+    </key>
+    <foreign-key id="255" parent="44" name="users_role_foreign">
+      <object-id>65329</object-id>
+      <columns>role</columns>
+      <ref-key>~.roles.roles_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="256" parent="44" name="users_location_foreign">
+      <object-id>65319</object-id>
+      <columns>location</columns>
+      <ref-key>~.locations.locations_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="257" parent="44" name="users_archive_location_foreign">
+      <object-id>65324</object-id>
+      <columns>archive_location</columns>
+      <ref-key>~.locations.locations_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+  </database-model>
+</dataSource>

@@ -1,0 +1,1962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - president@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="president">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="phpmyadmin"/>
+    <schema id="6" name="test"/>
+    <schema id="7" name="phalcon"/>
+    <table id="8" parent="1" name="archivelocation"/>
+    <table id="9" parent="1" name="artefact"/>
+    <table id="10" parent="1" name="artefactaudit"/>
+    <table id="11" parent="1" name="artefactcico"/>
+    <table id="12" parent="1" name="artefacttype"/>
+    <table id="13" parent="1" name="attributelist"/>
+    <table id="14" parent="1" name="attributes"/>
+    <table id="15" parent="1" name="attributevalue"/>
+    <table id="16" parent="1" name="audioattributes"/>
+    <table id="17" parent="1" name="bboxattributes"/>
+    <table id="18" parent="1" name="bookattributes"/>
+    <table id="19" parent="1" name="checklist"/>
+    <table id="20" parent="1" name="conditionalreport"/>
+    <table id="21" parent="1" name="cr_section"/>
+    <table id="22" parent="1" name="dummyphoto"/>
+    <table id="23" parent="1" name="landrecordattributes"/>
+    <table id="24" parent="1" name="lboxattributes"/>
+    <table id="25" parent="1" name="magazineattributes"/>
+    <table id="26" parent="1" name="maintenancecycle"/>
+    <table id="27" parent="1" name="page"/>
+    <table id="28" parent="1" name="photoboxattributes"/>
+    <table id="29" parent="1" name="photosattributes"/>
+    <table id="30" parent="1" name="prarticlesattributes"/>
+    <table id="31" parent="1" name="role"/>
+    <table id="32" parent="1" name="role_page_mapping"/>
+    <table id="33" parent="1" name="scheduledmaintenance"/>
+    <table id="34" parent="1" name="sectionmapping"/>
+    <table id="35" parent="1" name="soubokmagwithattrib"/>
+    <table id="36" parent="1" name="tasklist"/>
+    <table id="37" parent="1" name="user"/>
+    <table id="38" parent="1" name="utils"/>
+    <table id="39" parent="1" name="videoattributes"/>
+    <routine id="40" parent="1" name="InitialScheduleTask">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <routine id="41" parent="1" name="MigrateData">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <routine id="42" parent="1" name="RenameArtefact">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <routine id="43" parent="1" name="ScheduleTask">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <routine id="44" parent="1" name="updateData">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <routine id="45" parent="1" name="UpdateUserAndTime">
+      <routine-kind>PROCEDURE</routine-kind>
+    </routine>
+    <column id="46" parent="8" name="LocationPk">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="47" parent="8" name="Code">
+      <mandatory>1</mandatory>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="48" parent="8" name="Description">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="49" parent="8" name="CreatedBy">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="50" parent="8" name="CreatedDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="51" parent="8" name="Modifiedby">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="52" parent="8" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <key id="53" parent="8" name="PRIMARY">
+      <columns>LocationPk</columns>
+      <primary>1</primary>
+    </key>
+    <column id="54" parent="9" name="ArtefactPK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="55" parent="9" name="ArtefactCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="56" parent="9" name="ArtefactTypeCode">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="57" parent="9" name="LocationFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="58" parent="9" name="ArtefactPID">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="59" parent="9" name="LevelNumber">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="60" parent="9" name="SequenceNumber">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="61" parent="9" name="ArtefactName">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="62" parent="9" name="VisibleStatus">
+      <data-type>varchar(45)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="63" parent="9" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="64" parent="9" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="65" parent="9" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="66" parent="9" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="67" parent="9" name="FK_Artefact_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="68" parent="9" name="FK_Artefact_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="69" parent="9" name="PRIMARY">
+      <columns>ArtefactCode</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="70" parent="9" name="FK_Artefact_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="71" parent="9" name="FK_Artefact_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <ref-key>~.archivelocation.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="72" parent="9" name="updatetri">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="73" parent="10" name="AuditId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="74" parent="10" name="ArtefactCode">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="75" parent="10" name="UpdatedColumn">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="76" parent="10" name="OldValue">
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <column id="77" parent="10" name="NewValue">
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <column id="78" parent="10" name="UpdatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="79" parent="10" name="UpdatedDate">
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="80" parent="10" name="FK_ARTEFACTCODE_idx">
+      <columns>ArtefactCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="81" parent="10" name="FK_USERS_idx">
+      <columns>UpdatedBy</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="82" parent="10" name="PRIMARY">
+      <columns>AuditId</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="83" parent="10" name="FK_ARTEFACTCODE">
+      <columns>ArtefactCode</columns>
+      <ref-key>~.artefact.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="84" parent="10" name="FK_USER">
+      <columns>UpdatedBy</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="85" parent="11" name="CICOSK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="86" parent="11" name="CICOCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="87" parent="11" name="ArtefactTypeCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="88" parent="11" name="ArtefactCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="89" parent="11" name="LocationSK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="90" parent="11" name="userfk">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="91" parent="11" name="CICOTYPE">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="92" parent="11" name="CICOStatus">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="93" parent="11" name="CheckInDate">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="94" parent="11" name="CheckoutDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="95" parent="11" name="Purpose">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="96" parent="11" name="Remarks">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="97" parent="11" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="98" parent="11" name="CreatedDate">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="99" parent="11" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="100" parent="11" name="ModifiedDate">
+      <data-type>date|0</data-type>
+    </column>
+    <index id="101" parent="11" name="FK_ArtefactCICO_ArchiveLocation">
+      <columns>LocationSK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="102" parent="11" name="FK_ArtefactCICO_Artefact">
+      <columns>ArtefactCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="103" parent="11" name="FK_ArtefactTYPECODE_ArtefactCICO">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="104" parent="11" name="FK_USERF">
+      <columns>userfk</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="105" parent="11" name="PRIMARY">
+      <columns>CICOSK
+CICOCode</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="106" parent="11" name="FK_ArtefactTYPECODE_ArtefactCICO">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="107" parent="11" name="FK_ArtefactCICO_Artefact">
+      <columns>ArtefactCode</columns>
+      <ref-key>~.artefact.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="108" parent="11" name="FK_ArtefactCICO_ArchiveLocation">
+      <columns>LocationSK</columns>
+      <ref-key>~.archivelocation.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="109" parent="11" name="FK_USERFK">
+      <columns>userfk</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="110" parent="12" name="ArtefactTypePK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="111" parent="12" name="ArtefactTypeCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="112" parent="12" name="ArtefactTypePID">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="113" parent="12" name="ArtefactTypeDescription">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="114" parent="12" name="LevelNumber">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="115" parent="12" name="SequenceNumber">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="116" parent="12" name="ArtefactColor">
+      <comment>color to be displayed in DashBoard</comment>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="117" parent="12" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="118" parent="12" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="119" parent="12" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="120" parent="12" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <key id="121" parent="12" name="PRIMARY">
+      <columns>ArtefactTypeCode</columns>
+      <primary>1</primary>
+    </key>
+    <column id="122" parent="13" name="AttributeListPK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="123" parent="13" name="AlistCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="124" parent="13" name="AlistValue">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="125" parent="13" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="126" parent="13" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="127" parent="13" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="128" parent="13" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <key id="129" parent="13" name="PRIMARY">
+      <columns>AttributeListPK</columns>
+      <primary>1</primary>
+    </key>
+    <column id="130" parent="14" name="AttributesPK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="131" parent="14" name="AttributeCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="132" parent="14" name="ArtefactTypeCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="133" parent="14" name="AListCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="134" parent="14" name="Attributes">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="135" parent="14" name="PickFlag">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="136" parent="14" name="SequenceNo">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="137" parent="14" name="Prime">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="138" parent="14" name="AttType">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="139" parent="14" name="IsSearchable">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="140" parent="14" name="IsMaintainable">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="141" parent="14" name="DataType">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="142" parent="14" name="Size">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="143" parent="14" name="Format">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="144" parent="14" name="htmltype">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+      <default-expression>&apos;text&apos;</default-expression>
+    </column>
+    <column id="145" parent="14" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="146" parent="14" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="147" parent="14" name="ModifiedDate">
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="148" parent="14" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="149" parent="14" name="FK_Attributes_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="150" parent="14" name="PRIMARY">
+      <columns>AttributeCode</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="151" parent="14" name="FK_Attributes_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="152" parent="15" name="AttributeValuePK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="153" parent="15" name="ArtefactTypeCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="154" parent="15" name="ArtefactCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="155" parent="15" name="AttributeCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="156" parent="15" name="ArtefactParentID">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="157" parent="15" name="AttributeValue">
+      <mandatory>1</mandatory>
+      <data-type>varchar(1500)|0</data-type>
+    </column>
+    <column id="158" parent="15" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="159" parent="15" name="CreatedDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="160" parent="15" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="161" parent="15" name="ModifiedDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <index id="162" parent="15" name="Artefact_code">
+      <columns>ArtefactCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="163" parent="15" name="Artefact_Type">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="164" parent="15" name="Attribute_code">
+      <columns>AttributeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="165" parent="15" name="PRIMARY">
+      <columns>AttributeValuePK</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="166" parent="15" name="ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="167" parent="15" name="ArtefactCode">
+      <columns>ArtefactCode</columns>
+      <ref-key>~.artefact.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="168" parent="15" name="AttributePK">
+      <columns>AttributeCode</columns>
+      <ref-key>~.attributes.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="169" parent="15" name="audit">
+      <trig-events>U</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="170" parent="16" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="171" parent="16" name="MediaId">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="172" parent="16" name="Day">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="173" parent="16" name="Month">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="174" parent="16" name="Year">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="175" parent="16" name="Language">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="176" parent="16" name="Location">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="177" parent="16" name="Duration">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="178" parent="16" name="Titile">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="179" parent="16" name="FFL">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="180" parent="16" name="EFL">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="181" parent="16" name="ContentTypeCode">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="182" parent="16" name="RelTypeCode">
+      <data-type>varchar(900)|0</data-type>
+    </column>
+    <column id="183" parent="16" name="ArchStatCode">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="184" parent="16" name="DelPersonCode">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="185" parent="16" name="ADate">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="186" parent="16" name="Remarks1">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="187" parent="16" name="Remarks2">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="188" parent="16" name="Remarks3">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="189" parent="16" name="Remarks4">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="190" parent="16" name="VQuality">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="191" parent="16" name="AQuality">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="192" parent="16" name="FilePath">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="193" parent="16" name="Track">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="194" parent="16" name="VisibleStatus">
+      <data-type>varchar(20)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="195" parent="17" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="196" parent="17" name="ArchiveCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="197" parent="17" name="BoxNo">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="198" parent="17" name="Language">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="199" parent="17" name="TitleInEnglish">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="200" parent="17" name="Title">
+      <data-type>varchar(9000)|0</data-type>
+    </column>
+    <column id="201" parent="17" name="Author">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="202" parent="17" name="Edition">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="203" parent="17" name="PublishedYear">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="204" parent="17" name="PublishedMonth">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="205" parent="17" name="Publisher">
+      <data-type>varchar(500)|0</data-type>
+    </column>
+    <column id="206" parent="17" name="BindingType">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="207" parent="17" name="ISBN">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="208" parent="17" name="Price">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="209" parent="17" name="Condition">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="210" parent="17" name="Source">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="211" parent="17" name="Pcode">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="212" parent="17" name="RackNo">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="213" parent="17" name="Comments">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="214" parent="17" name="Remarks">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="215" parent="17" name="Dimension">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="216" parent="17" name="Audited">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="217" parent="17" name="VisibleStatus">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="218" parent="18" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="219" parent="18" name="ArchiveCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="220" parent="18" name="BoxNo">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="221" parent="18" name="Language">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="222" parent="18" name="TitleInEnglish">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="223" parent="18" name="Title">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="224" parent="18" name="Author">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="225" parent="18" name="Edition">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="226" parent="18" name="PublishYear">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="227" parent="18" name="PublishMonth">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="228" parent="18" name="Publisher">
+      <data-type>varchar(500)|0</data-type>
+    </column>
+    <column id="229" parent="18" name="BindingType">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="230" parent="18" name="ISBN">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="231" parent="18" name="Price">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="232" parent="18" name="Condition">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="233" parent="18" name="Source">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="234" parent="18" name="Pcode">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="235" parent="18" name="RachNo">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="236" parent="18" name="Comments">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="237" parent="18" name="Remarks">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="238" parent="18" name="Audited">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="239" parent="18" name="Dimension">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="240" parent="18" name="VisibleStatus">
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="241" parent="19" name="CheckListPK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="242" parent="19" name="ArtefactTypeCode">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="243" parent="19" name="SequenceNo">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="244" parent="19" name="CheckListItem">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="245" parent="19" name="CheckListType">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="246" parent="19" name="DataType">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="247" parent="19" name="pickflag">
+      <mandatory>1</mandatory>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="248" parent="19" name="pickcode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="249" parent="19" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="250" parent="19" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="251" parent="19" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="252" parent="19" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="253" parent="19" name="FK_Checklist_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="254" parent="19" name="PRIMARY">
+      <columns>CheckListPK</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="255" parent="19" name="FK_Checklist_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="256" parent="20" name="ConditionalReportPK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="257" parent="20" name="CheckListFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="258" parent="20" name="TaskListFK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="259" parent="20" name="Result">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="260" parent="20" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="261" parent="20" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="262" parent="20" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="263" parent="20" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <index id="264" parent="20" name="FK_ConditionalReport_Checklist">
+      <columns>CheckListFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="265" parent="20" name="PRIMARY">
+      <columns>ConditionalReportPK</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="266" parent="20" name="FK_ConditionalReport_Checklist">
+      <columns>CheckListFK</columns>
+      <ref-key>~.checklist.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="267" parent="21" name="sectionid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="268" parent="21" name="sectionname">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="269" parent="21" name="sectiondesc">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="270" parent="21" name="artefacttypecode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="271" parent="21" name="checklist">
+      <data-type>int(10)|0</data-type>
+    </column>
+    <column id="272" parent="21" name="createddate">
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <key id="273" parent="21" name="PRIMARY">
+      <columns>sectionid</columns>
+      <primary>1</primary>
+    </key>
+    <column id="274" parent="22" name="artefactcode">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="275" parent="22" name="code">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="276" parent="22" name="BoxNo">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="277" parent="22" name="year">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="278" parent="22" name="month">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="279" parent="22" name="day">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="280" parent="22" name="hour">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="281" parent="22" name="min">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="282" parent="22" name="continent">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="283" parent="22" name="country">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="284" parent="22" name="state">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="285" parent="22" name="city">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="286" parent="22" name="center">
+      <data-type>varchar(500)|0</data-type>
+    </column>
+    <column id="287" parent="22" name="location">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="288" parent="22" name="subject">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="289" parent="22" name="taggedperson">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="290" parent="22" name="event">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="291" parent="22" name="description">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="292" parent="22" name="credits">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="293" parent="22" name="photographer">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="294" parent="22" name="comments">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="295" parent="22" name="hatselection">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="296" parent="22" name="teamselection">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="297" parent="22" name="finalselection">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="298" parent="22" name="determined">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="299" parent="22" name="VisibleStatus">
+      <data-type>varchar(60)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="300" parent="23" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="301" parent="23" name="Title">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="302" parent="23" name="Author">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="303" parent="23" name="Date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="304" parent="23" name="VisibleStatus">
+      <data-type>varchar(45)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="305" parent="24" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="306" parent="24" name="BoxCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="307" parent="24" name="FolderCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="308" parent="24" name="FileCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="309" parent="24" name="Available">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="310" parent="24" name="FilePath">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="311" parent="24" name="Date">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="312" parent="24" name="Day">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="313" parent="24" name="Month">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="314" parent="24" name="Year">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="315" parent="24" name="Category">
+      <data-type>varchar(650)|0</data-type>
+    </column>
+    <column id="316" parent="24" name="Sensitivity">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="317" parent="24" name="LetterType">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="318" parent="24" name="From-Person">
+      <data-type>varchar(1050)|0</data-type>
+    </column>
+    <column id="319" parent="24" name="FromAddr">
+      <data-type>varchar(9050)|0</data-type>
+    </column>
+    <column id="320" parent="24" name="To-Person">
+      <data-type>varchar(9050)|0</data-type>
+    </column>
+    <column id="321" parent="24" name="ToAddr">
+      <data-type>varchar(9050)|0</data-type>
+    </column>
+    <column id="322" parent="24" name="Keywords">
+      <data-type>varchar(9050)|0</data-type>
+    </column>
+    <column id="323" parent="24" name="Description">
+      <data-type>varchar(9050)|0</data-type>
+    </column>
+    <column id="324" parent="24" name="Language">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="325" parent="24" name="NoOfPages">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="326" parent="24" name="Source">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="327" parent="24" name="Comments">
+      <data-type>varchar(9050)|0</data-type>
+    </column>
+    <column id="328" parent="24" name="WTW">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="329" parent="24" name="VisibleStatus">
+      <data-type>varchar(50)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="330" parent="25" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="331" parent="25" name="Title">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="332" parent="25" name="Author">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="333" parent="25" name="Date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="334" parent="25" name="VisibleStatus">
+      <data-type>varchar(45)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="335" parent="26" name="MaintenanceCyclePK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="336" parent="26" name="LocationFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="337" parent="26" name="ArtefactTypeCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="338" parent="26" name="ArtefactCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="339" parent="26" name="CurrentDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="340" parent="26" name="Frequency">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="341" parent="26" name="Unit">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="342" parent="26" name="NextServiceDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="343" parent="26" name="EndDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="344" parent="26" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="345" parent="26" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="346" parent="26" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="347" parent="26" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <index id="348" parent="26" name="FK_MaintenanceCycle_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="349" parent="26" name="FK_MaintenanceCycle_Artefact">
+      <columns>ArtefactCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="350" parent="26" name="FK_MaintenanceCycle_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="351" parent="26" name="PRIMARY">
+      <columns>MaintenanceCyclePK</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="352" parent="26" name="FK_MaintenanceCycle_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <ref-key>~.archivelocation.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="353" parent="26" name="FK_MaintenanceCycle_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="354" parent="26" name="FK_MaintenanceCycle_Artefact">
+      <columns>ArtefactCode</columns>
+      <ref-key>~.artefact.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="355" parent="27" name="PagePk">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="356" parent="27" name="PageName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="357" parent="27" name="MenuTitle">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="358" parent="27" name="URL">
+      <mandatory>1</mandatory>
+      <data-type>varchar(150)|0</data-type>
+    </column>
+    <column id="359" parent="27" name="dir">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="360" parent="27" name="Iscommon">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="361" parent="27" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="362" parent="27" name="CreatedDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="363" parent="27" name="ModifiedBy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="364" parent="27" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <key id="365" parent="27" name="PRIMARY">
+      <columns>PagePk</columns>
+      <primary>1</primary>
+    </key>
+    <column id="366" parent="28" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="367" parent="28" name="Code">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="368" parent="28" name="Year">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="369" parent="28" name="Month">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="370" parent="28" name="Day">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="371" parent="28" name="Hour">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="372" parent="28" name="Min">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="373" parent="28" name="Continent">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="374" parent="28" name="Country">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="375" parent="28" name="State">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="376" parent="28" name="City">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="377" parent="28" name="Center">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="378" parent="28" name="Location">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="379" parent="28" name="Subject">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="380" parent="28" name="Taggedperson">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="381" parent="28" name="Event">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="382" parent="28" name="Description">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="383" parent="28" name="Credits">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="384" parent="28" name="Photographer">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="385" parent="28" name="Comments">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="386" parent="28" name="HatSelection">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="387" parent="28" name="TeamSelection">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="388" parent="28" name="FinalSelection">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="389" parent="28" name="Determined">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="390" parent="28" name="BoxNo">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="391" parent="28" name="VisibleStatus">
+      <data-type>varchar(20)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="392" parent="29" name="artefactcode">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="393" parent="29" name="code">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="394" parent="29" name="BoxNo">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="395" parent="29" name="year">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="396" parent="29" name="month">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="397" parent="29" name="day">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="398" parent="29" name="hour">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="399" parent="29" name="min">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="400" parent="29" name="continent">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="401" parent="29" name="country">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="402" parent="29" name="state">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="403" parent="29" name="city">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="404" parent="29" name="center">
+      <data-type>varchar(500)|0</data-type>
+    </column>
+    <column id="405" parent="29" name="location">
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="406" parent="29" name="subject">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="407" parent="29" name="taggedperson">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="408" parent="29" name="event">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="409" parent="29" name="description">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="410" parent="29" name="credits">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="411" parent="29" name="photographer">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="412" parent="29" name="comments">
+      <data-type>varchar(600)|0</data-type>
+    </column>
+    <column id="413" parent="29" name="hatselection">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="414" parent="29" name="teamselection">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="415" parent="29" name="finalselection">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="416" parent="29" name="determined">
+      <data-type>varchar(60)|0</data-type>
+    </column>
+    <column id="417" parent="29" name="VisibleStatus">
+      <data-type>varchar(60)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="418" parent="30" name="artefactcode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="419" parent="30" name="Title">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="420" parent="30" name="Author">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="421" parent="30" name="Date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="422" parent="30" name="VisibleStatus">
+      <data-type>varchar(45)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <column id="423" parent="31" name="RolePk">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="424" parent="31" name="PageFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="425" parent="31" name="Code">
+      <mandatory>1</mandatory>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="426" parent="31" name="Description">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="427" parent="31" name="CreatedBy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="428" parent="31" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="429" parent="31" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="430" parent="31" name="ModifiedDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <key id="431" parent="31" name="PRIMARY">
+      <columns>RolePk</columns>
+      <primary>1</primary>
+    </key>
+    <column id="432" parent="32" name="RolePageMappingPk">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="433" parent="32" name="RoleFk">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="434" parent="32" name="PageFk">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="435" parent="32" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="436" parent="32" name="CreatedDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="437" parent="32" name="ModifiedBy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="438" parent="32" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <index id="439" parent="32" name="FK_Role_Page_Mapping_Page">
+      <columns>PageFk</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="440" parent="32" name="FK_Role_Page_Mapping_Role">
+      <columns>RoleFk</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="441" parent="32" name="PRIMARY">
+      <columns>RolePageMappingPk</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="442" parent="32" name="FK_Role_Page_Mapping_Role">
+      <columns>RoleFk</columns>
+      <ref-key>~.role.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="443" parent="32" name="FK_Role_Page_Mapping_Page">
+      <columns>PageFk</columns>
+      <ref-key>~.page.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="444" parent="33" name="ScheduleMaintenancePK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="445" parent="33" name="MaintenanceCycleFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="446" parent="33" name="ArtefactTypeCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="447" parent="33" name="ArtefactCode">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="448" parent="33" name="LocationFK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="449" parent="33" name="ScheduledServiceDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="450" parent="33" name="CurrentStatus">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="451" parent="33" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="452" parent="33" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="453" parent="33" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="454" parent="33" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="455" parent="33" name="FK_ScheduledMaintenance_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="456" parent="33" name="FK_ScheduledMaintenance_Artefact">
+      <columns>ArtefactCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="457" parent="33" name="FK_ScheduledMaintenance_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="458" parent="33" name="FK_ScheduledMaintenance_MaintenanceCycle">
+      <columns>MaintenanceCycleFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="459" parent="33" name="PRIMARY">
+      <columns>ScheduleMaintenancePK</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="460" parent="33" name="FK_ScheduledMaintenance_MaintenanceCycle">
+      <columns>MaintenanceCycleFK</columns>
+      <ref-key>~.maintenancecycle.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="461" parent="33" name="FK_ScheduledMaintenance_ArtefactType">
+      <columns>ArtefactTypeCode</columns>
+      <ref-key>~.artefacttype.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="462" parent="33" name="FK_ScheduledMaintenance_Artefact">
+      <columns>ArtefactCode</columns>
+      <ref-key>~.artefact.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="463" parent="33" name="FK_ScheduledMaintenance_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <ref-key>~.archivelocation.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="464" parent="34" name="sectionmappingid">
+      <mandatory>1</mandatory>
+      <data-type>int(10)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="465" parent="34" name="artefacttypecode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="466" parent="34" name="sectionid">
+      <data-type>int(10)|0</data-type>
+    </column>
+    <column id="467" parent="34" name="createddate">
+      <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <key id="468" parent="34" name="PRIMARY">
+      <columns>sectionmappingid</columns>
+      <primary>1</primary>
+    </key>
+    <column id="469" parent="35" name="COL 1">
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="470" parent="35" name="COL2">
+      <data-type>varchar(23)|0</data-type>
+    </column>
+    <column id="471" parent="35" name="COL 3">
+      <data-type>varchar(22)|0</data-type>
+    </column>
+    <column id="472" parent="35" name="COL 4">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="473" parent="35" name="COL 5">
+      <data-type>varchar(158)|0</data-type>
+    </column>
+    <column id="474" parent="35" name="COL 6">
+      <data-type>varchar(158)|0</data-type>
+    </column>
+    <column id="475" parent="35" name="COL 7">
+      <data-type>varchar(85)|0</data-type>
+    </column>
+    <column id="476" parent="35" name="COL 8">
+      <data-type>varchar(51)|0</data-type>
+    </column>
+    <column id="477" parent="35" name="COL 9">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="478" parent="35" name="COL 10">
+      <data-type>varchar(21)|0</data-type>
+    </column>
+    <column id="479" parent="35" name="COL 11">
+      <data-type>varchar(42)|0</data-type>
+    </column>
+    <column id="480" parent="35" name="COL 12">
+      <data-type>varchar(13)|0</data-type>
+    </column>
+    <column id="481" parent="35" name="COL 13">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="482" parent="35" name="COL 14">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="483" parent="35" name="COL 15">
+      <data-type>varchar(17)|0</data-type>
+    </column>
+    <column id="484" parent="35" name="COL 16">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="485" parent="35" name="COL 17">
+      <data-type>varchar(6)|0</data-type>
+    </column>
+    <column id="486" parent="35" name="COL 18">
+      <data-type>varchar(51)|0</data-type>
+    </column>
+    <column id="487" parent="35" name="COL 19">
+      <data-type>varchar(135)|0</data-type>
+    </column>
+    <column id="488" parent="35" name="COL 20">
+      <data-type>varchar(142)|0</data-type>
+    </column>
+    <column id="489" parent="35" name="COL 21">
+      <data-type>varchar(13)|0</data-type>
+    </column>
+    <column id="490" parent="35" name="COL 22">
+      <data-type>varchar(18)|0</data-type>
+    </column>
+    <column id="491" parent="35" name="COL 23">
+      <data-type>varchar(17)|0</data-type>
+    </column>
+    <column id="492" parent="35" name="COL 24">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="493" parent="35" name="COL 25">
+      <data-type>varchar(16)|0</data-type>
+    </column>
+    <column id="494" parent="35" name="COL 26">
+      <data-type>varchar(12)|0</data-type>
+    </column>
+    <column id="495" parent="35" name="COL 27">
+      <data-type>varchar(21)|0</data-type>
+    </column>
+    <column id="496" parent="35" name="COL 28">
+      <data-type>varchar(47)|0</data-type>
+    </column>
+    <column id="497" parent="35" name="COL 29">
+      <data-type>varchar(95)|0</data-type>
+    </column>
+    <column id="498" parent="35" name="COL 30">
+      <data-type>varchar(26)|0</data-type>
+    </column>
+    <column id="499" parent="35" name="COL 31">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="500" parent="36" name="TaskListPK">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="501" parent="36" name="ArtefactCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="502" parent="36" name="ScheduleMaintenanceFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="503" parent="36" name="LocationFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="504" parent="36" name="UserFK">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="505" parent="36" name="ServiceDate">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="506" parent="36" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="507" parent="36" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="508" parent="36" name="ModifiedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="509" parent="36" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="510" parent="36" name="FK_TaskList_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="511" parent="36" name="FK_TaskList_Artefact">
+      <columns>ArtefactCode</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="512" parent="36" name="FK_TaskList_ScheduledMaintenance">
+      <columns>ScheduleMaintenanceFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="513" parent="36" name="FK_TaskList_User">
+      <columns>UserFK</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="514" parent="36" name="PRIMARY">
+      <columns>TaskListPK</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="515" parent="36" name="FK_TaskList_Artefact">
+      <columns>ArtefactCode</columns>
+      <ref-key>~.artefact.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="516" parent="36" name="FK_TaskList_ScheduledMaintenance">
+      <columns>ScheduleMaintenanceFK</columns>
+      <ref-key>~.scheduledmaintenance.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="517" parent="36" name="FK_TaskList_ArchiveLocation">
+      <columns>LocationFK</columns>
+      <ref-key>~.archivelocation.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="518" parent="36" name="FK_TaskList_User">
+      <columns>UserFK</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="519" parent="36" name="tasklist_AFTER_INSERT">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="520" parent="37" name="UserPk">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="521" parent="37" name="LocationFk">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="522" parent="37" name="RoleFk">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="523" parent="37" name="Password">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="524" parent="37" name="ReportingTo">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="525" parent="37" name="AbhyasiID">
+      <mandatory>1</mandatory>
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="526" parent="37" name="FirstName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="527" parent="37" name="MiddleName">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="528" parent="37" name="LastName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="529" parent="37" name="EmailId">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="530" parent="37" name="CreatedBy">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="531" parent="37" name="CreatedDate">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="532" parent="37" name="ModifiedBy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="533" parent="37" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="534" parent="37" name="ActiveStatus">
+      <data-type>varchar(45)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <index id="535" parent="37" name="FK_User_ArchiveLocation">
+      <columns>LocationFk</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="536" parent="37" name="FK_User_Role">
+      <columns>RoleFk</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="537" parent="37" name="PRIMARY">
+      <columns>UserPk</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="538" parent="37" name="FK_User_ArchiveLocation">
+      <columns>LocationFk</columns>
+      <ref-key>~.archivelocation.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="539" parent="37" name="FK_User_Role">
+      <columns>RoleFk</columns>
+      <ref-key>~.role.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="540" parent="38" name="keydata">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="541" parent="38" name="valuedata">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="542" parent="39" name="artefactCode">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="543" parent="39" name="Title">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="544" parent="39" name="RelTypeCode">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="545" parent="39" name="ArchiveStatusCode">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="546" parent="39" name="DeliveryPersonCode">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="547" parent="39" name="Date">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="548" parent="39" name="Remarks1">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="549" parent="39" name="Remarks2">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="550" parent="39" name="Remarks3">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="551" parent="39" name="Remarks4">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="552" parent="39" name="VideoQuality">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="553" parent="39" name="AudioQuality">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="554" parent="39" name="Day">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="555" parent="39" name="FilePath">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="556" parent="39" name="TrackNo">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="557" parent="39" name="LocCode">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="558" parent="39" name="Month">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="559" parent="39" name="Year">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="560" parent="39" name="Language">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="561" parent="39" name="Duration">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="562" parent="39" name="FirstFewLine">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="563" parent="39" name="EndofLines">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="564" parent="39" name="contentType">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="565" parent="39" name="VisibleStatus">
+      <data-type>varchar(45)|0</data-type>
+      <default-expression>&apos;on&apos;</default-expression>
+    </column>
+    <argument id="566" parent="41" name="artefactType">
+      <direction>IN</direction>
+      <data-type>varchar(30)|0</data-type>
+    </argument>
+    <argument id="567" parent="41" name="artefactCode">
+      <direction>IN</direction>
+      <data-type>varchar(50)|0</data-type>
+    </argument>
+    <argument id="568" parent="41" name="attributeCode">
+      <direction>IN</direction>
+      <data-type>varchar(50)|0</data-type>
+    </argument>
+    <argument id="569" parent="41" name="attributeValue">
+      <direction>IN</direction>
+      <data-type>varchar(9000)|0</data-type>
+    </argument>
+    <argument id="570" parent="42" name="oldName">
+      <direction>IN</direction>
+      <data-type>varchar(50)|0</data-type>
+    </argument>
+    <argument id="571" parent="42" name="newName">
+      <direction>IN</direction>
+      <data-type>varchar(50)|0</data-type>
+    </argument>
+    <argument id="572" parent="43" name="location">
+      <direction>IN</direction>
+      <data-type>int(20)|0</data-type>
+    </argument>
+    <argument id="573" parent="43" name="artefactType">
+      <direction>IN</direction>
+      <data-type>varchar(10)|0</data-type>
+    </argument>
+    <argument id="574" parent="43" name="artefactCode">
+      <direction>IN</direction>
+      <data-type>varchar(20)|0</data-type>
+    </argument>
+    <argument id="575" parent="43" name="userpk">
+      <direction>IN</direction>
+      <data-type>int(10)|0</data-type>
+    </argument>
+    <argument id="576" parent="44" name="artefactType">
+      <direction>IN</direction>
+      <data-type>varchar(30)|0</data-type>
+    </argument>
+    <argument id="577" parent="44" name="artefactCode">
+      <direction>IN</direction>
+      <data-type>varchar(50)|0</data-type>
+    </argument>
+    <argument id="578" parent="44" name="attributeCode">
+      <direction>IN</direction>
+      <data-type>varchar(50)|0</data-type>
+    </argument>
+    <argument id="579" parent="44" name="attributeValue">
+      <direction>IN</direction>
+      <data-type>varchar(9000)|0</data-type>
+    </argument>
+    <argument id="580" parent="45" name="AttributeValuePK1">
+      <direction>IN</direction>
+      <data-type>int(30)|0</data-type>
+    </argument>
+    <argument id="581" parent="45" name="userid">
+      <direction>IN</direction>
+      <data-type>int(10)|0</data-type>
+    </argument>
+  </database-model>
+</dataSource>
