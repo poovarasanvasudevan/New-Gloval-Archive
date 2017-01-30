@@ -65,6 +65,7 @@ class TestConsole extends Command
 
                         $ddf = "INSERT INTO `cod_pincodes` (`pin_id`, `state`, `city`, `pin_code`, `shipping_vendor`, `active`, `created_date`) VALUES (NULL, '".$row['state']."', '".$row['city_name']."', '".$row['postal_code']."', 'Fedex', '1', CURRENT_TIMESTAMP);";
 
+
                         \Log::info($ddf);
                         $this->info($ddf);
                     }

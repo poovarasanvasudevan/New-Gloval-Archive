@@ -18,7 +18,10 @@
 | loading any of our classes later on. It feels nice to relax.
 |
 */
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 ini_set('memory_limit', '-1');
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 require __DIR__ . '/../bootstrap/autoload.php';
 
 /*

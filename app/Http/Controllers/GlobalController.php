@@ -449,19 +449,20 @@ class GlobalController extends Controller
                 'location' => 'required',
                 'archive_location' => 'required',
                 'email' => 'required',
+                'artefact'=>'required'
             ]);
 
             if ($role == 0 || $role == '0') {
                 $validator->errors()->add('field', 'Please select Valid Role');
             }
-            if (is_array($artefact_type)) {
+            if (isset($artefact_type) && is_array($artefact_type)) {
                 if (sizeof($artefact_type) == 0) {
                     $validator->errors()->add('field', 'Please select minimum one artefacts to access');
                 }
 
             }
 
-            if ($artefact_type == null) {
+            if (isset($artefact_type) && $artefact_type == null) {
                 $validator->errors()->add('field', 'Please select minimum one artefacts to access');
             }
             if ($validator->fails()) {
@@ -804,7 +805,12 @@ class GlobalController extends Controller
                                 ->subject('Welcome to ' . env('APP_NAME') . '!');
                         });
                     }
-                    flash('User created succesfully', 'success');
+                    if(env('MAIL_ENABLE') =='yes') {
+                        flash('User created succesfully', 'success');
+                    } else {
+                        flash('User created succesfully with Password :'.$password, 'success');
+                    }
+
                     return response()
                         ->redirectTo('/userrole/');
                 } else {

@@ -3,7 +3,7 @@
 @section('content')
     <div class="full-bg">
         <div class="col-md-4 col-md-offset-4">
-            <form class="form-horizontal center-form" method="post" action="/login">
+            <form class="form-horizontal center-form" method="get" action="/login">
 
                 <div class="card card-block padding15">
                     <div class="panel-body">

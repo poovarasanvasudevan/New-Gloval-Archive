@@ -31,3 +31,23 @@ and then add the command
 ```
 * * * * * /usr/local/bin/php /home/archive/artisan schedule:run
 ```
+
+### Server Configuration
+
+```
+<VirtualHost *:8091>
+
+ServerAdmin you@example.com
+ServerName localhost:8091
+
+DocumentRoot "/home/likewise-open/COE1/poovarasanv/learn/archive/public"
+<Directory "/home/likewise-open/COE1/poovarasanv/learn/archive/public">
+    DirectoryIndex index.php
+         AllowOverride All
+         Require all granted
+         Order allow,deny
+         Allow from all
+</Directory>
+</VirtualHost>
+
+```

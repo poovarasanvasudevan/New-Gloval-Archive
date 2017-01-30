@@ -19,7 +19,7 @@ Route::get('/', function () {
     }
 });
 
-Route::post("/login", 'GlobalController@login');
+Route::get("/login", 'GlobalController@login');
 Route::get("/myprofile", 'GlobalController@myprofile');
 Route::post("/myUserUpdate", 'GlobalController@myUserUpdate');
 Route::get("/artefactview/{id?}", 'GlobalController@artefactview');
